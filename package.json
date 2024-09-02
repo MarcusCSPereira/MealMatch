@@ -1,0 +1,20 @@
+{
+  "name": "fitly",
+  "version": "1.0.0",
+  "description": "## 🔎 Sobre o Projeto",
+  "main": "index.js",
+  "scripts": {
+    "commit": "npx git-cz"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+    }
+  },
+  "dependencies": {
+    "husky": "^9.1.5"
+  }
+}
