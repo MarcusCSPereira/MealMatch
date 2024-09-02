@@ -43,4 +43,67 @@ A aplicação foi projetada para ser simples e intuitiva, facilitando a integra�
 sudo apt-get install git
 ```
 
+##
+
+#### Outros comandos Aqui
+
+##
+
+### 🚀 Instalação:
+ 
+1. Clone o repositório
+```sh
+git clone [url-do-repositorio]
+```
+##
+
+2. Navegue até o diretório do projeto:
+```sh
+cd [diretorio-do-repositorio]
+```
+##
+
+
+4. Instale as dependências necessárias (especificar dependências):
+```sh
+instalar dependências
+```
+##
+
+<!-- USAGE EXAMPLES -->
+### 🖥️ Utilizando o projeto:
+
+1. Navegue até o diretório do projeto:
+```sh
+cd [diretorio-do-projeto]
+```
+
+##
+
+#### O passo a passo para execução do mesmo.
+
+##
+
+<!-- CONTACT -->
+## 📫 Contato
+
+<div align="left">
+  <a href="https://www.linkedin.com/in/marcus-césar-santos-pereira-70991a28a/" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="47" height="35" alt="linkedin logo"  />
+  </a>
+  <a href="contato.marcuscspereira@gmail.com" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg" width="47" height="35" alt="gmail logo"  />
+  </a>
+  <a href="https://www.instagram.com/_marcus.cesar/" target="_blank">
+    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="47" height="35" alt="instagram logo"  />
+  </a>
+</div>
+
+<!-- Adicionar LINKS & IMAGES -->
+[preview-preview1]: preview/preview_1.png
+
+## 📝 Licença
+
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+
 
