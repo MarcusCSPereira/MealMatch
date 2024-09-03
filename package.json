@@ -4,18 +4,17 @@
   "description": "## 🔎 Fitly",
   "main": "index.js",
   "scripts": {
-    "commit": "cz",
-    "prepare": "husky install"
+    "commit": "cz"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "husky": "^9.1.5"
+  },
   "husky": {
     "hooks": {
       "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
     }
-  },
-  "dependencies": {
-    "husky": "^9.1.5"
   }
 }
