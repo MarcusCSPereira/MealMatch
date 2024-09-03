@@ -1,4 +1,4 @@
-# [NOME DO PROJETO]
+# [App Fitly]
 
 ## 🔎 Sobre o Projeto
 
