@@ -4,7 +4,8 @@
   "description": "## 🔎 Sobre o Projeto",
   "main": "index.js",
   "scripts": {
-    "commit": "npx git-cz"
+    "commit": "npx git-cz",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
