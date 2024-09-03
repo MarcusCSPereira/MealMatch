@@ -1,7 +1,7 @@
 {
   "name": "fitly",
   "version": "1.0.0",
-  "description": "## 🔎 Sobre o Projeto",
+  "description": "## 🔎 Fitly",
   "main": "index.js",
   "scripts": {
     "commit": "npx git-cz",
