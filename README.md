@@ -10,7 +10,7 @@ A aplicação foi projetada para ser simples e intuitiva, facilitando a integra�
 
 ## 🖼️ Imagens:
 
-### Exemplo de [descrição da imagem]:
+### Exemplo de [descrição da imagem] :
 
 ![PREVIEW1][preview-preview1]
 
