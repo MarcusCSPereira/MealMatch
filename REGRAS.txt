@@ -1,0 +1,33 @@
+Seguiremos alguns padrões para manter a estruturação correta do código e funcionamento:
+
+
+- Primeiro em relação a estrutura do Projeto, afinal usaremos o javaFX e temos que entender algumas coisas:
+
+* O diretório do Main está em : spp/src/main/java/com/fitly/Main.java
+
+* Os arquivos .fxml ficarão no diretório view, logo a criação de telas deve ser feito no diretório: app/src/main/resources/views/
+
+* Os arquivos .css ficarão no diretório styles, logo a criação dos estilos das telas utilizando css, deve ser feito no diretório: app/src/main/resources/styles/
+
+* Os arquivos .java de controle de telas ficarão no diretório controller, logo a criação do controller dessas telas, deve ser feito no diretório: app/src/main/java/com/fitly/controller/
+
+* Os arquivos .java de Modelos como User.java ou Nutricionista.java ficarão no diretório model, logo a criação de modelos dessas telas, deve ser feito no diretório: app/src/main/java/com/fitly/model/
+
+* Os arquivos relacionados com o Banco de Dados ficarão no diretório jdbc(Java DataBase Connection) dipostos da seguinte maneira:
+- Os arquivos .java que proverão a conexão com o Banco em si, ficarão no diretório app/src/main/java/com/fitly/jdbc/database/
+- Os arquivos .java como UserDAO.java ou NutricionistaDAO.java que proverão as relações e operações dos Modelos com o Banco de Dados ficarão no diretório app/src/main/java/com/fitly/jdbc/dao/
+
+OBS: No diretório /database, temos apenas as configurações de conexão, como iniciar ou fechar uma conexão com o banco, já no diretório /dao é onde teremos em si a lógica da relação dos modelos com o Banco de Dados da nossa aplicação, utilizando da liguagem SQL em si, para as operações de CRUD (Create, Read, Update, Delete) das Entidades.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+- Agora que sabemos melhor onde criaremos cada um dos componentes, vamos definir como serão feitos os contatos entre tais componentes:
+
+* Para acessar uma tela a partir da main deve ser usado o FXMLLoader por meio dos resources como mostrado abaixo:
+  FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/nome-da-tela.fxml"));
+
+* Para acessar uma tela a partir de um controller deve ser usado o FXMLLoader por meio dos resources como mostrado abaixo:
+  FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/nome-da-tela.fxml"));
+
+* Agora para definir o controller da tela no fxml ou no sceneBuilder você deve se basear no diretório abaixo:
+  com.fitly.controller.TelaController 
