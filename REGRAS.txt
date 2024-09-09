@@ -3,7 +3,7 @@ Seguiremos alguns padrões para manter a estruturação correta do código e fun
 
 - Primeiro em relação a estrutura do Projeto, afinal usaremos o javaFX e temos que entender algumas coisas:
 
-* O diretório do Main está em : spp/src/main/java/com/fitly/Main.java
+* O diretório do Main está em : app/src/main/java/com/fitly/Main.java
 
 * Os arquivos .fxml ficarão no diretório view, logo a criação de telas deve ser feito no diretório: app/src/main/resources/views/
 
