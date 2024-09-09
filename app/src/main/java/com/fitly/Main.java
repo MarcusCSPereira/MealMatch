@@ -16,7 +16,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
 
-        primaryStage.setTitle("JavaFX with PostgreSQL");
+        primaryStage.setTitle("Trabalho de Banco De Dados");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
