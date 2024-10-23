@@ -1,4 +1,4 @@
-# [App Fitly]
+# MealMatch  🍲
 
 ## 🔎 Sobre o Projeto
 
@@ -18,14 +18,19 @@ A aplicação foi projetada para ser simples e intuitiva, facilitando a integra�
 
 ## 🔨 Construído com:
 
-* 💻 [IDE/Ferramentas de desenvolvimento utilizadas]
-* 🛠️ [Tecnologias principais]
+* 💻 VsCode | Maven 
+* 🛠️ Java 1.8.401 | JavaFX
+* 🎲 PostgreSQL
 
 ##
 
 ## 👨🏽‍💻 Tecnologias Utilizadas:
 
-<img src="[link do badge de tecnologia 1]" alt="[nome da tecnologia 1]" style="vertical-align:top; margin:4px"> <img src="[link do badge de tecnologia 2]" alt="[nome da tecnologia 2]" style="vertical-align:top; margin:4px">
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![JavaFX](https://img.shields.io/badge/javafx-%23FF0000.svg?style=for-the-badge&logo=javafx&logoColor=white)
+![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ##
 
