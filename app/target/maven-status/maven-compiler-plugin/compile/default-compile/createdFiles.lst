@@ -1,0 +1,6 @@
+com/fitly/controller/Tela2Controller.class
+com/fitly/controller/TelaController.class
+com/fitly/jdbc/database/Connection.class
+com/fitly/jdbc/dao/UserDAO.class
+com/fitly/model/User.class
+com/fitly/Main.class

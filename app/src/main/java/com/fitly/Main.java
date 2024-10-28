@@ -1,5 +1,9 @@
 package com.fitly;
 
+import java.sql.Connection;
+
+import com.fitly.jdbc.database.ConnectionFactory;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +14,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        Connection connection = ConnectionFactory.getConnection();
+        connection.close();
+        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela.fxml"));
         Parent root = loader.load();
 
