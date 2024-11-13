@@ -1,4 +1,4 @@
-package com.fitly.jdbc.database;
+package com.mealmatch.jdbc.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
