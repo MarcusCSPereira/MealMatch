@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaCadastroController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaCadastroController">
    <children>
       <Label alignment="CENTER" layoutY="14.0" text="Realize seu Cadastro:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
@@ -29,7 +29,7 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <Label layoutX="200.0" layoutY="435.0" text="Idade:">
+      <Label layoutX="200.0" layoutY="450.0" text="Idade:">
          <font>
             <Font size="27.0" />
          </font>
@@ -44,7 +44,7 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <Label layoutX="200.0" layoutY="500.0" text="Sexo:">
+      <Label layoutX="200.0" layoutY="520.0" text="Sexo:">
          <font>
             <Font size="27.0" />
          </font>
@@ -59,7 +59,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="age_user" layoutX="434.0" layoutY="435.0" prefHeight="39.0" prefWidth="380.0" promptText="Digite sua idade">
+      <TextField fx:id="age_user" layoutX="434.0" layoutY="450.0" prefHeight="39.0" prefWidth="380.0" promptText="Digite sua idade">
          <font>
             <Font size="20.0" />
          </font>
@@ -84,7 +84,7 @@
             <Image url="@../images/back_button.png" />
          </image>
       </ImageView>
-      <RadioButton fx:id="male_user" layoutX="435.0" layoutY="500.0" mnemonicParsing="false" text="Masculino">
+      <RadioButton fx:id="male_user" layoutX="435.0" layoutY="510.0" mnemonicParsing="false" text="Masculino">
          <font>
             <Font size="20.0" />
          </font>
@@ -92,7 +92,7 @@
             <ToggleGroup fx:id="sexo" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="female_user" layoutX="700.0" layoutY="500.0" mnemonicParsing="false" text="Feminino" toggleGroup="$sexo">
+      <RadioButton fx:id="female_user" layoutX="700.0" layoutY="510.0" mnemonicParsing="false" text="Feminino" toggleGroup="$sexo">
          <font>
             <Font size="20.0" />
          </font>
@@ -108,5 +108,10 @@
             <Font size="20.0" />
          </font>
       </TextField>
+      <Label fx:id="verificaSenhas_label" alignment="CENTER" layoutX="435.0" layoutY="409.0" prefHeight="17.0" prefWidth="380.0" text="Senhas não coincidem!" textFill="RED" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
