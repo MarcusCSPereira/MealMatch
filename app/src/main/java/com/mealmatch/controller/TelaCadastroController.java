@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +12,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class TelaCadastroController implements Initializable {
@@ -51,6 +54,12 @@ public class TelaCadastroController implements Initializable {
     @FXML
     private TextField username;
 
+    @FXML
+    private Label verificaSenhas_label;
+
+    @FXML
+    private AnchorPane screen;
+
     private final int TOTAL_FIELDS = 7; // Total de campos que precisam ser preenchidos
     private double progressStep = 1.0 / TOTAL_FIELDS;
     
@@ -61,16 +70,21 @@ public class TelaCadastroController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Aqui são os listeners para monitorar cada campo e atualizar a progress bar
-        addFieldListener(complete_username);
-        addFieldListener(email_user);
-        addFieldListener(username);
-        addFieldListener(age_user);
-        addPasswordFieldListener(password);
-        addPasswordFieldListener(confirm_password);
+      Platform.runLater(() -> screen.requestFocus());
 
-        // Listener para o grupo de RadioButtons (sexo)
-        sexo.selectedToggleProperty().addListener((observable, oldValue, newValue) -> updateProgress());
+      // Aqui são os listeners para monitorar cada campo e atualizar a progress bar
+      addFieldListener(complete_username);
+      addFieldListener(email_user);
+      addFieldListener(username);
+      addFieldListener(age_user);
+      addPasswordFieldListener(password);
+      addPasswordFieldListener(confirm_password);
+
+      // Listener para o grupo de RadioButtons (sexo)
+      sexo.selectedToggleProperty().addListener((observable, oldValue, newValue) -> updateProgress());
+
+      password.textProperty().addListener((observable,oldValue,newValue) -> checaSenhas(password,confirm_password,verificaSenhas_label));
+      confirm_password.textProperty().addListener((observable,oldValue,newValue) -> checaSenhas(password,confirm_password,verificaSenhas_label));
     }
 
     private void addFieldListener(TextField textField) {
@@ -94,6 +108,14 @@ public class TelaCadastroController implements Initializable {
 
         progress = filledFields * progressStep;
         register_progress.setProgress(progress);
+    }
+
+    private void checaSenhas(PasswordField password, PasswordField confirm_password, Label verificaSenhas_label) {
+        if (!password.getText().equals(confirm_password.getText())) {
+            verificaSenhas_label.setVisible(true);
+        } else {
+            verificaSenhas_label.setVisible(false);
+        }
     }
 
     @FXML
