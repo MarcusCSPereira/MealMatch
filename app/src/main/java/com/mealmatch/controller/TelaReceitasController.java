@@ -73,11 +73,11 @@ public class TelaReceitasController implements Initializable {
     // Configurar qual será cada item da lista para o ListView
     receitas_listview.setCellFactory(listView -> new ReceitaListCellController());
     // Limpa a lista de receitas buscadas:
-    limparListaReceitas(receitasObservable,receitas_listview);
+    limparListaReceitas();
     consumirEventoDeSelecaoDeReceita();
   }
 
-  private void limparListaReceitas(ObservableList<Receita> receitasObservable,ListView<Receita> receitas_listview) {
+  private void limparListaReceitas() {
     // Iniciando o ObservableList vazio, para ele receber as receitas após a busca
     receitasObservable = FXCollections.observableArrayList();
     receitas_listview.setItems(receitasObservable);

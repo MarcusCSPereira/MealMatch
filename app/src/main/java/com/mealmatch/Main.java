@@ -1,11 +1,5 @@
 package com.mealmatch;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import com.mealmatch.utils.TestarConexao;
-
 //import java.sql.Connection;
 
 //import com.mealmatch.jdbc.database.ConnectionFactory;
