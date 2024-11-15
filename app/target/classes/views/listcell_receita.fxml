@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="screen_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="945.0" style="-fx-border-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="receita_image" fitHeight="140.0" fitWidth="140.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/frango.png" />
+         </image>
+      </ImageView>
+      <Line endX="145.0" endY="149.0" startX="145.0" startY="1.0" />
+      <Label layoutX="153.0" layoutY="10.0" text="Nome da Receita:" />
+      <Label layoutX="153.0" layoutY="37.0" text="Tempo de preparo:" />
+      <Label layoutX="153.0" layoutY="62.0" text="Valor Nutricional:" />
+      <Label layoutX="153.0" layoutY="87.0" text="Dificuldade:" />
+      <RadioButton fx:id="facil_dificuldade_toogle" layoutX="149.0" layoutY="115.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="42.0" text="Fácil">
+         <font>
+            <Font size="10.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="dificuldade_receita" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="medio_dificuldade_toggle" layoutX="196.0" layoutY="115.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Médio" toggleGroup="$dificuldade_receita">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="dificil_dificuldade_toogle" layoutX="247.0" layoutY="115.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Difícil" toggleGroup="$dificuldade_receita">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </RadioButton>
+      <Label fx:id="nome_receita_label" layoutX="260.0" layoutY="10.0" text="Frango assado" />
+      <Label fx:id="tempo_receita_label" layoutX="260.0" layoutY="37.0" text="1 hora | 30 minutos | 10 segundos" />
+      <Label fx:id="valor_nutricional_label" layoutX="260.0" layoutY="62.0" text="1.000 kcal" />
+      <Line endX="145.0" endY="149.0" layoutX="584.0" startX="145.0" startY="1.0" />
+      <ImageView fx:id="like_button" fitHeight="36.0" fitWidth="36.0" layoutX="740.0" layoutY="8.0" onMouseClicked="#like_receipe" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/like_button.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="dislike_button" fitHeight="36.0" fitWidth="36.0" layoutX="890.0" layoutY="8.0" onMouseClicked="#dislike_receipe" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/dislike_button.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="favorite_button" fitHeight="36.0" fitWidth="36.0" layoutX="817.0" layoutY="40.0" onMouseClicked="#favorite_receipe" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/favorite_button.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="detail_button" layoutX="803.0" layoutY="95.0" mnemonicParsing="false" onAction="#receipe_details" text="Ver Mais" />
+      <Label fx:id="numero_likes_label" alignment="CENTER" layoutX="730.0" layoutY="43.0" prefHeight="13.0" prefWidth="58.0" text="100">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="numero_dislike_label" alignment="CENTER" layoutX="880.0" layoutY="43.0" prefHeight="13.0" prefWidth="58.0" text="50">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="check_like_button" fitHeight="21.0" fitWidth="17.0" layoutX="767.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/check_button.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="check_dislike_button" fitHeight="21.0" fitWidth="17.0" layoutX="916.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/check_button.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
