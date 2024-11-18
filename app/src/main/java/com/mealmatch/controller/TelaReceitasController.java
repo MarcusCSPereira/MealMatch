@@ -181,12 +181,7 @@ public class TelaReceitasController implements Initializable {
 
   @FXML
   void acessar_favoritas(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_favoritas.fxml"));
-    Parent root = loader.load();
-    scene = new Scene(root);
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
+    System.out.println("Mostra apenas as receitas favoritadas pelo usuario");
   }
 
   @FXML

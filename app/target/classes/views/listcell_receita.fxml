@@ -54,12 +54,17 @@
             <Image url="@../images/dislike_button.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="favorite_button" fitHeight="36.0" fitWidth="36.0" layoutX="817.0" layoutY="40.0" onMouseClicked="#favorite_receipe" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="unfavorite_button" fitHeight="70.0" fitWidth="70.0" layoutX="801.0" layoutY="-8.0" onMouseClicked="#unfavorite_receipe" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/favorite_button.png" />
          </image>
       </ImageView>
-      <Button fx:id="detail_button" layoutX="803.0" layoutY="95.0" mnemonicParsing="false" onAction="#receipe_details" text="Ver Mais" />
+      <ImageView fx:id="favorite_button" fitHeight="70.0" fitWidth="70.0" layoutX="801.0" layoutY="-8.0" onMouseClicked="#favorite_receipe" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/unfavorite_button.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="detail_button" layoutX="803.0" layoutY="105.0" mnemonicParsing="false" onAction="#receipe_details" text="Ver Mais" />
       <Label fx:id="numero_likes_label" alignment="CENTER" layoutX="730.0" layoutY="43.0" prefHeight="13.0" prefWidth="58.0" text="100">
          <font>
             <Font size="10.0" />
@@ -70,7 +75,7 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <ImageView fx:id="check_like_button" fitHeight="21.0" fitWidth="17.0" layoutX="767.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="check_like_button" fitHeight="21.0" fitWidth="17.0" layoutX="767.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/check_button.png" />
          </image>
@@ -78,6 +83,11 @@
       <ImageView fx:id="check_dislike_button" fitHeight="21.0" fitWidth="17.0" layoutX="916.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/check_button.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="edit_receipe_image" fitHeight="150.0" fitWidth="36.0" layoutX="817.0" layoutY="57.0" onMouseClicked="#editar_receita" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/edit_button.png" />
          </image>
       </ImageView>
    </children>
