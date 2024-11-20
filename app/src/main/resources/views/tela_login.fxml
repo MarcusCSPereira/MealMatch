@@ -28,7 +28,10 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <PasswordField fx:id="field_senha" layoutX="420.0" layoutY="288.0" prefHeight="39.0" prefWidth="320.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" />
+      <PasswordField fx:id="field_senha" layoutX="420.0" layoutY="288.0" prefHeight="39.0" prefWidth="320.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
+         <font>
+            <Font size="9.0" />
+         </font></PasswordField>
       <Button fx:id="login_btt" layoutX="473.0" layoutY="345.0" mnemonicParsing="false" onAction="#login" text="Login" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="390.0">
          <font>
             <Font size="20.0" />
@@ -44,5 +47,10 @@
             <Image url="@../images/close_button.png" />
          </image>
       </ImageView>
+      <Hyperlink fx:id="esqueci_senha_hlk" alignment="CENTER" layoutX="398.0" layoutY="436.0" onAction="#solicitar_senha" text="Esqueci minha senha!" underline="true" visible="false">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Hyperlink>
    </children>
 </AnchorPane>

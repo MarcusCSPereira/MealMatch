@@ -70,8 +70,41 @@ public class TelaReceitasController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
 
     Platform.runLater(() -> screen.requestFocus());
-    // Configurar qual será cada item da lista para o ListView
+    // O que acontece aqui:
+    // O método buscar retorna uma lista de receitas. Quando chamamos o método
+    // atualizarListaReceitas,
+    // ele limpa a lista observável (ObservableList) e adiciona as receitas buscadas
+    // nela. Dessa forma, nossa
+    // lista original de receitas é transformada em uma ObservableList.
+
+    // Ao usar o código abaixo, o que ocorre é o seguinte:
+    // O ListView observa a ObservableList associada a ele. Sempre que ocorre uma
+    // alteração na ObservableList
+    // (adição, remoção ou atualização de itens), o ListView é notificado e reflete
+    // as mudanças automaticamente.
+
+    // Além disso, as células do ListView são renderizadas utilizando o CellFactory configurado, que, neste caso, é o ReceitaListCellController. Esse controller é responsável por definir como cada célula será exibida na lista, ou seja, ele renderiza os itens visuais da lista.
     receitas_listview.setCellFactory(listView -> new ReceitaListCellController());
+
+    // Explicação detalhada dos elementos:
+    // 1. setCellFactory: É um método do ListView usado para configurar o
+    // "fabricante de células" (CellFactory),
+    // que define como cada célula (item visual) do ListView será criada e exibida.
+    // 2. listView: É o parâmetro fornecido automaticamente pelo método
+    // setCellFactory. Ele representa a própria
+    // instância do ListView (neste caso, receitas_listview) que está sendo
+    // configurada. Esse parâmetro é
+    // fornecido pela API do JavaFX como parte do contrato do Callback.
+    // O listView pode ser útil dentro do CellFactory, caso seja necessário acessar
+    // métodos ou propriedades
+    // do ListView enquanto as células são configuradas.
+    // 3. ReceitaListCellController: É uma classe personalizada que estende
+    // ListCell<Receita>, e nela implementamos
+    // a lógica para renderizar as informações de uma Receita em cada célula da
+    // lista. Por exemplo, no método
+    // updateItem, usamos o setGraphic() para configurar os componentes visuais da
+    // célula.
+
     // Limpa a lista de receitas buscadas:
     limparListaReceitas();
     consumirEventoDeSelecaoDeReceita();
@@ -148,12 +181,7 @@ public class TelaReceitasController implements Initializable {
 
   @FXML
   void acessar_favoritas(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_favoritas.fxml"));
-    Parent root = loader.load();
-    scene = new Scene(root);
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
+    System.out.println("Mostra apenas as receitas favoritadas pelo usuario");
   }
 
   @FXML
