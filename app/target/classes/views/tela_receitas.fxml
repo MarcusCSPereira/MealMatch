@@ -52,5 +52,10 @@
             <Image url="@../images/profile_button.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="criar_receita_button" fitHeight="40.0" fitWidth="40.0" layoutX="17.0" layoutY="95.0" onMouseClicked="#adicionar_receita" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/criarReceita.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

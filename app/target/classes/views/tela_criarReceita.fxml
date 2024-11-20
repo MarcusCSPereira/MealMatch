@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.AdicionarReceitaController">
+   <children>
+      <ImageView fx:id="botaoVoltar" fitHeight="150.0" fitWidth="50.0" layoutX="30.0" layoutY="25.0" onMouseClicked="#voltar_tela" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+         <image>
+            <Image url="@../images/back_button.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="361.0" layoutY="36.0" text="Insira uma receita:">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="32.0" layoutY="158.0" prefHeight="30.0" prefWidth="125.0" text="Ingrediente:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ingrediente_adicionado" layoutX="30.0" layoutY="194.0" prefHeight="30.0" prefWidth="149.0" promptText="ingrediente">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="quantidade_ingrediente" layoutX="200.0" layoutY="194.0" prefHeight="30.0" prefWidth="149.0" promptText="quantidade">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Label layoutX="200.0" layoutY="159.0" text="Quantidade:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="unidadeDeMedida" layoutX="365.0" layoutY="197.0" prefHeight="25.0" prefWidth="125.0" />
+      <Button fx:id="botaoAdicionar" layoutX="30.0" layoutY="235.0" mnemonicParsing="false" onAction="#adiciona_ingrediente" prefHeight="31.0" prefWidth="149.0" text="Adicionar" />
+      <ListView fx:id="listaView" layoutX="23.0" layoutY="281.0" prefHeight="299.0" prefWidth="214.0" />
+      <Label layoutX="365.0" layoutY="159.0" text="Unidade de Medida:">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="79.0" text="Nome da Receita:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nomeDaReceita" layoutX="23.0" layoutY="119.0" promptText="Nome da receita">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <RadioButton fx:id="dificuldadeFacil" layoutX="279.0" layoutY="280.0" mnemonicParsing="false" onAction="#definirDificuldade" text="fácil">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="dificuldadeReceita" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="dificuldadeMedio" layoutX="279.0" layoutY="330.0" mnemonicParsing="false" onAction="#definirDificuldade" text="médio" toggleGroup="$dificuldadeReceita">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="dificuldadeDificil" layoutX="279.0" layoutY="380.0" mnemonicParsing="false" onAction="#definirDificuldade" text="difícil" toggleGroup="$dificuldadeReceita">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="665.0" layoutY="158.0" text="Modo de Preparo:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="campoModoPreparo" layoutX="665.0" layoutY="194.0" prefHeight="50.0" prefWidth="267.0" promptText="Primeiro passo" />
+      <ListView fx:id="listaDePreparo" layoutX="665.0" layoutY="273.0" prefHeight="226.0" prefWidth="267.0" />
+      <Button fx:id="adicionaPasso" layoutX="665.0" layoutY="508.0" mnemonicParsing="false" onAction="#adicionarPasso" text="Adiciona Passo" />
+      <Button fx:id="removerPasso" layoutX="773.0" layoutY="508.0" mnemonicParsing="false" onAction="#removerPasso" text="Remover Passo" />
+      <Label layoutX="665.0" layoutY="551.0" text="Tempo de Preparo:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tempoDePrearoField" layoutX="671.0" layoutY="588.0" promptText="Tempo de preparo" />
+      <Button fx:id="tempoDePreparoButton" layoutX="844.0" layoutY="588.0" mnemonicParsing="false" onAction="#adicionarTempoDePreparo" text="adicionar" />
+   </children>
+</AnchorPane>
