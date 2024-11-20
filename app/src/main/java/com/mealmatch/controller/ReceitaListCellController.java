@@ -1,10 +1,15 @@
 package com.mealmatch.controller;
 
+import java.io.IOException;
+
 import com.mealmatch.model.Receita;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -12,6 +17,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
 public class ReceitaListCellController extends ListCell<Receita> {
@@ -73,6 +79,9 @@ public class ReceitaListCellController extends ListCell<Receita> {
   @FXML
   private Label valor_nutricional_label;
 
+  Scene scene;
+  Stage stage;
+
   @FXML
   void editar_receita(MouseEvent event) {
     System.out.println("Editar receita de id: " + getItem().getId());
@@ -115,8 +124,13 @@ public class ReceitaListCellController extends ListCell<Receita> {
   }
 
   @FXML
-  void receipe_details(ActionEvent event) {
-    System.out.println("Detalhes da receita de id: " + getItem().getId());
+  void receipe_details(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_detalhes_receita.fxml"));
+    Parent root = loader.load();
+    scene = new Scene(root);
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();
   }
 
   public ReceitaListCellController() {

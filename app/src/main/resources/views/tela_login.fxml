@@ -47,5 +47,10 @@
             <Image url="@../images/close_button.png" />
          </image>
       </ImageView>
+      <Hyperlink fx:id="esqueci_senha_hlk" alignment="CENTER" layoutX="398.0" layoutY="436.0" onAction="#solicitar_senha" text="Esqueci minha senha!" underline="true" visible="false">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Hyperlink>
    </children>
 </AnchorPane>
