@@ -50,6 +50,9 @@ public class TelaReceitasController implements Initializable {
   private ImageView profile_button;
 
   @FXML
+  private ImageView criar_receita_button;
+
+  @FXML
   private ListView<Receita> receitas_listview;
 
   @FXML
@@ -193,6 +196,16 @@ public class TelaReceitasController implements Initializable {
     stage.setScene(scene);
     stage.show();
   }
+
+    @FXML
+    void adicionar_receita(MouseEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_criarReceita.fxml"));
+    Parent root = loader.load();
+    scene = new Scene(root);
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();
+    }
 
   @FXML
   void fechar_programa() {
