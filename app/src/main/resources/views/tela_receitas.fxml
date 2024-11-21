@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaReceitasController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaReceitasController">
    <children>
       <ImageView fx:id="close_button" fitHeight="60.0" fitWidth="60.0" layoutX="800.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
          <image>
@@ -57,5 +57,8 @@
             <Image url="@../images/criarReceita.png" />
          </image>
       </ImageView>
+      <RadioButton fx:id="difFacil" layoutX="720.0" layoutY="81.0" mnemonicParsing="false" text="Fácil" toggleGroup="$toggleGroupDificuldade" />
+      <RadioButton fx:id="difMedio" layoutX="775.0" layoutY="81.0" mnemonicParsing="false" text="Médio" toggleGroup="$toggleGroupDificuldade" />
+      <RadioButton fx:id="difDificil" layoutX="840.0" layoutY="81.0" mnemonicParsing="false" text="Difícil" toggleGroup="$toggleGroupDificuldade" />
    </children>
 </AnchorPane>
