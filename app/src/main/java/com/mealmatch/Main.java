@@ -2,7 +2,6 @@ package com.mealmatch;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.Receita;
 import com.mealmatch.model.ReceitaIngrediente;
@@ -19,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class Main extends Application {
 
     @Override

@@ -6,6 +6,8 @@ import javafx.scene.control.Alert;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.SimpleEmail;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 public class EmailSender implements Runnable {
 
     private final String recipientEmail;
@@ -18,10 +20,12 @@ public class EmailSender implements Runnable {
         this.message = message;
     }
 
+    private static Dotenv dotenv = Dotenv.load();
+
     @Override
     public void run() {
         String email = "mealmatch.server@gmail.com"; // E-mail do servidor
-        String senha = "qitj ysyh tnjn wbhw";        // App Password do Gmail
+        String senha = dotenv.get("EMAIL_PASSWORD_APP");        // App Password do Gmail
 
         try {
             SimpleEmail simpleEmail = new SimpleEmail();
@@ -35,14 +39,14 @@ public class EmailSender implements Runnable {
             simpleEmail.addTo(recipientEmail);
             simpleEmail.send();
 
-            // Alerta de sucesso
+            /* Alerta de sucesso
             Platform.runLater(() -> {
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 successAlert.setTitle("Sucesso");
                 successAlert.setHeaderText(null);
                 successAlert.setContentText("E-mail enviado com sucesso para: " + recipientEmail);
                 successAlert.showAndWait();
-            });
+            });*/
         } catch (Exception e) {
             e.printStackTrace();
             // Alerta de erro
