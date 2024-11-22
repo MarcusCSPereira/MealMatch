@@ -1,9 +1,12 @@
 package com.mealmatch.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.scene.image.Image;
 
 public class Receita {
-  private Integer id;
+  private Integer id=0;
   private String nome;
   private String ingredientes;
   private String modoPreparo;
@@ -14,6 +17,10 @@ public class Receita {
   private int numeroLikes;
   private int numeroDislikes;
   private boolean favorita;
+  private double massa;
+  Map<Ingrediente,ReceitaIngrediente> ingredientesMapping = new HashMap<>();
+  TabelaNutricionalReceita tabelaNutricional;
+
 
   public Receita(Integer id ,String nome, String ingredientes, String modoPreparo, int tempoPreparo, int valorNutricional, int dificuldade, Image imagem, int numeroLikes, int numeroDislikes, boolean favorita) {
     this.id = id;
@@ -29,7 +36,39 @@ public class Receita {
     this.favorita = favorita;
   }
 
-  public Receita() {
+ public Receita() {
+    tabelaNutricional = new TabelaNutricionalReceita(id);
+  }
+
+  public void gerarTabela(){
+    int count = 0;
+    for(Map.Entry<Ingrediente,ReceitaIngrediente> tupla: ingredientesMapping.entrySet()){
+      Ingrediente ingrediente = tupla.getKey(); // Pega o objeto ingrediente
+      ReceitaIngrediente receitaIngrediente = tupla.getValue(); // Pega o objeta que liga os dois
+      count++;
+
+      double quantidade = receitaIngrediente.getQuantidade();
+      System.out.println("Quantidade de "+ingrediente.getNomeIngrediente()+ " : "+ quantidade);
+      String unidadeMedida = receitaIngrediente.getUnidadeMedida();
+
+
+
+      if(unidadeMedida == "L" || unidadeMedida == "kg") // Converte tudo para grama ou ml
+        quantidade = quantidade * 1000;
+      
+      double caloriaAdicionar = ingrediente.getTabela().getCaloria() * quantidade / 100;
+      this.tabelaNutricional.setCaloria(this.tabelaNutricional.getCaloria()+ caloriaAdicionar);
+
+      double carboidratoAdicionar = ingrediente.getTabela().getCarboidrato() * quantidade / 100;
+      this.tabelaNutricional.setCarboidrato(this.tabelaNutricional.getCarboidrato()+ carboidratoAdicionar);
+
+      double gorduraAdicionar = ingrediente.getTabela().getGordura() * quantidade / 100;
+      this.tabelaNutricional.setGordura(this.tabelaNutricional.getGordura()+ gorduraAdicionar);
+
+      double proteinaAdicionar = ingrediente.getTabela().getProteina() * quantidade / 100;
+      this.tabelaNutricional.setProteina(this.tabelaNutricional.getProteina()+ proteinaAdicionar);
+      this.massa+= quantidade;
+    }
   }
 
   public Integer getId() {
@@ -106,5 +145,29 @@ public class Receita {
   public void setImagem(Image imagem) {
     this.imagem = imagem;
   }
+
+   public double getMassa() {
+  return massa;
+}
+
+public void setMassa(double massa) {
+  this.massa = massa;
+}
+
+public Map<Ingrediente, ReceitaIngrediente> getIngredientesMapping() {
+  return ingredientesMapping;
+}
+
+public void setIngredientesMapping(Map<Ingrediente, ReceitaIngrediente> ingredientesMapping) {
+  this.ingredientesMapping = ingredientesMapping;
+}
+
+public TabelaNutricionalReceita getTabelaNutricional() {
+  return tabelaNutricional;
+}
+
+public void setTabelaNutricional(TabelaNutricionalReceita tabelaNutricional) {
+  this.tabelaNutricional = tabelaNutricional;
+}
 
 }
