@@ -1,5 +1,13 @@
 package com.mealmatch;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.mealmatch.model.Ingrediente;
+import com.mealmatch.model.Receita;
+import com.mealmatch.model.ReceitaIngrediente;
+import com.mealmatch.model.TabelaNutricionalIngrediente;
+
 //import java.sql.Connection;
 
 //import com.mealmatch.jdbc.database.ConnectionFactory;
