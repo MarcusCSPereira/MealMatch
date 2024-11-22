@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
 import com.mealmatch.model.Receita;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -30,6 +32,18 @@ public class TelaReceitasController implements Initializable {
 
   @FXML
   private ToggleGroup busca_de_receitas;
+
+  @FXML
+  private ToggleGroup toggleGroupDificuldade;
+
+  @FXML
+  private RadioButton difFacil;
+
+  @FXML
+  private RadioButton difMedio;
+
+  @FXML
+  private RadioButton difDificil;
 
   @FXML
   private ImageView close_button;
@@ -66,6 +80,8 @@ public class TelaReceitasController implements Initializable {
 
   Scene scene;
   Stage stage;
+
+  private int dificuldadeSelecionada;
 
   private ObservableList<Receita> receitasObservable;
 
@@ -149,11 +165,11 @@ public class TelaReceitasController implements Initializable {
     // receitas fictícias, aqui tera o uso do receitas.dao para buscar as receitas
     // no banco de dados
     List<Receita> receitasBuscadas = new ArrayList<>();
-    receitasBuscadas.add(new Receita(1, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
+    receitasBuscadas.add(new Receita(1, "Salada de Quinoa id1", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
         new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(2, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
+    receitasBuscadas.add(new Receita(2, "Salada de Quinoa id2", "quinoa, tomate, pepino", "preparo", 10, 10, 2,
         new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(3, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
+    receitasBuscadas.add(new Receita(3, "Salada de Quinoa id3", "quinoa, tomate, pepino", "preparo", 10, 10, 3,
         new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
     receitasBuscadas.add(new Receita(4, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
         new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
@@ -177,6 +193,22 @@ public class TelaReceitasController implements Initializable {
         new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
     receitasBuscadas.add(new Receita(14, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
         new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
+
+        dificuldadeSelecionada = -1; // Valor que nao pega nenhum filtro
+        if (difFacil.isSelected()) {
+            dificuldadeSelecionada = 1;
+        } else if (difMedio.isSelected()) {
+            dificuldadeSelecionada = 2;
+        } else if (difDificil.isSelected()) {
+            dificuldadeSelecionada = 3;
+        }
+
+        // Aplicacao do filtro
+        if (dificuldadeSelecionada != -1) {
+            receitasBuscadas = receitasBuscadas.stream()
+                .filter(receita -> receita.getDificuldade() == dificuldadeSelecionada)
+                .collect(Collectors.toList());
+        }
 
     // Atualizar o ListView com as receitas buscadas
     atualizarListaReceitas(receitasBuscadas);
