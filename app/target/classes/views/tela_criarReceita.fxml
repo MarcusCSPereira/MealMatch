@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.AdicionarReceitaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaAdicionarReceitaController">
    <children>
       <ImageView fx:id="botaoVoltar" fitHeight="150.0" fitWidth="50.0" layoutX="30.0" layoutY="25.0" onMouseClicked="#voltar_tela" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
          <image>
@@ -97,5 +96,10 @@
       </Label>
       <TextField fx:id="tempoDePrearoField" layoutX="671.0" layoutY="588.0" promptText="Tempo de preparo" />
       <Button fx:id="tempoDePreparoButton" layoutX="844.0" layoutY="588.0" mnemonicParsing="false" onAction="#adicionarTempoDePreparo" text="adicionar" />
+      <ImageView fx:id="receita_image" fitHeight="230.0" fitWidth="230.0" layoutX="359.0" layoutY="432.0" onMouseClicked="#selecionar_image_receita" pickOnBounds="true">
+         <image>
+            <Image url="@../images/pickup_image_button.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
