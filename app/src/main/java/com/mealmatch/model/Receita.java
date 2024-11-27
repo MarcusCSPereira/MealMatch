@@ -41,6 +41,7 @@ public class Receita {
   }
 
   public void gerarTabela(){
+    @SuppressWarnings("unused")
     int count = 0;
     for(Map.Entry<Ingrediente,ReceitaIngrediente> tupla: ingredientesMapping.entrySet()){
       Ingrediente ingrediente = tupla.getKey(); // Pega o objeto ingrediente

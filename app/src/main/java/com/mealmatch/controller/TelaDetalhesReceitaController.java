@@ -32,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class TelaDetalhesReceitaController implements Initializable {
 
   @FXML

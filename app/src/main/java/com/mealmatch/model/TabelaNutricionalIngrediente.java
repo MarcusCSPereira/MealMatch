@@ -1,5 +1,6 @@
 package com.mealmatch.model;
 
+@SuppressWarnings("unused")
 public class TabelaNutricionalIngrediente {
   private static int idIncrement = 0;
   private int idTabelaNutricional;

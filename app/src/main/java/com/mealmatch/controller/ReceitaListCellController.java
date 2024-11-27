@@ -1,9 +1,6 @@
 package com.mealmatch.controller;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.mealmatch.model.Receita;
 
 import javafx.event.ActionEvent;
