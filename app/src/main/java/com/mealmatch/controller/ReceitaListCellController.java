@@ -129,6 +129,8 @@ public class ReceitaListCellController extends ListCell<Receita> {
   void receipe_details(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_detalhes_receita.fxml"));
     Parent root = loader.load();
+    TelaDetalhesReceitaController detailsController = loader.getController();
+    detailsController.setReceita(getItem());
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);

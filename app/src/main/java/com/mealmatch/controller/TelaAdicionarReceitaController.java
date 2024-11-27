@@ -31,6 +31,30 @@ public class TelaAdicionarReceitaController implements Initializable {
   @FXML
   private ImageView botaoVoltar;
 
+  @FXML 
+  private ImageView close_image;
+
+  @FXML 
+  private ImageView add_receita_image;
+
+  @FXML
+  private RadioButton acucar_toogle;
+
+  @FXML
+  private RadioButton vegana_toogle;
+
+  @FXML
+  private RadioButton vegetariana_toogle;
+
+  @FXML
+  private RadioButton frutos_do_mar_toogle;
+
+  @FXML
+  private RadioButton lactose_toogle;
+
+  @FXML
+  private RadioButton gluten_toogle;
+
   @FXML
   private Button adicionaPasso;
 
@@ -151,6 +175,28 @@ public class TelaAdicionarReceitaController implements Initializable {
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
+  }
+
+  @FXML 
+  void fechar_programa(MouseEvent event) {
+    System.exit(0);
+  }
+
+  @FXML
+  void criar_receita(MouseEvent event) throws IOException{
+    System.out.println("Adicionando receita...");
+    System.out.println("Nome da receita: " + nomeDaReceita.getText());
+    System.out.println("Dificuldade: " + dificuldade);
+    System.out.println("Tempo de preparo: " + tempoDePreparo);
+    System.out.println("Ingredientes: ");
+    for (String ingrediente : listaIngredientes) {
+      System.out.println(ingrediente);
+    }
+    System.out.println("Modo de preparo: ");
+    for (String passo : passosModoPreparo) {
+      System.out.println(passo);
+    }
+    voltar_tela(event);
   }
 
   @FXML
