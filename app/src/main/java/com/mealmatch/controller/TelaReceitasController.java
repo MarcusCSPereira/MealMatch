@@ -102,7 +102,10 @@ public class TelaReceitasController implements Initializable {
     // (adição, remoção ou atualização de itens), o ListView é notificado e reflete
     // as mudanças automaticamente.
 
-    // Além disso, as células do ListView são renderizadas utilizando o CellFactory configurado, que, neste caso, é o ReceitaListCellController. Esse controller é responsável por definir como cada célula será exibida na lista, ou seja, ele renderiza os itens visuais da lista.
+    // Além disso, as células do ListView são renderizadas utilizando o CellFactory
+    // configurado, que, neste caso, é o ReceitaListCellController. Esse controller
+    // é responsável por definir como cada célula será exibida na lista, ou seja,
+    // ele renderiza os itens visuais da lista.
     receitas_listview.setCellFactory(listView -> new ReceitaListCellController());
 
     // Explicação detalhada dos elementos:
@@ -165,9 +168,10 @@ public class TelaReceitasController implements Initializable {
     // receitas fictícias, aqui tera o uso do receitas.dao para buscar as receitas
     // no banco de dados
     List<Receita> receitasBuscadas = new ArrayList<>();
-    receitasBuscadas.add(new Receita(1, "Salada de Quinoa id1", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(2, "Salada de Quinoa id2", "quinoa, tomate, pepino", "preparo", 10, 10, 2,
+    receitasBuscadas.add(new Receita(1, "Salada de Quinoa id1", "quinoa ; tomate ; pepino ;",
+        "1. Cozinhe a quinoa conforme as instruções da embalagem.\n2. Pique o tomate e o pepino em cubos pequenos.\n3. Misture a quinoa cozida com o tomate e o pepino.\n4. Tempere com sal, azeite e limão a gosto.\n5. Sirva a salada fresca.",
+        10, 10, 1, new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
+    receitasBuscadas.add(new Receita(2, "Salada de Quinoa id2", "pão;frango;tomate;alface;sal;cominho;pimenta do reino;", "preparo", 10, 10, 2,
         new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
     receitasBuscadas.add(new Receita(3, "Salada de Quinoa id3", "quinoa, tomate, pepino", "preparo", 10, 10, 3,
         new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
@@ -194,21 +198,21 @@ public class TelaReceitasController implements Initializable {
     receitasBuscadas.add(new Receita(14, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
         new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
 
-        dificuldadeSelecionada = -1; // Valor que nao pega nenhum filtro
-        if (difFacil.isSelected()) {
-            dificuldadeSelecionada = 1;
-        } else if (difMedio.isSelected()) {
-            dificuldadeSelecionada = 2;
-        } else if (difDificil.isSelected()) {
-            dificuldadeSelecionada = 3;
-        }
+    dificuldadeSelecionada = -1; // Valor que nao pega nenhum filtro
+    if (difFacil.isSelected()) {
+      dificuldadeSelecionada = 1;
+    } else if (difMedio.isSelected()) {
+      dificuldadeSelecionada = 2;
+    } else if (difDificil.isSelected()) {
+      dificuldadeSelecionada = 3;
+    }
 
-        // Aplicacao do filtro
-        if (dificuldadeSelecionada != -1) {
-            receitasBuscadas = receitasBuscadas.stream()
-                .filter(receita -> receita.getDificuldade() == dificuldadeSelecionada)
-                .collect(Collectors.toList());
-        }
+    // Aplicacao do filtro
+    if (dificuldadeSelecionada != -1) {
+      receitasBuscadas = receitasBuscadas.stream()
+          .filter(receita -> receita.getDificuldade() == dificuldadeSelecionada)
+          .collect(Collectors.toList());
+    }
 
     // Atualizar o ListView com as receitas buscadas
     atualizarListaReceitas(receitasBuscadas);
@@ -229,15 +233,15 @@ public class TelaReceitasController implements Initializable {
     stage.show();
   }
 
-    @FXML
-    void adicionar_receita(MouseEvent event) throws IOException {
+  @FXML
+  void adicionar_receita(MouseEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_criarReceita.fxml"));
     Parent root = loader.load();
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
-    }
+  }
 
   @FXML
   void fechar_programa() {

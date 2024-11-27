@@ -1,5 +1,6 @@
 package com.mealmatch.model;
 
+@SuppressWarnings("unused")
 public class TabelaNutricionalReceita {
   private int idTabelaNutricional;
   private double carboidrato;

@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaReceitasController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaReceitasController">
    <children>
       <ImageView fx:id="close_button" fitHeight="60.0" fitWidth="60.0" layoutX="800.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
          <image>
@@ -47,17 +47,20 @@
          </image>
       </ImageView>
       <Line endX="667.5" endY="100.0" startX="667.5" startY="130.0" />
-      <ImageView fx:id="profile_button" fitHeight="50.0" fitWidth="50.0" layoutX="67.0" layoutY="90.0" onMouseClicked="#acessar_perfil" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="profile_button" fitHeight="50.0" fitWidth="50.0" layoutX="68.0" layoutY="90.0" onMouseClicked="#acessar_perfil" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/profile_button.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="criar_receita_button" fitHeight="40.0" fitWidth="40.0" layoutX="17.0" layoutY="95.0" onMouseClicked="#adicionar_receita" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="criar_receita_button" fitHeight="35.0" fitWidth="35.0" layoutX="20.0" layoutY="98.0" onMouseClicked="#adicionar_receita" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/criarReceita.png" />
          </image>
       </ImageView>
-      <RadioButton fx:id="difFacil" layoutX="720.0" layoutY="81.0" mnemonicParsing="false" text="Fácil" toggleGroup="$toggleGroupDificuldade" />
+      <RadioButton fx:id="difFacil" layoutX="720.0" layoutY="81.0" mnemonicParsing="false" text="Fácil">
+         <toggleGroup>
+            <ToggleGroup fx:id="toggleGroupDificuldade" />
+         </toggleGroup></RadioButton>
       <RadioButton fx:id="difMedio" layoutX="775.0" layoutY="81.0" mnemonicParsing="false" text="Médio" toggleGroup="$toggleGroupDificuldade" />
       <RadioButton fx:id="difDificil" layoutX="840.0" layoutY="81.0" mnemonicParsing="false" text="Difícil" toggleGroup="$toggleGroupDificuldade" />
    </children>

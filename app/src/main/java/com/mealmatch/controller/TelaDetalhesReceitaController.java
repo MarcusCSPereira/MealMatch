@@ -2,9 +2,16 @@ package com.mealmatch.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import com.mealmatch.model.NutrienteValor;
+import com.mealmatch.model.Receita;
+import com.mealmatch.utils.DificuldadeEnum;
+
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,15 +21,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class TelaDetalhesReceitaController implements Initializable {
 
   @FXML
@@ -38,6 +48,21 @@ public class TelaDetalhesReceitaController implements Initializable {
   private RadioButton acucar_toggle;
 
   @FXML
+  private RadioButton facil_toggle;
+
+  @FXML
+  private RadioButton medio_toggle;
+
+  @FXML
+  private RadioButton dificil_toggle;
+
+  @FXML
+  private ListView<String> list_view_ingredientes;
+
+  @FXML
+  private TextArea text_area_modo_preparo;
+
+  @FXML
   private ImageView back_button_image;
 
   @FXML
@@ -48,9 +73,6 @@ public class TelaDetalhesReceitaController implements Initializable {
 
   @FXML
   private RadioButton gluten_toggle;
-
-  @FXML
-  private Rectangle gluten_toogle;
 
   @FXML
   private RadioButton lactose_toggle;
@@ -67,13 +89,18 @@ public class TelaDetalhesReceitaController implements Initializable {
   @FXML
   private RadioButton vegetariana_toggle;
 
+  @FXML
+  private AnchorPane screen;
+
   private ObservableList<NutrienteValor> dadosNutricionais;
+  private Receita receita;
 
   Stage stage;
   Scene scene;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Platform.runLater(() -> screen.requestFocus());
     // Configurando as colunas
     nutrientes_column.setCellValueFactory(new PropertyValueFactory<>("nutriente"));
     valores_column.setCellValueFactory(new PropertyValueFactory<>("valor"));
@@ -101,6 +128,70 @@ public class TelaDetalhesReceitaController implements Initializable {
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
-    
+
   }
+
+  public void setReceita(Receita item) {
+    this.receita = item;
+    Platform.runLater(() -> {
+      nome_receita_label.setText(item.getNome() + item.getId());
+      receita_image.setImage(item.getImagem());
+      preencherListaIngredientes(item.getIngredientes());
+      text_area_modo_preparo.setText(item.getModoPreparo());
+      preencherDificuldade(item.getDificuldade());
+    });
+  }
+
+  private void preencherListaIngredientes(String ingredientes) {
+
+    if (ingredientes == null || ingredientes.isEmpty()) {
+      System.out.println("Nenhum ingrediente fornecido.");
+      return;
+    }
+
+    // Divide os ingredientes pelo delimitador ";"
+    String[] ingredientesArray = ingredientes.split(";");
+
+    List<String> ingredientesFormatados = Arrays.stream(ingredientesArray)
+        .map(String::trim) // Remove 
+        .filter(ingrediente -> !ingrediente.isEmpty())
+        .map(ingrediente -> "\u25CF" + " " + capitalizeFirstLetter(ingrediente))
+        .collect(Collectors.toList());
+
+    // Adiciona os ingredientes formatados à ListView
+    list_view_ingredientes.getItems().clear();
+    list_view_ingredientes.getItems().addAll(ingredientesFormatados);
+  }
+
+  // Método auxiliar para deixar a primeira letra de uma string em Maiúsculo
+  private String capitalizeFirstLetter(String text) {
+    if (text == null || text.isEmpty()) {
+      return text;
+    }
+    return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
+  }
+
+  private void preencherDificuldade(int dificuldade) {
+    try {
+      // Converte o valor para o Enum correspondente
+      DificuldadeEnum dificuldadeEnum = DificuldadeEnum.fromValor(dificuldade);
+
+      switch (dificuldadeEnum) {
+        case FACIL:
+          facil_toggle.setSelected(true);
+          break;
+        case MEDIO:
+          medio_toggle.setSelected(true);
+          break;
+        case DIFICIL:
+          dificil_toggle.setSelected(true);
+          break;
+        default:
+          throw new IllegalStateException("Dificuldade desconhecida: " + dificuldadeEnum);
+      }
+    } catch (IllegalArgumentException e) {
+      System.err.println("Erro: " + e.getMessage());
+    }
+  }
+
 }

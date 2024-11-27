@@ -1,9 +1,6 @@
 package com.mealmatch.controller;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.mealmatch.model.Receita;
 
 import javafx.event.ActionEvent;
@@ -129,6 +126,8 @@ public class ReceitaListCellController extends ListCell<Receita> {
   void receipe_details(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_detalhes_receita.fxml"));
     Parent root = loader.load();
+    TelaDetalhesReceitaController detailsController = loader.getController();
+    detailsController.setReceita(getItem());
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);

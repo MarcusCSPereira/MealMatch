@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaDetalhesReceitaController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaDetalhesReceitaController">
    <children>
       <BorderPane prefHeight="240.0" prefWidth="240.0">
          <center>
@@ -75,7 +78,7 @@
       <RadioButton fx:id="vegana_toggle" focusTraversable="false" layoutX="584.0" layoutY="165.0" mnemonicParsing="false" text="Vegana" />
       <RadioButton fx:id="frutos_do_mar_toggle" focusTraversable="false" layoutX="735.0" layoutY="165.0" mnemonicParsing="false" text="Frutos do Mar" />
       <RadioButton fx:id="acucar_toggle" focusTraversable="false" layoutX="665.0" layoutY="165.0" mnemonicParsing="false" text="Açúcar" />
-      <Rectangle fx:id="gluten_toogle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" layoutX="560.0" layoutY="110.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="285.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" layoutX="560.0" layoutY="110.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="285.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="142.0" layoutX="246.0" layoutY="96.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="183.0" />
       <ImageView fx:id="clobe_button_image" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
          <image>
@@ -88,5 +91,27 @@
          </image>
       </ImageView>
       <Line endX="1000.0" endY="238.0" startY="238.0" strokeWidth="5.0" />
+      <RadioButton fx:id="facil_toggle" focusTraversable="false" layoutX="457.0" layoutY="101.0" mnemonicParsing="false" text="Fácil">
+         <toggleGroup>
+            <ToggleGroup fx:id="dificuldade_group" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="medio_toggle" focusTraversable="false" layoutX="457.0" layoutY="148.0" mnemonicParsing="false" text="Médio" toggleGroup="$dificuldade_group" />
+      <RadioButton fx:id="dificil_toggle" focusTraversable="false" layoutX="457.0" layoutY="194.0" mnemonicParsing="false" text="Difícil" toggleGroup="$dificuldade_group" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="135.0" layoutX="442.0" layoutY="91.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="104.0" />
+      <ListView fx:id="list_view_ingredientes" layoutX="32.0" layoutY="311.0" prefHeight="379.0" prefWidth="404.0" />
+      <Label layoutX="32.0" layoutY="277.0" text="Ingredientes:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="text_area_modo_preparo" layoutX="564.0" layoutY="311.0" prefHeight="379.0" prefWidth="404.0" />
+      <Label alignment="CENTER" layoutX="560.0" layoutY="277.0" prefHeight="26.0" prefWidth="172.0" text="Modo de Preparo:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="394.0" layoutX="551.0" layoutY="303.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="425.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="394.0" layoutX="22.0" layoutY="303.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="425.0" />
    </children>
 </AnchorPane>
