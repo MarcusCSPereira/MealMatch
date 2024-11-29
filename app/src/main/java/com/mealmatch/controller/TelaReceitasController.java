@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import com.mealmatch.model.Receita;
+import com.mealmatch.utils.ControleDeSessao;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -250,6 +252,8 @@ public class TelaReceitasController implements Initializable {
 
   @FXML
   void sair_conta(MouseEvent event) throws IOException {
+    ControleDeSessao controleDeSessao = ControleDeSessao.getInstance();
+    controleDeSessao.clearSession();
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_login.fxml"));
     Parent root = loader.load();
     scene = new Scene(root);

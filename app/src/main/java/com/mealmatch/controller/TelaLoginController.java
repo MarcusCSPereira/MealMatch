@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mealmatch.jdbc.dao.UserDAO;
+import com.mealmatch.jdbc.database.ConnectionFactory;
 import com.mealmatch.utils.EmailSender;
+import com.mealmatch.utils.ControleDeSessao;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -73,14 +76,16 @@ public class TelaLoginController implements Initializable {
     String senha = field_senha.getText();
 
     if (validarLogin(nomeUsuario, senha)) {
+      UserDAO userDao = new UserDAO(ConnectionFactory.getConnection()); // Certifique-se de passar a conexão
+      Integer userId = userDao.getUserIdByUsername(nomeUsuario);
+      // Armazena o ID no SessionManager
+      ControleDeSessao.getInstance().setUserId(userId);
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_receitas.fxml"));
       Parent root = loader.load();
       scene = new Scene(root);
       stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setScene(scene);
       stage.show();
-    } else {
-      System.out.println("Usuário ou senha inválidos!");
     }
   }
 
@@ -99,11 +104,8 @@ public class TelaLoginController implements Initializable {
       return;
     }
 
-    String subject = "Recuperação de senha do aplicativo MealMatch";
-    String message = "Sua senha é: admin";
-
     // Cria e inicia a thread para envio do e-mail
-    EmailSender emailSender = new EmailSender(recipientEmail, subject, message);
+    EmailSender emailSender = new EmailSender(recipientEmail);
     Thread emailThread = new Thread(emailSender);
     emailThread.setDaemon(true); // Permite que a aplicação seja fechada mesmo com a thread em execução
     emailThread.start();
@@ -118,12 +120,12 @@ public class TelaLoginController implements Initializable {
 
   // Simula a busca do e-mail no banco de dados com base no nome do usuário
   private String getEmail(String nomeUsuario) {
-    // Exemplo de busca simulada no banco de dados
-    if (nomeUsuario.equalsIgnoreCase("admin")) {
-      return "marcus.cesar.sp@gmail.com";
+    UserDAO userDao = new UserDAO(ConnectionFactory.getConnection()); // Certifique-se de passar a conexão
+    try {
+      return userDao.buscaEmail(nomeUsuario);
+    } catch (RuntimeException e) {
+      return null;
     }
-    // Retorna null se o usuário não for encontrado
-    return null;
   }
 
   @FXML
@@ -141,8 +143,19 @@ public class TelaLoginController implements Initializable {
     System.exit(0);
   }
 
-  private boolean validarLogin(String nomeUsuario, String senha) {
-    return nomeUsuario.equals("admin") && senha.equals("admin");
+  public boolean validarLogin(String nomeUsuario, String senha) {
+    UserDAO userDao = new UserDAO(ConnectionFactory.getConnection()); // Certifique-se de passar a conexão
+
+    if (userDao.validarLogin(nomeUsuario, senha)) {
+      return true;
+    } else {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Erro");
+      alert.setHeaderText("Login inválido");
+      alert.setContentText("Usuário ou senha incorretos.");
+      alert.showAndWait();
+      return false;
+    }
   }
 
 }

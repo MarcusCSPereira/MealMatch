@@ -6,10 +6,11 @@ import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.Receita;
 import com.mealmatch.model.ReceitaIngrediente;
 import com.mealmatch.model.TabelaNutricionalIngrediente;
+import com.mealmatch.utils.TestarConexao;
 
-//import java.sql.Connection;
+import java.sql.Connection;
 
-//import com.mealmatch.jdbc.database.ConnectionFactory;
+import com.mealmatch.jdbc.database.ConnectionFactory;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,11 +25,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        //Por enquanto, não use a conexão com o banco de dados, para não gastar o banco de dados.
-        //Connection connection = ConnectionFactory.getConnection();
-        //connection.close();
-
-        //TestarConexao.checkInternetConnection();
+        TestarConexao.checkInternetConnection();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_login.fxml"));
         Parent root = loader.load();
