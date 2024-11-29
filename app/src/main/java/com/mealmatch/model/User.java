@@ -1,5 +1,7 @@
 package com.mealmatch.model;
 
+import java.sql.Date;
+
 public class User {
 
   public enum Sex {
@@ -12,19 +14,19 @@ public class User {
   private String email;
   private String username;
   private String password;
-  private Integer age;
+  private Date date;
   private Sex sex;
 
-  public User(Integer id, String completeName, String email, String username, String password, Integer age, Sex sex) {
+  public User(Integer id, String completeName, String email, String username, String password, Date date, Sex sex) {
     if (id != null && id <= 0) {
       throw new IllegalArgumentException("ID deve ser um número positivo.");
     }
     this.id = id;
     this.completeName = completeName;
-    setEmail(email);
+    this.email = email;
     this.username = username;
-    setPassword(password);
-    setAge(age);
+    this.password = password;
+    this.date = date;
     this.sex = sex;
   }
 
@@ -32,6 +34,10 @@ public class User {
 
   public Integer getId() {
     return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public String getUsername() {
@@ -58,12 +64,12 @@ public class User {
     this.email = email;
   }
 
-  public Integer getAge() {
-    return age;
+  public Date getDate() {
+    return date;
   }
 
-  public void setAge(Integer age) {
-    this.age = age;
+  public void setDate(Date date) {
+    this.date = date;
   }
 
   public String getCompleteName() {

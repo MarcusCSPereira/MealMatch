@@ -54,12 +54,12 @@
          </font>
       </Label>
       <Button fx:id="alterar_senha_button" layoutX="229.0" layoutY="574.0" mnemonicParsing="false" onAction="#alterar_senha" text="Alterar Senha" />
-      <TextField fx:id="senha_textfield" editable="false" layoutX="121.0" layoutY="515.0" prefHeight="47.0" prefWidth="310.0" visible="false">
+      <TextField fx:id="senha_textfield" layoutX="121.0" layoutY="515.0" prefHeight="47.0" prefWidth="310.0" visible="false">
          <font>
             <Font size="25.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="senha_passwordfield" editable="false" layoutX="121.0" layoutY="515.0" prefHeight="48.0" prefWidth="310.0" text="ai francuuu">
+      <PasswordField fx:id="senha_passwordfield" layoutX="121.0" layoutY="515.0" prefHeight="48.0" prefWidth="310.0">
          <font>
             <Font size="14.0" />
          </font>
