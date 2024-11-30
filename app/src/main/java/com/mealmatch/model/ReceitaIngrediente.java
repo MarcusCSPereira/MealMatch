@@ -9,6 +9,12 @@ public class ReceitaIngrediente {
   public ReceitaIngrediente(){
   }
 
+  public ReceitaIngrediente(int idReceita, int idIngrediente, double quantidade, String unidadeMedida){
+    this.idReceita = idReceita;
+    this.idIngrediente = idIngrediente;
+    this.quantidade = quantidade;
+    this.unidadeMedida = unidadeMedida;
+  }
 
   public int getIdReceita() {
     return idReceita;

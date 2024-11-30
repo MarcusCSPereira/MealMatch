@@ -131,17 +131,19 @@ public class TelaDetalhesReceitaController implements Initializable {
 
   }
 
+  // Método para preencher a tela com os dados da receita, que é chamado ao clicar no Botão ver mais em um item da lista de receitas
   public void setReceita(Receita item) {
     this.receita = item;
     Platform.runLater(() -> {
-      nome_receita_label.setText(item.getNome() + item.getId());
+      nome_receita_label.setText(item.getNome());
       receita_image.setImage(item.getImagem());
-      preencherListaIngredientes(item.getIngredientes());
+      preencherListaIngredientes(item.getIngredientesFormatados());
       text_area_modo_preparo.setText(item.getModoPreparo());
       preencherDificuldade(item.getDificuldade());
     });
   }
 
+  // Método auxiliar para preencher a lista de ingredientes, recebendo uma string e formatando-a
   private void preencherListaIngredientes(String ingredientes) {
 
     if (ingredientes == null || ingredientes.isEmpty()) {
@@ -171,6 +173,7 @@ public class TelaDetalhesReceitaController implements Initializable {
     return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
   }
 
+  // Método auxiliar para preencher a dificuldade da receita utilizando o Enum correspondente
   private void preencherDificuldade(int dificuldade) {
     try {
       // Converte o valor para o Enum correspondente

@@ -9,7 +9,8 @@ public class Ingrediente {
     this.tabelaNutricional = new TabelaNutricionalIngrediente(this.id_ingrediente);
   }
 
-  public Ingrediente(String nomeIngrediente, TabelaNutricionalIngrediente tabela){
+  public Ingrediente(Integer id_ingrediente,String nomeIngrediente, TabelaNutricionalIngrediente tabela){
+    this.id_ingrediente = id_ingrediente;
     this.nomeIngrediente = nomeIngrediente;
     this.tabelaNutricional = tabela;
     this.tabelaNutricional = new TabelaNutricionalIngrediente(this.id_ingrediente);
