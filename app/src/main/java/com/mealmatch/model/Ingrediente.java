@@ -16,6 +16,15 @@ public class Ingrediente {
     this.nomeIngrediente = nomeIngrediente;
   }
 
+  public Ingrediente(int id_ingrediente, String nomeIngrediente, double carboidrato, double gordura, double proteina, double caloria) {
+    this.id_ingrediente = id_ingrediente;
+    this.nomeIngrediente = nomeIngrediente;
+    this.carboidrato = carboidrato;
+    this.gordura = gordura;
+    this.proteina = proteina;
+    this.caloria = caloria;
+  }
+
   public int getId_ingrediente() {
     return id_ingrediente;
   }

@@ -224,7 +224,7 @@ public class UserDAO {
       stmt.setInt(1, id);
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
-          return new User(
+          User user =  new User(
               rs.getInt("idusuario"),
               rs.getString("nomecompleto"),
               rs.getString("email"),
@@ -234,12 +234,29 @@ public class UserDAO {
               User.Sex.valueOf(rs.getString("sexo")),
               rs.getBytes("fotoperfil") != null ? new Image(new ByteArrayInputStream(rs.getBytes("fotoperfil")))
                   : null);
+              user.setNumeroReceitasCriadas(getNumReceipesCreated(id));
+          return user;
         }
       }
     } catch (SQLException e) {
       e.printStackTrace();
     }
     return null; // Retorna null se o usuário não for encontrado
+  }
+
+  public int getNumReceipesCreated(Integer userId) {
+    String sql = "SELECT COUNT(*) AS num_receitas FROM criarreceita WHERE criarreceita.idusuario = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+      stmt.setInt(1, userId);
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt("num_receitas");
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return 0; // Retorna 0 se não houver receitas criadas
   }
 
   public boolean updatePassword(Integer userId, String novaSenha) {

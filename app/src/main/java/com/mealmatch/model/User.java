@@ -19,6 +19,7 @@ public class User {
   private Date date;
   private Sex sex;
   private Image profileImage;
+  private int numeroReceitasCriadas;
 
   public User(Integer id, String completeName, String email, String username, String password, Date date, Sex sex, Image profileImage) {
     if (id != null && id <= 0) {
@@ -98,6 +99,14 @@ public class User {
 
   public void setProfileImage(Image profileImage) {
     this.profileImage = profileImage;
+  }
+
+  public int getNumeroReceitasCriadas() {
+    return numeroReceitasCriadas;
+  }
+
+  public void setNumeroReceitasCriadas(int numeroReceitasCriadas) {
+    this.numeroReceitasCriadas = numeroReceitasCriadas;
   }
 
 }
