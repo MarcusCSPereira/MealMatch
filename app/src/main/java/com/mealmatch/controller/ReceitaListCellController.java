@@ -82,7 +82,15 @@ public class ReceitaListCellController extends ListCell<Receita> {
   Stage stage;
 
   @FXML
-  void editar_receita(MouseEvent event) {
+  void editar_receita(MouseEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_EditarReceita.fxml"));
+    Parent root = loader.load();
+    TelaEditarReceitaController detailsController = loader.getController();
+    detailsController.setReceita(getItem());
+    scene = new Scene(root);
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(scene);
+    stage.show();
     System.out.println("Editar receita de id: " + getItem().getId());
   }
 
