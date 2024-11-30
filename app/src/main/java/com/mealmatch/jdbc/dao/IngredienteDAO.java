@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mealmatch.model.Ingrediente;
-import com.mealmatch.model.TabelaNutricionalIngrediente;
 
 public class IngredienteDAO {
   
@@ -31,11 +30,15 @@ public class IngredienteDAO {
   }
 
   public Ingrediente mapResultSetToIngrediente(ResultSet rs) throws SQLException {
-    return new Ingrediente(
-      rs.getInt("idingrediente"),
-      rs.getString("nomeingrediente"),
-      new TabelaNutricionalIngrediente(rs.getInt("caloria"), rs.getInt("carboidrato"), rs.getInt("proteina"), rs.getInt("gordura"), rs.getInt("idingrediente"))
-    );
+    Ingrediente ingrediente = new Ingrediente();
+    ingrediente.setCaloria(rs.getDouble("caloria"));
+    ingrediente.setCarboidrato(rs.getDouble("carboidrato"));
+    ingrediente.setGordura(rs.getDouble("gordura"));
+    ingrediente.setProteina(rs.getDouble("proteina"));
+    ingrediente.setId_ingrediente(rs.getInt("idingrediente"));
+    
+    return ingrediente;
+
   }
   
 }

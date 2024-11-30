@@ -1,29 +1,24 @@
 package com.mealmatch.model;
 
 @SuppressWarnings("unused")
-public class TabelaNutricionalIngrediente {
-  private static int idIncrement = 0;
+public class TabelaNutricional {
   private int idTabelaNutricional;
   private double carboidrato;
   private  double gordura;
   private double proteina;
   private double caloria;
-  private int idIngrediente;
+  private int idReceita;
 
-  public TabelaNutricionalIngrediente(int idIngrediente){
-    idTabelaNutricional = idIncrement;
-    idIncrement++;
-    this.idIngrediente = idIngrediente;
+  public TabelaNutricional(int idReceita){
+    this.idReceita = idReceita;
   }
 
-  public TabelaNutricionalIngrediente(double carboidrato, double gordura, double proteina, double caloria,int idingrediente){
-    idTabelaNutricional = idIncrement;
-    idIncrement++;
+  public TabelaNutricional(double carboidrato, double gordura, double proteina, double caloria, int idReceita){
     this.carboidrato = carboidrato;
     this.gordura = gordura;
     this.proteina = proteina;
     this.caloria = caloria;
-    this.idIngrediente = idingrediente;
+    this.idReceita = idReceita;
   }
 
   public double getCarboidrato() {
