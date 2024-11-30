@@ -2,11 +2,14 @@ package com.mealmatch.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import com.mealmatch.jdbc.dao.ReceitaDAO;
+import com.mealmatch.jdbc.database.ConnectionFactory;
 import com.mealmatch.model.Receita;
 import com.mealmatch.utils.ControleDeSessao;
 
@@ -24,7 +27,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -91,45 +93,9 @@ public class TelaReceitasController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
 
     Platform.runLater(() -> screen.requestFocus());
-    // O que acontece aqui:
-    // O método buscar retorna uma lista de receitas. Quando chamamos o método
-    // atualizarListaReceitas,
-    // ele limpa a lista observável (ObservableList) e adiciona as receitas buscadas
-    // nela. Dessa forma, nossa
-    // lista original de receitas é transformada em uma ObservableList.
 
-    // Ao usar o código abaixo, o que ocorre é o seguinte:
-    // O ListView observa a ObservableList associada a ele. Sempre que ocorre uma
-    // alteração na ObservableList
-    // (adição, remoção ou atualização de itens), o ListView é notificado e reflete
-    // as mudanças automaticamente.
-
-    // Além disso, as células do ListView são renderizadas utilizando o CellFactory
-    // configurado, que, neste caso, é o ReceitaListCellController. Esse controller
-    // é responsável por definir como cada célula será exibida na lista, ou seja,
-    // ele renderiza os itens visuais da lista.
     receitas_listview.setCellFactory(listView -> new ReceitaListCellController());
 
-    // Explicação detalhada dos elementos:
-    // 1. setCellFactory: É um método do ListView usado para configurar o
-    // "fabricante de células" (CellFactory),
-    // que define como cada célula (item visual) do ListView será criada e exibida.
-    // 2. listView: É o parâmetro fornecido automaticamente pelo método
-    // setCellFactory. Ele representa a própria
-    // instância do ListView (neste caso, receitas_listview) que está sendo
-    // configurada. Esse parâmetro é
-    // fornecido pela API do JavaFX como parte do contrato do Callback.
-    // O listView pode ser útil dentro do CellFactory, caso seja necessário acessar
-    // métodos ou propriedades
-    // do ListView enquanto as células são configuradas.
-    // 3. ReceitaListCellController: É uma classe personalizada que estende
-    // ListCell<Receita>, e nela implementamos
-    // a lógica para renderizar as informações de uma Receita em cada célula da
-    // lista. Por exemplo, no método
-    // updateItem, usamos o setGraphic() para configurar os componentes visuais da
-    // célula.
-
-    // Limpa a lista de receitas buscadas:
     limparListaReceitas();
     consumirEventoDeSelecaoDeReceita();
   }
@@ -166,39 +132,23 @@ public class TelaReceitasController implements Initializable {
 
   @FXML
   void buscar() {
-    // Aqui é um exemplo de busca de receitas, por enquanto, apenas adicionando
-    // receitas fictícias, aqui tera o uso do receitas.dao para buscar as receitas
-    // no banco de dados
+
     List<Receita> receitasBuscadas = new ArrayList<>();
-    receitasBuscadas.add(new Receita(1, "Salada de Quinoa id1", "quinoa ; tomate ; pepino ;",
-        "1. Cozinhe a quinoa conforme as instruções da embalagem.\n2. Pique o tomate e o pepino em cubos pequenos.\n3. Misture a quinoa cozida com o tomate e o pepino.\n4. Tempere com sal, azeite e limão a gosto.\n5. Sirva a salada fresca.",
-        10, 10, 1, new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(2, "Salada de Quinoa id2", "pão;frango;tomate;alface;sal;cominho;pimenta do reino;", "preparo", 10, 10, 2,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(3, "Salada de Quinoa id3", "quinoa, tomate, pepino", "preparo", 10, 10, 3,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(4, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(5, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(6, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(7, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(8, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(9, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(10, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(11, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(12, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(13, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
-    receitasBuscadas.add(new Receita(14, "Salada de Quinoa", "quinoa, tomate, pepino", "preparo", 10, 10, 1,
-        new Image(getClass().getResource("/images/frango.png").toExternalForm()), 10, 10, true));
+    ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());//Quem busca as Receitas
+  
+    if (nomeReceita_toggle.isSelected()) {
+      // Busca por nome da receita
+      String nomeReceita = search_field.getText();
+      try {
+        receitasBuscadas = receitaDAO.findByName(nomeReceita);
+        if (receitasBuscadas.isEmpty()) {
+          System.out.println("Nenhuma receita encontrada com o nome: " + nomeReceita);
+        }
+      } catch (SQLException e) {
+        System.out.println("Erro ao buscar receitas por nome: " + e.getMessage());
+        e.printStackTrace();
+      }
+    }
 
     dificuldadeSelecionada = -1; // Valor que nao pega nenhum filtro
     if (difFacil.isSelected()) {
