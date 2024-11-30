@@ -5,7 +5,6 @@ import java.util.Map;
 import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.Receita;
 import com.mealmatch.model.ReceitaIngrediente;
-import com.mealmatch.model.TabelaNutricionalIngrediente;
 import com.mealmatch.utils.TestarConexao;
 
 import java.sql.Connection;

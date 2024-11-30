@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mealmatch.jdbc.dao.ReceitaIngredienteDAO;
 import com.mealmatch.jdbc.database.ConnectionFactory;
 
 import javafx.scene.image.Image;
@@ -22,10 +21,12 @@ public class Receita {
   private int numeroLikes;
   private int numeroDislikes;
   private double massa;
-  TabelaNutricionalReceita tabelaNutricional;
+  TabelaNutricional tabelaNutricional;
+
+  public Receita(){}
 
   public Receita(Integer idReceita, String nomeReceita, String modoPreparo, int tempoPreparo, int dificuldade,
-      Image imagemReceita, int numeroLikes, int numeroDislikes, int idTabela) {
+        Image imagemReceita, int numeroLikes, int numeroDislikes, int idTabela) {
     this.id = idReceita;
     this.nome = nomeReceita;
     this.modoPreparo = modoPreparo;
@@ -37,36 +38,6 @@ public class Receita {
     // this.tabelaNutricional = TODO: buscar tabela nutricional da receita
     //this.valorNutricional = TODO: calcular valor nutricional da receita
 
-    // Busca os ingredientes da receita utilizando a relação ReceitaIngrediente
-    ReceitaIngredienteDAO ReceitaIngredienteDao = new ReceitaIngredienteDAO(ConnectionFactory.getConnection());
-    try {
-      this.ingredientesMapping = ReceitaIngredienteDao.buscarIngredientesPorReceita(idReceita);
-
-      // Formata os ingredientes
-      StringBuilder ingredientesStringBuilder = new StringBuilder();
-      for (Map.Entry<Ingrediente, ReceitaIngrediente> entry : ingredientesMapping.entrySet()) {
-        Ingrediente ingrediente = entry.getKey();
-        ReceitaIngrediente receitaIngrediente = entry.getValue();
-
-        if (ingredientesStringBuilder.length() > 0) {
-          ingredientesStringBuilder.append(" ; "); // Adiciona o delimitador
-        }
-
-        // Formata: Nome do ingrediente (quantidade unidade de medida)
-        ingredientesStringBuilder.append(ingrediente.getNomeIngrediente())
-            .append(" (")
-            .append(receitaIngrediente.getQuantidade())
-            .append(" ")
-            .append(receitaIngrediente.getUnidadeMedida())
-            .append(")");
-      }
-
-      this.ingredientesFormatados = ingredientesStringBuilder.toString(); // Converte para String para exibir na tela de detalhes
-
-    } catch (SQLException e) {
-      System.out.println("Erro ao buscar ingredientes da receita");
-      e.printStackTrace();
-    }
   }
 
   public void gerarTabela() {
@@ -81,22 +52,48 @@ public class Receita {
       System.out.println("Quantidade de " + ingrediente.getNomeIngrediente() + " : " + quantidade);
       String unidadeMedida = receitaIngrediente.getUnidadeMedida();
 
-      if (unidadeMedida == "L" || unidadeMedida == "kg") // Converte tudo para grama ou ml
+      if (unidadeMedida.equals("L") || unidadeMedida.equals("kg")) // Converte tudo para grama ou ml
         quantidade = quantidade * 1000;
 
-      double caloriaAdicionar = ingrediente.getTabela().getCaloria() * quantidade / 100;
+      double caloriaAdicionar = gerarProporcao(ingrediente.getCaloria(), quantidade);
       this.tabelaNutricional.setCaloria(this.tabelaNutricional.getCaloria() + caloriaAdicionar);
 
-      double carboidratoAdicionar = ingrediente.getTabela().getCarboidrato() * quantidade / 100;
+      double carboidratoAdicionar = gerarProporcao(ingrediente.getCarboidrato(), quantidade);
       this.tabelaNutricional.setCarboidrato(this.tabelaNutricional.getCarboidrato() + carboidratoAdicionar);
 
-      double gorduraAdicionar = ingrediente.getTabela().getGordura() * quantidade / 100;
+      double gorduraAdicionar = gerarProporcao(ingrediente.getGordura(), quantidade);
       this.tabelaNutricional.setGordura(this.tabelaNutricional.getGordura() + gorduraAdicionar);
 
-      double proteinaAdicionar = ingrediente.getTabela().getProteina() * quantidade / 100;
+      double proteinaAdicionar = gerarProporcao(ingrediente.getProteina(), quantidade);
       this.tabelaNutricional.setProteina(this.tabelaNutricional.getProteina() + proteinaAdicionar);
       this.massa += quantidade;
     }
+  }
+
+  private static double gerarProporcao(double valor, double quantidade){
+    return valor * quantidade / 100;
+  }
+
+  private void gerarStringIngredientes(){
+    StringBuilder ingredientesStringBuilder = new StringBuilder();
+    
+    for(Map.Entry<Ingrediente, ReceitaIngrediente> entry : ingredientesMapping.entrySet()){
+      Ingrediente ingrediente = entry.getKey();
+      ReceitaIngrediente receitaIngrediente = entry.getValue();
+
+      if (ingredientesStringBuilder.length()>0)
+        ingredientesStringBuilder.append(" ; "); // Adiciona o delimitador
+      
+      // Formata o nome do ingrediente (quantidade unidade de medida)
+      ingredientesStringBuilder.append(ingrediente.getNomeIngrediente())
+        .append(" (")
+        .append(receitaIngrediente.getQuantidade())
+        .append(" ")
+        .append(receitaIngrediente.getUnidadeMedida())
+        .append(")");
+    }
+
+    this.ingredientesFormatados = ingredientesStringBuilder.toString();
   }
 
   public Integer getId() {
@@ -195,11 +192,11 @@ public class Receita {
     this.ingredientesMapping = ingredientesMapping;
   }
 
-  public TabelaNutricionalReceita getTabelaNutricional() {
+  public TabelaNutricional getTabelaNutricional() {
     return tabelaNutricional;
   }
 
-  public void setTabelaNutricional(TabelaNutricionalReceita tabelaNutricional) {
+  public void setTabelaNutricional(TabelaNutricional tabelaNutricional) {
     this.tabelaNutricional = tabelaNutricional;
   }
 
