@@ -2,6 +2,7 @@ package com.mealmatch.controller;
 
 import java.io.IOException;
 import com.mealmatch.model.Receita;
+import com.mealmatch.utils.ControleDeSessao;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -155,16 +156,34 @@ public class ReceitaListCellController extends ListCell<Receita> {
       receita_image.setImage(receita.getImagem());
       receita_image.setPreserveRatio(true);
       nome_receita_label.setText(receita.getNome());
-      tempo_receita_label.setText(String.valueOf(receita.getTempoPreparo()));
-      valor_nutricional_label.setText(String.valueOf(receita.getValorNutricional()));
+      tempo_receita_label.setText(String.valueOf(formatarTempo(receita.getTempoPreparo())));
+      valor_nutricional_label.setText(String.valueOf(receita.getValorNutricional() + " Kcal"));
       numero_likes_label.setText(String.valueOf(receita.getNumeroLikes()));
       numero_dislike_label.setText(String.valueOf(receita.getNumeroDislikes()));
       selecionarDificuldade(receita.getDificuldade());
-
+      configureEditButton(receita);
       setGraphic(screen_pane);
     }
   }
 
+  //Controla a aparição do botão de editar receita caso o usuário seja o dono da receita
+  private void configureEditButton(Receita receita) {
+    if(ControleDeSessao.getInstance().getUserId() != receita.getIdUsuarioDonoReceita() || receita.getIdUsuarioDonoReceita() == 0){
+      edit_receipe_image.setVisible(false);
+    }else{
+      edit_receipe_image.setVisible(true);
+    }
+  }
+
+  //Formata o tempo de preparo da receita para aparecer no formato h m s
+  private String formatarTempo(int tempoPreparoEmSegundos) {
+    int horas = tempoPreparoEmSegundos / 3600;
+    int minutos = tempoPreparoEmSegundos / 60;
+    int segundos = tempoPreparoEmSegundos % 60;
+    return horas + " h " + minutos + " m " + segundos + " s ";
+  }
+
+  //Seleciona a dificuldade da receita de acordo com o valor do banco de dados
   private void selecionarDificuldade(int dificuldade) {
     switch (dificuldade) {
       case 1:

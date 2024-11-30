@@ -89,7 +89,7 @@ public class TelaPerfilController implements Initializable {
           nome_completo_label.setText(user.getCompleteName());
           nome_usuario_label.setText(user.getUsername());
           email_label.setText(user.getEmail());
-          numero_receitas_criadas_label.setText("0"); // TODO: Implementar
+          numero_receitas_criadas_label.setText(String.valueOf(user.getNumeroReceitasCriadas()));
           if (user.getProfileImage() != null) {
             profile_button_image.setImage(user.getProfileImage());
           }

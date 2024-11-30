@@ -21,11 +21,7 @@
    <children>
       <BorderPane prefHeight="240.0" prefWidth="240.0">
          <center>
-            <ImageView fx:id="receita_image" fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../images/frango.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="receita_image" fitHeight="230.0" fitWidth="230.0" pickOnBounds="true" BorderPane.alignment="CENTER" />
          </center>
          <top>
             <Pane prefHeight="5.0" prefWidth="280.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER" />
@@ -45,19 +41,14 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label layoutX="255.0" layoutY="74.0" text="Nutrientes:">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <TableView fx:id="tabelaNutricional" focusTraversable="false" layoutX="255.0" layoutY="103.0" prefHeight="128.0" prefWidth="161.0">
+      <TableView fx:id="tabelaNutricional" focusTraversable="false" layoutX="255.0" layoutY="85.0" prefHeight="146.0" prefWidth="161.0">
          <columns>
-            <TableColumn fx:id="nutrientes_column" text="Nutrientes">
+            <TableColumn fx:id="nutrientes_column" prefWidth="78.0" text="Nutrientes">
                <cellValueFactory>
                   <PropertyValueFactory property="nutriente" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="valores_column" text="Valores">
+            <TableColumn fx:id="valores_column" prefWidth="81.0" text="Valores">
                <cellValueFactory>
                   <PropertyValueFactory property="nutriente" />
                </cellValueFactory>
@@ -79,7 +70,7 @@
       <RadioButton fx:id="frutos_do_mar_toggle" focusTraversable="false" layoutX="735.0" layoutY="165.0" mnemonicParsing="false" text="Frutos do Mar" />
       <RadioButton fx:id="acucar_toggle" focusTraversable="false" layoutX="665.0" layoutY="165.0" mnemonicParsing="false" text="Açúcar" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" layoutX="560.0" layoutY="110.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="285.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="142.0" layoutX="246.0" layoutY="96.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="183.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="178.0" layoutX="246.0" layoutY="60.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="183.0" />
       <ImageView fx:id="clobe_button_image" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
          <image>
             <Image url="@../images/close_button.png" />
@@ -105,7 +96,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextArea fx:id="text_area_modo_preparo" layoutX="564.0" layoutY="311.0" prefHeight="379.0" prefWidth="404.0" />
+      <TextArea fx:id="text_area_modo_preparo" layoutX="564.0" layoutY="311.0" prefHeight="379.0" prefWidth="404.0" wrapText="true" />
       <Label alignment="CENTER" layoutX="560.0" layoutY="277.0" prefHeight="26.0" prefWidth="172.0" text="Modo de Preparo:">
          <font>
             <Font size="20.0" />
