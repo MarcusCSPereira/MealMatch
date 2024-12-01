@@ -88,14 +88,13 @@
       <TextField fx:id="campoModoPreparo" layoutX="676.0" layoutY="132.0" prefHeight="50.0" prefWidth="267.0" promptText="Primeiro passo" />
       <ListView fx:id="listaDePreparo" layoutX="676.0" layoutY="211.0" prefHeight="226.0" prefWidth="267.0" />
       <Button fx:id="adicionaPasso" layoutX="676.0" layoutY="446.0" mnemonicParsing="false" onAction="#adicionarPasso" text="Adiciona Passo" />
-      <Button fx:id="removerPasso" layoutX="784.0" layoutY="446.0" mnemonicParsing="false" onAction="#removerPasso" text="Remover Passo" />
-      <Label layoutX="676.0" layoutY="489.0" text="Tempo de Preparo:">
+      <Button fx:id="removerPasso" layoutX="840.0" layoutY="446.0" mnemonicParsing="false" onAction="#removerPasso" text="Remover Passo" />
+      <Label layoutX="646.0" layoutY="514.0" text="Tempo de Preparo:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="tempoDePrearoField" layoutX="682.0" layoutY="526.0" promptText="Tempo de preparo" />
-      <Button fx:id="tempoDePreparoButton" layoutX="855.0" layoutY="526.0" mnemonicParsing="false" onAction="#adicionarTempoDePreparo" text="adicionar" />
+      <TextField fx:id="tempoDePrearoField" layoutX="811.0" layoutY="514.0" promptText="Tempo de preparo" />
       <ImageView fx:id="receita_image" fitHeight="230.0" fitWidth="230.0" layoutX="17.0" layoutY="75.0" onMouseClicked="#selecionar_image_receita" pickOnBounds="true">
          <image>
             <Image url="@../images/pickup_image_button.png" />
@@ -156,7 +155,7 @@
             <Image url="@../images/add_button.png" />
          </image>
       </ImageView>
-      <Label layoutX="673.0" layoutY="592.0" text="Clique para adicionar a sua receita:">
+      <Label layoutX="672.0" layoutY="580.0" text="Clique para adicionar a sua receita:">
          <font>
             <Font size="19.0" />
          </font>
