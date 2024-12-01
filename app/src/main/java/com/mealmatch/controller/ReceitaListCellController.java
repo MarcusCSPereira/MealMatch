@@ -139,8 +139,11 @@ public class ReceitaListCellController extends ListCell<Receita> {
     detailsController.setReceita(getItem());
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
+    stage.hide();
+    Stage novoStage = new Stage();
+    novoStage.setOnHidden(e -> stage.show());
+    novoStage.setScene(scene);
+    novoStage.show();
   }
 
   public ReceitaListCellController() {
@@ -174,24 +177,26 @@ public class ReceitaListCellController extends ListCell<Receita> {
     }
   }
 
-  //Controla a aparição do botão de editar receita caso o usuário seja o dono da receita
+  // Controla a aparição do botão de editar receita caso o usuário seja o dono da
+  // receita
   private void configureEditButton(Receita receita) {
-    if(ControleDeSessao.getInstance().getUserId() != receita.getIdUsuarioDonoReceita() || receita.getIdUsuarioDonoReceita() == 0){
+    if (ControleDeSessao.getInstance().getUserId() != receita.getIdUsuarioDonoReceita()
+        || receita.getIdUsuarioDonoReceita() == 0) {
       edit_receipe_image.setVisible(false);
-    }else{
+    } else {
       edit_receipe_image.setVisible(true);
     }
   }
 
-  //Formata o tempo de preparo da receita para aparecer no formato h m s
+  // Formata o tempo de preparo da receita para aparecer no formato h m s
   private String formatarTempo(int tempoPreparoEmSegundos) {
     int horas = tempoPreparoEmSegundos / 3600;
-    int minutos = tempoPreparoEmSegundos / 60;
-    int segundos = tempoPreparoEmSegundos % 60;
-    return horas + " h " + minutos + " m " + segundos + " s ";
+    int minutos = (tempoPreparoEmSegundos % 3600) / 60; 
+    int segundos = tempoPreparoEmSegundos % 60; 
+    return horas + " h " + minutos + " m " + segundos + " s";
   }
 
-  //Seleciona a dificuldade da receita de acordo com o valor do banco de dados
+  // Seleciona a dificuldade da receita de acordo com o valor do banco de dados
   private void selecionarDificuldade(int dificuldade) {
     switch (dificuldade) {
       case 1:
