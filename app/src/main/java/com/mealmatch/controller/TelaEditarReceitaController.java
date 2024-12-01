@@ -175,7 +175,7 @@ public class TelaEditarReceitaController implements Initializable {
     Platform.runLater(() -> {
       nome_receita_label.setText(item.getNome() + item.getId());
       receita_image.setImage(item.getImagem());
-      preencherListaIngredientes(item.getIngredientes());
+      preencherListaIngredientes(item.getIngredientesFormatados());
       text_area_modo_preparo.setText(item.getModoPreparo());
       preencherDificuldade(item.getDificuldade());
     });
