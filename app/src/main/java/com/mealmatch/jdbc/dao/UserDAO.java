@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import java.io.ByteArrayInputStream;
+
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 
 public class UserDAO {
 
@@ -16,6 +19,19 @@ public class UserDAO {
 
   public UserDAO(Connection connection) {
     this.connection = connection;
+  }
+
+  // Método auxiliar para mapear um ResultSet para um objeto User
+  private User mapResultSetToUser(ResultSet rs) throws SQLException {
+    return new User(
+        rs.getInt("idusuario"),
+        rs.getString("nomecompleto"),
+        rs.getString("email"),
+        rs.getString("nomeusuario"),
+        rs.getString("senha"),
+        rs.getDate("datanascimento"),
+        User.Sex.valueOf(rs.getString("sexo")),
+        rs.getBytes("fotoperfil") != null ? new Image(new ByteArrayInputStream(rs.getBytes("fotoperfil"))): null);
   }
 
   // Método para inserir um novo usuário
@@ -91,19 +107,6 @@ public class UserDAO {
       stmt.setInt(1, id);
       stmt.executeUpdate();
     }
-  }
-
-  // Método auxiliar para mapear um ResultSet para um objeto User
-  private User mapResultSetToUser(ResultSet rs) throws SQLException {
-    return new User(
-        rs.getInt("idusuario"),
-        rs.getString("nomecompleto"),
-        rs.getString("email"),
-        rs.getString("nomeusuario"),
-        rs.getString("senha"),
-        rs.getDate("datanascimento"),
-        User.Sex.valueOf(rs.getString("sexo")) // Converte o valor String para o Enum Sex
-    );
   }
 
   public boolean validarLogin(String nomeUsuario, String senha) {
@@ -221,14 +224,18 @@ public class UserDAO {
       stmt.setInt(1, id);
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
-          return new User(
+          User user =  new User(
               rs.getInt("idusuario"),
               rs.getString("nomecompleto"),
               rs.getString("email"),
               rs.getString("nomeusuario"),
               rs.getString("senha"),
               rs.getDate("datanascimento"),
-              User.Sex.valueOf(rs.getString("sexo")));
+              User.Sex.valueOf(rs.getString("sexo")),
+              rs.getBytes("fotoperfil") != null ? new Image(new ByteArrayInputStream(rs.getBytes("fotoperfil")))
+                  : null);
+              user.setNumeroReceitasCriadas(getNumReceipesCreated(id));
+          return user;
         }
       }
     } catch (SQLException e) {
@@ -237,8 +244,23 @@ public class UserDAO {
     return null; // Retorna null se o usuário não for encontrado
   }
 
+  public int getNumReceipesCreated(Integer userId) {
+    String sql = "SELECT COUNT(*) AS num_receitas FROM criarreceita WHERE criarreceita.idusuario = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+      stmt.setInt(1, userId);
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt("num_receitas");
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return 0; // Retorna 0 se não houver receitas criadas
+  }
+
   public boolean updatePassword(Integer userId, String novaSenha) {
-    String sql = "UPDATE Usuario SET senha = ? WHERE idUsuario = ?";
+    String sql = "UPDATE usuario SET senha = ? WHERE idUsuario = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setString(1, EncriptadorDeSenhas.hashPassword(novaSenha)); // Criptografa a senha
       stmt.setInt(2, userId);
@@ -247,6 +269,18 @@ public class UserDAO {
       e.printStackTrace();
     }
     return false;
+  }
+
+  public void updateProfileImage(Integer userId, byte[] imageBytes) {
+    String sql = "UPDATE usuario SET fotoperfil = ? WHERE idusuario = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+      stmt.setBytes(1, imageBytes);
+      stmt.setInt(2, userId);
+      stmt.executeUpdate();
+    } catch (SQLException e) {
+      System.out.println("Erro ao atualizar a imagem de perfil: " + e.getMessage());
+      e.printStackTrace();
+    }
   }
 
 }

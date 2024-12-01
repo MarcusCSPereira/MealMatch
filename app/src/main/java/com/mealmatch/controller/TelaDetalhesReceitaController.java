@@ -101,18 +101,6 @@ public class TelaDetalhesReceitaController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     Platform.runLater(() -> screen.requestFocus());
-    // Configurando as colunas
-    nutrientes_column.setCellValueFactory(new PropertyValueFactory<>("nutriente"));
-    valores_column.setCellValueFactory(new PropertyValueFactory<>("valor"));
-
-    // Criando dados
-    dadosNutricionais = FXCollections.observableArrayList(
-        new NutrienteValor("Proteínas", "50 g"),
-        new NutrienteValor("Carboidratos", "30 g"),
-        new NutrienteValor("Gorduras", "20 g"),
-        new NutrienteValor("Calorias", "40000 kcal"));
-    // Adicionando os dados na tabela
-    tabelaNutricional.setItems(dadosNutricionais);
   }
 
   @FXML
@@ -131,17 +119,36 @@ public class TelaDetalhesReceitaController implements Initializable {
 
   }
 
+  // Método para preencher a tela com os dados da receita, que é chamado ao clicar
+  // no Botão ver mais em um item da lista de receitas
   public void setReceita(Receita item) {
     this.receita = item;
     Platform.runLater(() -> {
-      nome_receita_label.setText(item.getNome() + item.getId());
+      nome_receita_label.setText(item.getNome());
       receita_image.setImage(item.getImagem());
-      preencherListaIngredientes(item.getIngredientes());
+      preencherListaIngredientes(item.getIngredientesFormatados());
       text_area_modo_preparo.setText(item.getModoPreparo());
       preencherDificuldade(item.getDificuldade());
+      preencherTabelaNutricional(item);
     });
   }
 
+  // Método auxiliar para preencher a tabela nutricional da receita
+  private void preencherTabelaNutricional(Receita item) {
+    // Configurando as colunas
+    nutrientes_column.setCellValueFactory(new PropertyValueFactory<>("nutriente"));
+    valores_column.setCellValueFactory(new PropertyValueFactory<>("valor"));
+    dadosNutricionais = FXCollections.observableArrayList(
+        new NutrienteValor("Proteínas", item.getTabelaNutricional().getProteina() + " g"),
+        new NutrienteValor("Carboidratos", item.getTabelaNutricional().getCarboidrato() + " g"),
+        new NutrienteValor("Gorduras", item.getTabelaNutricional().getGordura() + " g"),
+        new NutrienteValor("Calorias", item.getTabelaNutricional().getCaloria() + " kcal"));
+    // Adicionando os dados na tabela
+    tabelaNutricional.setItems(dadosNutricionais);
+  }
+
+  // Método auxiliar para preencher a lista de ingredientes, recebendo uma string
+  // e formatando-a
   private void preencherListaIngredientes(String ingredientes) {
 
     if (ingredientes == null || ingredientes.isEmpty()) {
@@ -153,7 +160,7 @@ public class TelaDetalhesReceitaController implements Initializable {
     String[] ingredientesArray = ingredientes.split(";");
 
     List<String> ingredientesFormatados = Arrays.stream(ingredientesArray)
-        .map(String::trim) // Remove 
+        .map(String::trim) // Remove
         .filter(ingrediente -> !ingrediente.isEmpty())
         .map(ingrediente -> "\u25CF" + " " + capitalizeFirstLetter(ingrediente))
         .collect(Collectors.toList());
@@ -171,6 +178,8 @@ public class TelaDetalhesReceitaController implements Initializable {
     return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
   }
 
+  // Método auxiliar para preencher a dificuldade da receita utilizando o Enum
+  // correspondente
   private void preencherDificuldade(int dificuldade) {
     try {
       // Converte o valor para o Enum correspondente

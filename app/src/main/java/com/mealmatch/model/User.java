@@ -2,6 +2,8 @@ package com.mealmatch.model;
 
 import java.sql.Date;
 
+import javafx.scene.image.Image;
+
 public class User {
 
   public enum Sex {
@@ -16,8 +18,10 @@ public class User {
   private String password;
   private Date date;
   private Sex sex;
+  private Image profileImage;
+  private int numeroReceitasCriadas;
 
-  public User(Integer id, String completeName, String email, String username, String password, Date date, Sex sex) {
+  public User(Integer id, String completeName, String email, String username, String password, Date date, Sex sex, Image profileImage) {
     if (id != null && id <= 0) {
       throw new IllegalArgumentException("ID deve ser um número positivo.");
     }
@@ -28,6 +32,7 @@ public class User {
     this.password = password;
     this.date = date;
     this.sex = sex;
+    this.profileImage = profileImage;
   }
 
   public User(){}
@@ -86,6 +91,22 @@ public class User {
 
   public void setSex(Sex sex){
     this.sex = sex;
+  }
+
+  public Image getProfileImage() {
+    return profileImage;
+  }
+
+  public void setProfileImage(Image profileImage) {
+    this.profileImage = profileImage;
+  }
+
+  public int getNumeroReceitasCriadas() {
+    return numeroReceitasCriadas;
+  }
+
+  public void setNumeroReceitasCriadas(int numeroReceitasCriadas) {
+    this.numeroReceitasCriadas = numeroReceitasCriadas;
   }
 
 }

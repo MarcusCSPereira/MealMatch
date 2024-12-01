@@ -1,5 +1,6 @@
 package com.mealmatch.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -8,6 +9,7 @@ import com.mealmatch.jdbc.dao.UserDAO;
 import com.mealmatch.jdbc.database.ConnectionFactory;
 import com.mealmatch.model.User;
 import com.mealmatch.utils.ControleDeSessao;
+import com.mealmatch.utils.ImageSelector;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -87,6 +89,10 @@ public class TelaPerfilController implements Initializable {
           nome_completo_label.setText(user.getCompleteName());
           nome_usuario_label.setText(user.getUsername());
           email_label.setText(user.getEmail());
+          numero_receitas_criadas_label.setText(String.valueOf(user.getNumeroReceitasCriadas()));
+          if (user.getProfileImage() != null) {
+            profile_button_image.setImage(user.getProfileImage());
+          }
         }
       }
     });
@@ -121,7 +127,26 @@ public class TelaPerfilController implements Initializable {
 
   @FXML
   void escolher_imagem_perfil(MouseEvent event) {
+    File selectedFile = ImageSelector.selecionarImagem(((Node) event.getSource()).getScene().getWindow());
 
+    if (selectedFile != null) {
+      // Exibe a imagem selecionada no ImageView
+      profile_button_image.setImage(ImageSelector.carregarImagem(selectedFile));
+
+      // Converte a imagem para binário para salvar no banco de dados
+      byte[] imageBytes;
+      try {
+        imageBytes = ImageSelector.converterImagemParaBytes(selectedFile);
+        UserDAO userDao = new UserDAO(ConnectionFactory.getConnection());
+        userDao.updateProfileImage(ControleDeSessao.getInstance().getUserId(), imageBytes);
+      } catch (IOException e) {
+        System.out.println("Erro ao converter imagem para bytes: " + e.getMessage());
+        e.printStackTrace();
+      }
+
+      // Debug temporário
+      System.out.println("Imagem selecionada: " + selectedFile.getAbsolutePath());
+    }
   }
 
   @FXML
@@ -160,7 +185,7 @@ public class TelaPerfilController implements Initializable {
   }
 
   private Boolean checkPassword(String novaSenha) {
-    
+
     // Verifica se a senha tem pelo menos 8 caracteres
     if (novaSenha.length() < 8) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
