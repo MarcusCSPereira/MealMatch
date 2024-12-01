@@ -14,10 +14,8 @@ import com.mealmatch.utils.ImageSelector;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -176,12 +174,8 @@ public class TelaPerfilController implements Initializable {
 
   @FXML
   void voltar_tela(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_receitas.fxml"));
-    Parent root = loader.load();
-    scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
+    stage.close();
   }
 
   private Boolean checkPassword(String novaSenha) {

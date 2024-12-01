@@ -95,9 +95,6 @@ public class TelaDetalhesReceitaController implements Initializable {
   private ObservableList<NutrienteValor> dadosNutricionais;
   private Receita receita;
 
-  Stage stage;
-  Scene scene;
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     Platform.runLater(() -> screen.requestFocus());
@@ -109,14 +106,11 @@ public class TelaDetalhesReceitaController implements Initializable {
   }
 
   @FXML
-  void voltar_tela(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_receitas.fxml"));
-    Parent root = loader.load();
-    scene = new Scene(root);
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
-
+  void voltar_tela(MouseEvent event) {
+    // Obtém a janela atual (tela de detalhes)
+    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    // Fecha a tela de detalhes
+    currentStage.close();
   }
 
   // Método para preencher a tela com os dados da receita, que é chamado ao clicar

@@ -131,8 +131,11 @@ public class ReceitaListCellController extends ListCell<Receita> {
     detailsController.setReceita(getItem());
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
+    stage.hide();
+    Stage novoStage = new Stage();
+    novoStage.setOnHidden(e -> stage.show());
+    novoStage.setScene(scene);
+    novoStage.show();
   }
 
   public ReceitaListCellController() {
