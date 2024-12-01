@@ -194,8 +194,14 @@ public class TelaReceitasController implements Initializable {
     Parent root = loader.load();
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
+    stage.hide();
+    Stage novoStage = new Stage();
+    novoStage.setOnHidden(e -> {
+        stage.show();
+        buscar();
+    });
+    novoStage.setScene(scene);
+    novoStage.show();
   }
 
   @FXML

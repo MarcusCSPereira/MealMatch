@@ -12,7 +12,7 @@
 
 <Pane fx:id="screen_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="945.0" style="-fx-border-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="receita_image" fitHeight="140.0" fitWidth="140.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="receita_image" fitHeight="140.0" fitWidth="140.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true">
          <image>
             <Image url="@../images/frango.png" />
          </image>

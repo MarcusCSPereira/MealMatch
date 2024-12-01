@@ -22,10 +22,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -78,7 +76,13 @@ public class TelaAdicionarReceitaController implements Initializable {
   private TextField ingrediente_adicionado;
 
   @FXML
-  private TextField tempoDePrearoField;
+  private ChoiceBox<Integer> horas_box;
+
+  @FXML
+  private ChoiceBox<Integer> minutos_box;
+
+  @FXML
+  private ChoiceBox<Integer> segundos_box;
 
   @FXML
   private TextField quantidade_ingrediente;
@@ -115,6 +119,17 @@ public class TelaAdicionarReceitaController implements Initializable {
 
   private String[] unidadesDeMedida = { "g", "ml", "kg", "L" };
 
+  private Integer[] horas = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+      22, 23, 24 };
+
+  private Integer[] minutos = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+      23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+      49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59 };
+
+  private Integer[] segundos = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+      23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+      49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59 };
+
   private int dificuldade;
 
   // Lista para armazenar os ingredientes
@@ -132,6 +147,12 @@ public class TelaAdicionarReceitaController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     unidadeDeMedida.getItems().addAll(unidadesDeMedida); // adicionando as unidades de medida dos ingredientes
+    horas_box.getItems().addAll(horas);
+    horas_box.setValue(0);
+    minutos_box.setValue(0);
+    segundos_box.setValue(0);
+    minutos_box.getItems().addAll(minutos);
+    segundos_box.getItems().addAll(segundos);
     listaView.setItems(listaIngredientes);// setando a lista de ingredientes
     listaDePreparo.setItems(passosModoPreparo);// setando a lista de preparo
 
@@ -173,26 +194,13 @@ public class TelaAdicionarReceitaController implements Initializable {
   }
 
   // Método para formatar o tempo de preparo
-  private int formatarTempoPreparo() {
-    String tempoPreparo = tempoDePrearoField.getText(); // Obtém o texto do campo
+  private int formatarTempoPreparo() { // Obtém o texto do campo
     int totalSegundos = 0;
 
-    // Divide a string nos espaços para processar os elementos
-    String[] partes = tempoPreparo.split(" ");
-
-    for (int i = 0; i < partes.length; i += 2) {
-      int valor = Integer.parseInt(partes[i]); // Converte o número para inteiro
-      String unidade = partes[i + 1]; // Obtém a unidade (h, min, s)
-
-      // Converte para segundos de acordo com a unidade
-      if (unidade.equals("h")) {
-        totalSegundos += valor * 3600; // 1 hora = 3600 segundos
-      } else if (unidade.equals("min")) {
-        totalSegundos += valor * 60; // 1 minuto = 60 segundos
-      } else if (unidade.equals("s")) {
-        totalSegundos += valor; // Segundos permanecem como estão
-      }
-    }
+    // Converte horas, minutos e segundos para segundos
+    totalSegundos += horas_box.getValue() * 3600;
+    totalSegundos += minutos_box.getValue() * 60;
+    totalSegundos += segundos_box.getValue();
 
     return totalSegundos; // Retorna o tempo total em segundos
   }
@@ -231,12 +239,8 @@ public class TelaAdicionarReceitaController implements Initializable {
 
   @FXML
   void voltar_tela(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_receitas.fxml"));
-    Parent root = loader.load();
-    scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.setScene(scene);
-    stage.show();
+    stage.close();
   }
 
   @FXML

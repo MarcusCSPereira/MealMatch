@@ -89,12 +89,11 @@
       <ListView fx:id="listaDePreparo" layoutX="676.0" layoutY="211.0" prefHeight="226.0" prefWidth="267.0" />
       <Button fx:id="adicionaPasso" layoutX="676.0" layoutY="446.0" mnemonicParsing="false" onAction="#adicionarPasso" text="Adiciona Passo" />
       <Button fx:id="removerPasso" layoutX="840.0" layoutY="446.0" mnemonicParsing="false" onAction="#removerPasso" text="Remover Passo" />
-      <Label layoutX="646.0" layoutY="514.0" text="Tempo de Preparo:">
+      <Label layoutX="730.0" layoutY="482.0" text="Tempo de Preparo:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="tempoDePrearoField" layoutX="811.0" layoutY="514.0" promptText="Tempo de preparo" />
       <ImageView fx:id="receita_image" fitHeight="230.0" fitWidth="230.0" layoutX="17.0" layoutY="75.0" onMouseClicked="#selecionar_image_receita" pickOnBounds="true">
          <image>
             <Image url="@../images/pickup_image_button.png" />
@@ -160,5 +159,11 @@
             <Font size="19.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="horas_box" layoutX="672.0" layoutY="527.0" prefHeight="26.0" prefWidth="38.0" />
+      <ChoiceBox fx:id="minutos_box" layoutX="758.0" layoutY="527.0" prefHeight="26.0" prefWidth="38.0" />
+      <ChoiceBox fx:id="segundos_box" layoutX="859.0" layoutY="527.0" prefHeight="26.0" prefWidth="38.0" />
+      <Label layoutX="714.0" layoutY="527.0" text="Horas" />
+      <Label layoutX="803.0" layoutY="527.0" text="Minutos" />
+      <Label layoutX="903.0" layoutY="527.0" text="Segundos" />
    </children>
 </AnchorPane>
