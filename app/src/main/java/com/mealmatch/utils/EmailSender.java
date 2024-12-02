@@ -6,8 +6,8 @@ import javafx.scene.control.Alert;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.SimpleEmail;
 
+import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.UserDAO;
-import com.mealmatch.jdbc.database.ConnectionFactory;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

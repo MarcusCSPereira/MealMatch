@@ -2,14 +2,14 @@ package com.mealmatch;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.Receita;
 import com.mealmatch.model.ReceitaIngrediente;
 import com.mealmatch.utils.TestarConexao;
 
 import java.sql.Connection;
-
-import com.mealmatch.jdbc.database.ConnectionFactory;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

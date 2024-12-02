@@ -27,7 +27,7 @@ public class Receita {
   }
 
   public Receita(Integer idReceita, String nomeReceita, String modoPreparo, int tempoPreparo, int dificuldade,
-      Image imagemReceita, int numeroLikes, int numeroDislikes, int idTabela) {
+      Image imagemReceita, int numeroLikes, int numeroDislikes) {
     this.id = idReceita;
     this.nome = nomeReceita;
     this.modoPreparo = modoPreparo;

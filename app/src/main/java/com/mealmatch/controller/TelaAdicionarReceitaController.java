@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.IngredienteDAO;
 import com.mealmatch.jdbc.dao.ReceitaDAO;
-import com.mealmatch.jdbc.database.ConnectionFactory;
 import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.Receita;
 import com.mealmatch.utils.ControleDeSessao;
@@ -28,6 +28,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -76,13 +77,13 @@ public class TelaAdicionarReceitaController implements Initializable {
   private TextField ingrediente_adicionado;
 
   @FXML
-  private ChoiceBox<Integer> horas_box;
+  private ComboBox<Integer> horas_box;
 
   @FXML
-  private ChoiceBox<Integer> minutos_box;
+  private ComboBox<Integer> minutos_box;
 
   @FXML
-  private ChoiceBox<Integer> segundos_box;
+  private ComboBox<Integer> segundos_box;
 
   @FXML
   private TextField quantidade_ingrediente;
@@ -175,11 +176,14 @@ public class TelaAdicionarReceitaController implements Initializable {
   // Método para adicionar a receita no banco de dados
   private void adicionarReceita(Receita receita) {
 
-    //Primeiro adiciona a receita no banco de dados junto com a relacao de usuario dono da receita
+    // Primeiro adiciona a receita no banco de dados junto com a relacao de usuario
+    // dono da receita
     ReceitaDAO receitaDao = new ReceitaDAO(ConnectionFactory.getConnection());
-    int idReceita = receitaDao.adicionarReceitaCompleta(receita, imagemEmBytes,ControleDeSessao.getInstance().getUserId());
+    int idReceita = receitaDao.adicionarReceitaCompleta(receita, imagemEmBytes,
+        ControleDeSessao.getInstance().getUserId());
 
-    //Depois adiciona os ingredientes na receita por meio da relacao de receita e ingrediente
+    // Depois adiciona os ingredientes na receita por meio da relacao de receita e
+    // ingrediente
     for (int i = 0; i < listaIngredientes.size(); i++) {
       Ingrediente ingrediente = listaObjetoIngredientes.get(i);
 
@@ -189,7 +193,7 @@ public class TelaAdicionarReceitaController implements Initializable {
 
       Double quantidade = Double.parseDouble(quantidadeStr);
 
-      receitaDao.adicionarIngredienteNaReceita(idReceita, ingrediente.getId_ingrediente(), quantidade, unidade);
+      receitaDao.adicionarIngredienteNaReceita(idReceita,ingrediente.getId_ingrediente(), quantidade, unidade);
     }
   }
 
@@ -205,7 +209,8 @@ public class TelaAdicionarReceitaController implements Initializable {
     return totalSegundos; // Retorna o tempo total em segundos
   }
 
-  // Método para formatar o modo de preparo retornando uma string unica com todos os passos separados por quebra de linha
+  // Método para formatar o modo de preparo retornando uma string unica com todos
+  // os passos separados por quebra de linha
   private String formatarModoPreparo() {
     StringBuilder resultado = new StringBuilder();
 
@@ -247,7 +252,6 @@ public class TelaAdicionarReceitaController implements Initializable {
   void fechar_programa(MouseEvent event) {
     System.exit(0);
   }
-
 
   @FXML
   void adiciona_ingrediente(ActionEvent event) throws SQLException {

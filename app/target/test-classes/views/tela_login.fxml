@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaLoginController">
+   <children>
+      <Label fx:id="label01" alignment="CENTER" contentDisplay="CENTER" layoutX="285.0" layoutY="105.0" text="MealMatch" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <TextField fx:id="field_usuario" layoutX="341.0" layoutY="210.0" prefHeight="39.0" prefWidth="320.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0" />
+      <Label layoutX="342.0" layoutY="182.0" text="Usuário:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="342.0" layoutY="260.0" text="Senha">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="field_senha" layoutX="420.0" layoutY="288.0" prefHeight="39.0" prefWidth="320.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="340.0">
+         <font>
+            <Font size="9.0" />
+         </font></PasswordField>
+      <Button fx:id="login_btt" layoutX="473.0" layoutY="345.0" mnemonicParsing="false" onAction="#login" text="Login" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="390.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Hyperlink fx:id="cadastro_hlk" alignment="CENTER" layoutX="440.0" layoutY="400.0" onAction="#ir_para_cadastro" text="Cadastre-se" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="370.0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Hyperlink>
+      <ImageView fx:id="close_btt" fitHeight="97.0" fitWidth="60.0" layoutX="936.0" layoutY="1.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
+         <image>
+            <Image url="@../images/close_button.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="esqueci_senha_hlk" alignment="CENTER" layoutX="398.0" layoutY="436.0" onAction="#solicitar_senha" text="Esqueci minha senha!" underline="true" visible="false">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

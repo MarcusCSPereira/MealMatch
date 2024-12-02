@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.UserDAO;
-import com.mealmatch.jdbc.database.ConnectionFactory;
 import com.mealmatch.utils.EmailSender;
 import com.mealmatch.utils.ControleDeSessao;
 
@@ -59,7 +59,36 @@ public class TelaLoginController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     Platform.runLater(() -> screen.requestFocus());
+
+    // Mostra ou oculta o link "Esqueci a Senha" com base no campo de usuário
     field_usuario.textProperty().addListener((observable, oldValue, newValue) -> controleEsqueciASenha(field_usuario));
+
+    // Quando o usuario der ENTER no campo de usuario, muda o foco para o campo de
+    // senha
+    field_usuario.setOnKeyPressed(event -> {
+      switch (event.getCode()) {
+        case ENTER:
+          field_senha.requestFocus();
+          break;
+        default:
+          break;
+      }
+    });
+
+    // Quando o usuario der ENTER no campo de senha, tenta fazer o Login
+    field_senha.setOnKeyPressed(event -> {
+      switch (event.getCode()) {
+        case ENTER:
+          try {
+            login(new ActionEvent(field_senha, field_senha));
+          } catch (IOException e) {
+            e.printStackTrace();
+          } // Chama o método de login
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   private void controleEsqueciASenha(TextField field_usuario) {
@@ -157,5 +186,4 @@ public class TelaLoginController implements Initializable {
       return false;
     }
   }
-
 }

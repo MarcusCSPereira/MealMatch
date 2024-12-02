@@ -35,7 +35,7 @@ public class ReceitaDAO {
       return new ArrayList<>();
     }
 
-    String sql = "SELECT idreceita, nomereceita, modopreparo, tempopreparo, dificuldade, imagemreceita, numerolikes, numerodislikes, idtabela FROM receita WHERE nomereceita LIKE ?";
+    String sql = "SELECT idreceita, nomereceita, modopreparo, tempopreparo, dificuldade, imagemreceita, numerolikes, numerodislikes FROM receita WHERE nomereceita LIKE ?";
     List<Receita> receitas = new ArrayList<>();
 
     // Primeiro busca as receitas sem os ingredientes
@@ -52,8 +52,7 @@ public class ReceitaDAO {
               rs.getBytes("imagemreceita") != null ? new Image(new ByteArrayInputStream(rs.getBytes("imagemreceita")))
                   : null,
               rs.getInt("numerolikes"),
-              rs.getInt("numerodislikes"),
-              rs.getInt("idtabela"));
+              rs.getInt("numerodislikes"));
           receitas.add(receita);
         }
       }
@@ -114,7 +113,8 @@ public class ReceitaDAO {
     return 0;
   }
 
-  // Adiciona uma receita completa no banco de dados, incluindo a relação com o usuário e a sua propria relação
+  // Adiciona uma receita completa no banco de dados, incluindo a relação com o
+  // usuário e a sua propria relação
   public int adicionarReceitaCompleta(Receita receita, byte[] imagemReceita, int idUsuario) {
     String sqlReceita = "INSERT INTO receita (nomereceita, numerolikes, numerodislikes, modopreparo, dificuldade, tempopreparo, imagemreceita) "
         +
@@ -187,7 +187,8 @@ public class ReceitaDAO {
 
   }
 
-  // Adiciona um ingrediente na receita baseado na relação entre a receita e o ingrediente
+  // Adiciona um ingrediente na receita baseado na relação entre a receita e o
+  // ingrediente
   public void adicionarIngredienteNaReceita(int idReceita, int idIngrediente, Double quantidade, String unidade) {
     String sql = "INSERT INTO receitaingrediente (idreceita, idingrediente, quantidade, medida) VALUES (?, ?, ?, ?)";
 
@@ -203,5 +204,47 @@ public class ReceitaDAO {
       System.err.println("Erro ao adicionar ingrediente na receita: " + e.getMessage());
     }
   }
+
+  // Adiciona ou atualiza a reação do usuário
+  public void reagirReceita(int idUsuario, int idReceita, int reacao) throws SQLException {
+    String sql = "INSERT INTO reagirreceita (idusuario, idreceita, reacao) " +
+        "VALUES (?, ?, ?) " +
+        "ON CONFLICT (idusuario, idreceita) " +
+        "DO UPDATE SET reacao = EXCLUDED.reacao;";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setInt(1, idUsuario);
+      statement.setInt(2, idReceita);
+      statement.setInt(3, reacao);
+      statement.executeUpdate();
+    }
+  }
+
+  // Atualiza o contador de likes ou dislikes na receita
+  public void atualizarLikesDislikes(int idReceita, String tipo, int valor) throws SQLException {
+    String coluna = tipo.equals("like") ? "numerolikes" : "numerodislikes";
+    String sql = "UPDATE receita SET " + coluna + " = " + coluna + " + ? WHERE idreceita = ?;";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setInt(1, valor); // +1 ou -1
+      statement.setInt(2, idReceita);
+      statement.executeUpdate();
+    }
+  }
+
+  // Retorna a reação do usuário a uma receita
+  public int getReacaoUsuario(int idUsuario, int idReceita) throws SQLException {
+    String sql = "SELECT reacao FROM reagirreceita WHERE idusuario = ? AND idreceita = ?;";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setInt(1, idUsuario);
+        statement.setInt(2, idReceita);
+        try (ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getInt("reacao"); // Retorna "like", "dislike", ou null
+            }
+        }
+    }
+    return 0; // Nenhuma reação encontrada
+}
 
 }

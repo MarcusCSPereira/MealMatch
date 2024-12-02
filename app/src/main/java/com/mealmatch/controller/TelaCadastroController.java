@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.UserDAO;
-import com.mealmatch.jdbc.database.ConnectionFactory;
 import com.mealmatch.model.User;
 import com.mealmatch.model.User.Sex;
 import com.mealmatch.utils.EncriptadorDeSenhas;
