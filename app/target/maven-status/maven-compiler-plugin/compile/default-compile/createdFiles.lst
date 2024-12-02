@@ -2,6 +2,7 @@ com/mealmatch/controller/TelaDetalhesReceitaController$1.class
 com/mealmatch/controller/TelaCadastroController.class
 com/mealmatch/Main.class
 com/mealmatch/jdbc/dao/UserDAO.class
+com/mealmatch/controller/TelaEditarReceitaController$1.class
 com/mealmatch/controller/ReceitaListCellController.class
 com/mealmatch/controller/TelaPerfilController.class
 com/mealmatch/model/Receita.class
