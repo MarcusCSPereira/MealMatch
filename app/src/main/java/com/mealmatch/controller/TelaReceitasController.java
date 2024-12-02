@@ -98,6 +98,7 @@ public class TelaReceitasController implements Initializable {
 
     limparListaReceitas();
     consumirEventoDeSelecaoDeReceita();
+
   }
 
   private void limparListaReceitas() {
