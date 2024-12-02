@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.mealmatch.model.Ingrediente;
@@ -236,38 +237,51 @@ public class ReceitaDAO {
   public void marcarFavorito(int idUsuario, int idReceita) throws SQLException {
     String sql = "INSERT INTO favorito (idusuario, idreceita) VALUES (?, ?)";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
-       statement.setInt(1, idUsuario);
-       statement.setInt(2, idReceita);
-       statement.executeUpdate();
+      statement.setInt(1, idUsuario);
+      statement.setInt(2, idReceita);
+      statement.executeUpdate();
     }
-}
+  }
 
-public void desmarcarFavorito(int idUsuario, int idReceita) throws SQLException {
+  public void desmarcarFavorito(int idUsuario, int idReceita) throws SQLException {
     String sql = "DELETE FROM favorito WHERE idusuario = ? AND idreceita = ?";
-    try (PreparedStatement statement = connection.prepareStatement(sql)) {
-       statement.setInt(1, idUsuario);
-       statement.setInt(2, idReceita);
-       statement.executeUpdate();
-    }
-}
-
-  // Retorna a reação do usuário a uma receita
-  public int getReacaoUsuario(int idUsuario, int idReceita) throws SQLException {
-    String sql = "SELECT reacao FROM reagirreceita WHERE idusuario = ? AND idreceita = ?;";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
       statement.setInt(1, idUsuario);
       statement.setInt(2, idReceita);
-      try (ResultSet resultSet = statement.executeQuery()) {
-        if (resultSet.next()) {
-          return resultSet.getInt("reacao"); // Retorna "like", "dislike", ou null
+      statement.executeUpdate();
+    }
+  }
+
+  // Retorna a reação do usuário e se a receita é favoritada
+  public Map<String, Object> getReacaoEFavorito(int idUsuario, int idReceita) throws SQLException {
+    String sql = "SELECT " +
+        "COALESCE(rr.reacao, 0) AS reacao, " +
+        "CASE WHEN f.idusuario IS NOT NULL THEN true ELSE false END AS favoritado " +
+        "FROM receita r " +
+        "LEFT JOIN reagirreceita rr ON rr.idreceita = r.idreceita AND rr.idusuario = ? " +
+        "LEFT JOIN favorito f ON f.idreceita = r.idreceita AND f.idusuario = ? " +
+        "WHERE r.idreceita = ?;";
+
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+      stmt.setInt(1, idUsuario);
+      stmt.setInt(2, idUsuario);
+      stmt.setInt(3, idReceita);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          Map<String, Object> result = new HashMap<>();
+          result.put("reacao", rs.getInt("reacao")); // Retorna 0 (nenhuma reação), 1 (dislike), ou 2 (like)
+          result.put("favoritado", rs.getBoolean("favoritado")); // Retorna true ou false
+          return result;
         }
       }
     }
-    return 0; // Nenhuma reação encontrada
+    return null; // Nenhuma informação encontrada
   }
 
   public List<Receita> buscarReceitasPorIngredientes(List<String> ingredientesList) {
-    String sql = "SELECT r.idreceita, r.nomereceita, r.modopreparo, r.tempopreparo, r.dificuldade, r.imagemreceita, r.numerolikes, r.numerodislikes FROM receita r JOIN receitaingrediente ri ON r.idreceita = ri.idreceita JOIN ingrediente i ON ri.idingrediente = i.idingrediente WHERE i.nomeingrediente IN ( " + ingredientesList.stream().map(ing -> "?").collect(Collectors.joining(","))
+    String sql = "SELECT r.idreceita, r.nomereceita, r.modopreparo, r.tempopreparo, r.dificuldade, r.imagemreceita, r.numerolikes, r.numerodislikes FROM receita r JOIN receitaingrediente ri ON r.idreceita = ri.idreceita JOIN ingrediente i ON ri.idingrediente = i.idingrediente WHERE i.nomeingrediente IN ( "
+        + ingredientesList.stream().map(ing -> "?").collect(Collectors.joining(","))
         + " ) GROUP BY r.idreceita, r.nomereceita, r.modopreparo, r.tempopreparo, r.dificuldade, r.imagemreceita, r.numerolikes, r.numerodislikes HAVING COUNT(DISTINCT i.nomeingrediente) = ?";
 
     List<Receita> receitas = new ArrayList<>();
@@ -312,18 +326,5 @@ public void desmarcarFavorito(int idUsuario, int idReceita) throws SQLException 
 
     return receitas;
   }
-
-public boolean isFavoritada(int idUsuario, int idReceita) throws SQLException {
-    String sql = "SELECT 1 FROM favorito WHERE idusuario = ? AND idreceita = ?;";
-    try (PreparedStatement statement = connection.prepareStatement(sql)) {
-        statement.setInt(1, idUsuario);
-        statement.setInt(2, idReceita);
-        try (ResultSet resultSet = statement.executeQuery()) {
-            return resultSet.next(); // Retorna true se encontrou um registro
-        }
-    }
-}
-
-
 
 }
