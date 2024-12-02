@@ -28,7 +28,7 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <TextField fx:id="search_field" layoutX="200.0" layoutY="100.0" onAction="#buscar" prefHeight="30.0" prefWidth="500.0" promptText="Digite sua busca aqui" />
+      <TextField fx:id="search_field" layoutX="200.0" layoutY="100.0" onAction="#buscar" prefHeight="30.0" prefWidth="500.0" promptText="Digite os Ingredientes para buscar separados por vírgula. EX: Frango, Manteiga, ..." />
       <ImageView fx:id="search_button" fitHeight="30.0" fitWidth="30.0" layoutX="670.0" layoutY="100.0" onMouseClicked="#buscar" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/search_button.png" />

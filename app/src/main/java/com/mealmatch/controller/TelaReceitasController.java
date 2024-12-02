@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -95,10 +96,23 @@ public class TelaReceitasController implements Initializable {
     Platform.runLater(() -> screen.requestFocus());
 
     receitas_listview.setCellFactory(listView -> new ReceitaListCellController());
+    busca_de_receitas.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+      controlePromptTextoBusca();
+    });
 
     limparListaReceitas();
     consumirEventoDeSelecaoDeReceita();
 
+  }
+
+  private void controlePromptTextoBusca() {
+    if (ingrediente_toogle.isSelected()) {
+      search_field.clear();
+      search_field.setPromptText("Digite os Ingredientes para buscar separados por vírgula. EX: Frango, Manteiga, ...");
+    } else if (nomeReceita_toggle.isSelected()) {
+      search_field.clear();
+      search_field.setPromptText("Digite o nome da receita que deseja buscar");
+    }
   }
 
   private void limparListaReceitas() {
@@ -135,21 +149,21 @@ public class TelaReceitasController implements Initializable {
   void buscar() {
 
     List<Receita> receitasBuscadas = new ArrayList<>();
-    ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());//Quem busca as Receitas
-  
+    ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());// Quem busca as Receitas
+
     if (nomeReceita_toggle.isSelected()) {
-      // Busca por nome da receita
-      String nomeReceita = search_field.getText();
-      try {
-        receitasBuscadas = receitaDAO.findByName(nomeReceita);
-        if (receitasBuscadas.isEmpty()) {
-          System.out.println("Nenhuma receita encontrada com o nome: " + nomeReceita);
-        }
-      } catch (SQLException e) {
-        System.out.println("Erro ao buscar receitas por nome: " + e.getMessage());
-        e.printStackTrace();
-      }
+      receitasBuscadas = fetchReceitasByName(receitasBuscadas, receitaDAO);
+    } else if (ingrediente_toogle.isSelected()) {
+      receitasBuscadas = fetchReceitasByIngredients(receitasBuscadas, receitaDAO);
     }
+
+    receitasBuscadas = getFilteredReceitas(receitasBuscadas);
+
+    // Atualizar o ListView com as receitas buscadas
+    atualizarListaReceitas(receitasBuscadas);
+  }
+
+  private List<Receita> getFilteredReceitas(List<Receita> receitasBuscadas) {
 
     dificuldadeSelecionada = -1; // Valor que nao pega nenhum filtro
     if (difFacil.isSelected()) {
@@ -167,8 +181,62 @@ public class TelaReceitasController implements Initializable {
           .collect(Collectors.toList());
     }
 
-    // Atualizar o ListView com as receitas buscadas
-    atualizarListaReceitas(receitasBuscadas);
+    return receitasBuscadas;
+  }
+
+  private List<Receita> fetchReceitasByIngredients(List<Receita> receitasBuscadas, ReceitaDAO receitaDAO) {
+
+    String ingredientes = search_field.getText();
+
+    if (!validarEntradaDeIngredientes(ingredientes)) {
+      return new ArrayList<>(); // Retorna lista vazia caso a entrada seja inválida
+    }
+
+    // Manipula a string de ingredientes, separando em uma lista
+    List<String> ingredientesList = Arrays.asList(ingredientes.split("\\s*,\\s*"));
+
+    // Chama o DAO passando a lista de ingredientes
+    receitasBuscadas = receitaDAO.buscarReceitasPorIngredientes(ingredientesList);
+
+    if (receitasBuscadas.isEmpty()) {
+      exibirAlerta("Nenhuma Receita Encontrada", "Nenhuma receita foi encontrada com esses Ingredientes",
+          "Verifique o nome do ingrediente e sua ortografia.");
+      return receitasBuscadas;
+    }
+
+    return receitasBuscadas;
+  }
+
+  private List<Receita> fetchReceitasByName(List<Receita> receitasBuscadas, ReceitaDAO receitaDAO) {
+    String nomeReceita = search_field.getText();
+    try {
+      receitasBuscadas = receitaDAO.findByName(nomeReceita);
+      if (receitasBuscadas.isEmpty()) {
+        exibirAlerta("Nenhuma Receita Encontrada", "Nenhuma receita foi encontrada",
+            "Tente ajustar o nome da receita ou verificar a ortografia.");
+      }
+    } catch (SQLException e) {
+      System.out.println("Erro ao buscar receitas por nome: " + e.getMessage());
+      e.printStackTrace();
+    }
+    return receitasBuscadas;
+  }
+
+  private boolean validarEntradaDeIngredientes(String ingredientesInput) {
+    if (!ingredientesInput.matches("^[\\p{L}0-9, ]+$")) {
+      exibirAlerta("Caracteres Inválidos", "Caracteres especiais não permitidos",
+          "Por favor, utilize apenas letras, e use vírgulas para separar os ingredientes.");
+      return false;
+    }
+    return true;
+  }
+
+  private void exibirAlerta(String titulo, String cabecalho, String conteudo) {
+    javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+    alert.setTitle(titulo);
+    alert.setHeaderText(cabecalho);
+    alert.setContentText(conteudo);
+    alert.showAndWait();
   }
 
   @FXML
@@ -198,8 +266,8 @@ public class TelaReceitasController implements Initializable {
     stage.hide();
     Stage novoStage = new Stage();
     novoStage.setOnHidden(e -> {
-        stage.show();
-        buscar();
+      stage.show();
+      buscar();
     });
     novoStage.setScene(scene);
     novoStage.show();
