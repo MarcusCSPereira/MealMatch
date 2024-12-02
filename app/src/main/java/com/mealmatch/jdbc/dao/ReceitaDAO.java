@@ -232,6 +232,24 @@ public class ReceitaDAO {
     }
   }
 
+  public void marcarFavorito(int idUsuario, int idReceita) throws SQLException {
+    String sql = "INSERT INTO favorito (idusuario, idreceita) VALUES (?, ?)";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+       statement.setInt(1, idUsuario);
+       statement.setInt(2, idReceita);
+       statement.executeUpdate();
+    }
+}
+
+public void desmarcarFavorito(int idUsuario, int idReceita) throws SQLException {
+    String sql = "DELETE FROM favorito WHERE idusuario = ? AND idreceita = ?";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+       statement.setInt(1, idUsuario);
+       statement.setInt(2, idReceita);
+       statement.executeUpdate();
+    }
+}
+
   // Retorna a reação do usuário a uma receita
   public int getReacaoUsuario(int idUsuario, int idReceita) throws SQLException {
     String sql = "SELECT reacao FROM reagirreceita WHERE idusuario = ? AND idreceita = ?;";
@@ -246,5 +264,18 @@ public class ReceitaDAO {
     }
     return 0; // Nenhuma reação encontrada
 }
+
+public boolean isFavoritada(int idUsuario, int idReceita) throws SQLException {
+    String sql = "SELECT 1 FROM favorito WHERE idusuario = ? AND idreceita = ?;";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setInt(1, idUsuario);
+        statement.setInt(2, idReceita);
+        try (ResultSet resultSet = statement.executeQuery()) {
+            return resultSet.next(); // Retorna true se encontrou um registro
+        }
+    }
+}
+
+
 
 }

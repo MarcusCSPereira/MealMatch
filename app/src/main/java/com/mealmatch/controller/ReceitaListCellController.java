@@ -130,46 +130,76 @@ public class ReceitaListCellController extends ListCell<Receita> {
 
   // Busca a reação do usuário para a receita e configura os botões de like e
   // dislike com uso de Threads
-  private void configurarReacaoUsuario(Receita receita) {
+private void configurarReacaoUsuario(Receita receita) {
     int idUsuario = ControleDeSessao.getInstance().getUserId();
     int idReceita = receita.getId();
 
     Task<Integer> reacaoTask = new Task<Integer>() {
-      @Override
-      protected Integer call() throws SQLException {
-        ReceitaDAO dao = new ReceitaDAO(ConnectionFactory.getConnection());
-        return dao.getReacaoUsuario(idUsuario, idReceita); // Retorna 0 (null), 1 (dislike) ou 2 (like)
-      }
+        @Override
+        protected Integer call() throws SQLException {
+            ReceitaDAO dao = new ReceitaDAO(ConnectionFactory.getConnection());
+            return dao.getReacaoUsuario(idUsuario, idReceita); // Retorna 0 (null), 1 (dislike) ou 2 (like)
+        }
     };
 
-    // Define o que acontece quando a tarefa é concluída
+    Task<Boolean> favoritoTask = new Task<Boolean>() {
+        @Override
+        protected Boolean call() throws SQLException {
+            ReceitaDAO dao = new ReceitaDAO(ConnectionFactory.getConnection());
+            return dao.isFavoritada(idUsuario, idReceita); // Retorna true se favoritada
+        }
+    };
+
+    // Configura o estado de "like" e "dislike"
     reacaoTask.setOnSucceeded(event -> {
-      Integer reacao = reacaoTask.getValue(); // Obtém o valor retornado pela consulta
+        Integer reacao = reacaoTask.getValue();
 
-      // Atualiza os botões de acordo com o valor da reação
-      if (reacao == ReacaoEnum.LIKE.getValor()) {
-        setLikeVisibility(true);
-        setDislikeVisibility(false);
-      } else if (reacao == ReacaoEnum.DISLIKE.getValor()) {
-        setLikeVisibility(false);
-        setDislikeVisibility(true);
-      } else {
-        setLikeVisibility(false);
-        setDislikeVisibility(false);
-      }
+        if (reacao == ReacaoEnum.LIKE.getValor()) {
+            setLikeVisibility(true);
+            setDislikeVisibility(false);
+        } else if (reacao == ReacaoEnum.DISLIKE.getValor()) {
+            setLikeVisibility(false);
+            setDislikeVisibility(true);
+        } else {
+            setLikeVisibility(false);
+            setDislikeVisibility(false);
+        }
     });
 
+    // Configura o estado de "favoritado"
+    favoritoTask.setOnSucceeded(event -> {
+        boolean favoritada = favoritoTask.getValue();
+        setFavoritoVisibility(favoritada);
+    });
+
+    // Tratamento de erro para "like" e "dislike"
     reacaoTask.setOnFailed(event -> {
-      System.out.println("Erro ao buscar reação do usuário para a receita de id: " + idReceita);
-      Throwable exception = reacaoTask.getException();
-      exception.printStackTrace();
+        System.out.println("Erro ao buscar reação do usuário para a receita de id: " + idReceita);
+        Throwable exception = reacaoTask.getException();
+        exception.printStackTrace();
     });
 
-    // Inicia as tarefas em uma nova thread
-    Thread thread = new Thread(reacaoTask);
-    thread.setDaemon(true); // Faz com que a thread pare ao fechar a aplicação
-    thread.start();
-  }
+    // Tratamento de erro para "favorito"
+    favoritoTask.setOnFailed(event -> {
+        System.out.println("Erro ao buscar estado de favorito para a receita de id: " + idReceita);
+        Throwable exception = favoritoTask.getException();
+        exception.printStackTrace();
+    });
+
+    // Inicia as tarefas em threads separadas
+    Thread reacaoThread = new Thread(reacaoTask);
+    Thread favoritoThread = new Thread(favoritoTask);
+
+    reacaoThread.setDaemon(true);
+    favoritoThread.setDaemon(true);
+
+    reacaoThread.start();
+    favoritoThread.start();
+}
+
+
+
+
 
   private void handleDebounce(int idReceita, Runnable action) {
     if (debounceMap.getOrDefault(idReceita, false)) {
@@ -227,6 +257,19 @@ public class ReceitaListCellController extends ListCell<Receita> {
 
   @FXML
   void unfavorite_receipe(MouseEvent event) {
+     int idUsuario = ControleDeSessao.getInstance().getUserId(); // Usuário logado
+    int idReceita = getItem().getId(); // Receita selecionada
+
+    try {
+
+        ReceitaDAO dao = new ReceitaDAO(ConnectionFactory.getConnection());
+        dao.desmarcarFavorito(idUsuario, idReceita); // Remove a receita dos favoritos
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+
+    }
+
     System.out.println("Desfavoritou receita de id: " + getItem().getId());
     favorite_button.setVisible(true);
     unfavorite_button.setVisible(false);
@@ -234,10 +277,35 @@ public class ReceitaListCellController extends ListCell<Receita> {
 
   @FXML
   void favorite_receipe(MouseEvent event) {
+
+    
+    int idUsuario = ControleDeSessao.getInstance().getUserId(); // Usuario Logado
+    int receita = getItem().getId(); // Receita selecionada
+
+    try {
+
+    ReceitaDAO dao = new ReceitaDAO(ConnectionFactory.getConnection());
+    dao.marcarFavorito(idUsuario, receita); 
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    
     System.out.println("Favoritou receita de id: " + getItem().getId());
     unfavorite_button.setVisible(true);
     favorite_button.setVisible(false);
   }
+
+  private void setFavoritoVisibility(boolean favoritada) {
+    if (favoritada) {
+     unfavorite_button.setVisible(true);
+    favorite_button.setVisible(false);
+    } else {
+          favorite_button.setVisible(true);
+    unfavorite_button.setVisible(false);
+    }
+}
+
 
 
   @FXML
