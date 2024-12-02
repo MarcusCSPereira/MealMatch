@@ -1,4 +1,4 @@
-package com.mealmatch.utils;
+package com.mealmatch.enums;
 
 public enum DificuldadeEnum {
     FACIL(1),

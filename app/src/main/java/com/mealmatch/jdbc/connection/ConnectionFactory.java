@@ -1,4 +1,4 @@
-package com.mealmatch.jdbc.database;
+package com.mealmatch.jdbc.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

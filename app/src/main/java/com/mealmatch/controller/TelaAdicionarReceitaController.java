@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.IngredienteDAO;
 import com.mealmatch.jdbc.dao.ReceitaDAO;
-import com.mealmatch.jdbc.database.ConnectionFactory;
 import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.Receita;
 import com.mealmatch.utils.ControleDeSessao;

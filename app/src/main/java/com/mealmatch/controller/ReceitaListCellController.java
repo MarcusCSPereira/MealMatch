@@ -5,11 +5,11 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mealmatch.enums.ReacaoEnum;
+import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.ReceitaDAO;
-import com.mealmatch.jdbc.database.ConnectionFactory;
 import com.mealmatch.model.Receita;
 import com.mealmatch.utils.ControleDeSessao;
-import com.mealmatch.utils.ReacaoEnum;
 
 import javafx.animation.PauseTransition;
 import javafx.concurrent.Task;

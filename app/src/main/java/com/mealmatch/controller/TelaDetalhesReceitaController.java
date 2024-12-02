@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import com.mealmatch.enums.DificuldadeEnum;
 import com.mealmatch.model.NutrienteValor;
 import com.mealmatch.model.Receita;
-import com.mealmatch.utils.DificuldadeEnum;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

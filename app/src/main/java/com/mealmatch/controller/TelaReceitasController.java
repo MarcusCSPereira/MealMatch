@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.ReceitaDAO;
-import com.mealmatch.jdbc.database.ConnectionFactory;
 import com.mealmatch.model.Receita;
 import com.mealmatch.utils.ControleDeSessao;
 

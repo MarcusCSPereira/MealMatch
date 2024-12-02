@@ -35,7 +35,7 @@ public class ReceitaDAO {
       return new ArrayList<>();
     }
 
-    String sql = "SELECT idreceita, nomereceita, modopreparo, tempopreparo, dificuldade, imagemreceita, numerolikes, numerodislikes, idtabela FROM receita WHERE nomereceita LIKE ?";
+    String sql = "SELECT idreceita, nomereceita, modopreparo, tempopreparo, dificuldade, imagemreceita, numerolikes, numerodislikes FROM receita WHERE nomereceita LIKE ?";
     List<Receita> receitas = new ArrayList<>();
 
     // Primeiro busca as receitas sem os ingredientes
@@ -52,8 +52,7 @@ public class ReceitaDAO {
               rs.getBytes("imagemreceita") != null ? new Image(new ByteArrayInputStream(rs.getBytes("imagemreceita")))
                   : null,
               rs.getInt("numerolikes"),
-              rs.getInt("numerodislikes"),
-              rs.getInt("idtabela"));
+              rs.getInt("numerodislikes"));
           receitas.add(receita);
         }
       }
