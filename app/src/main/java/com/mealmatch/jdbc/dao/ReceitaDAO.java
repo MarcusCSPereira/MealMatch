@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.Receita;
@@ -236,15 +237,62 @@ public class ReceitaDAO {
   public int getReacaoUsuario(int idUsuario, int idReceita) throws SQLException {
     String sql = "SELECT reacao FROM reagirreceita WHERE idusuario = ? AND idreceita = ?;";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
-        statement.setInt(1, idUsuario);
-        statement.setInt(2, idReceita);
-        try (ResultSet resultSet = statement.executeQuery()) {
-            if (resultSet.next()) {
-                return resultSet.getInt("reacao"); // Retorna "like", "dislike", ou null
-            }
+      statement.setInt(1, idUsuario);
+      statement.setInt(2, idReceita);
+      try (ResultSet resultSet = statement.executeQuery()) {
+        if (resultSet.next()) {
+          return resultSet.getInt("reacao"); // Retorna "like", "dislike", ou null
         }
+      }
     }
     return 0; // Nenhuma reação encontrada
-}
+  }
+
+  public List<Receita> buscarReceitasPorIngredientes(List<String> ingredientesList) {
+    String sql = "SELECT r.idreceita, r.nomereceita, r.modopreparo, r.tempopreparo, r.dificuldade, r.imagemreceita, r.numerolikes, r.numerodislikes FROM receita r JOIN receitaingrediente ri ON r.idreceita = ri.idreceita JOIN ingrediente i ON ri.idingrediente = i.idingrediente WHERE i.nomeingrediente IN ( " + ingredientesList.stream().map(ing -> "?").collect(Collectors.joining(","))
+        + " ) GROUP BY r.idreceita, r.nomereceita, r.modopreparo, r.tempopreparo, r.dificuldade, r.imagemreceita, r.numerolikes, r.numerodislikes HAVING COUNT(DISTINCT i.nomeingrediente) = ?";
+
+    List<Receita> receitas = new ArrayList<>();
+
+    try (PreparedStatement stmt = this.connection.prepareStatement(sql)) {
+      // Preenche os parâmetros com os ingredientes
+      int index = 1;
+      for (String ingrediente : ingredientesList) {
+        stmt.setString(index++, ingrediente.trim());
+      }
+
+      // Define o último parâmetro como o número de ingredientes fornecidos
+      stmt.setInt(index, ingredientesList.size());
+
+      // Executa a consulta e processa os resultados
+      try (ResultSet rs = stmt.executeQuery()) {
+        while (rs.next()) {
+          Receita receita = new Receita(
+              rs.getInt("idreceita"),
+              rs.getString("nomereceita"),
+              rs.getString("modopreparo"),
+              rs.getInt("tempopreparo"),
+              rs.getInt("dificuldade"),
+              rs.getBytes("imagemreceita") != null ? new Image(new ByteArrayInputStream(rs.getBytes("imagemreceita")))
+                  : null,
+              rs.getInt("numerolikes"),
+              rs.getInt("numerodislikes"));
+          receitas.add(receita);
+        }
+      }
+      // Busca os ingredientes de cada receita e associa
+      for (Receita receita : receitas) {
+        receita.setIngredientesMapping(findIngredientes(receita));// Acha os ingredientes da receita e associa a ela
+        receita.gerarStringIngredientes();// Gera a string de ingredientes formatada para processamento na view
+        receita.gerarTabela();// Gera a tabela nutricional da receita
+        receita.gerarValorNutricional();// Gera o valor nutricional da receita
+        receita.setIdUsuarioDonoReceita(findUserIDOwnerReceipe(receita)); // Acha o id do usuário dono da receita
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException("Erro ao buscar receitas por ingredientes: " + e.getMessage(), e);
+    }
+
+    return receitas;
+  }
 
 }
