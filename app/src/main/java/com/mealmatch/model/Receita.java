@@ -4,13 +4,15 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import javafx.scene.image.Image;
 
 public class Receita {
   private Integer id;
   private String nome;
-  private Integer idUsuarioDonoReceita; // Id do usuário que criou a receita, pode ser 0 caso seja uma receita padrão do sistema ou ter um valor caso seja uma receita de um usuário
+  private Integer idUsuarioDonoReceita; // Id do usuário que criou a receita, pode ser 0 caso seja uma receita padrão do
+                                        // sistema ou ter um valor caso seja uma receita de um usuário
   Map<Ingrediente, ReceitaIngrediente> ingredientesMapping = new HashMap<>();
   private String ingredientesFormatados;
   private String modoPreparo;
@@ -71,7 +73,7 @@ public class Receita {
 
   }
 
-  // Método para gerar o valor nutricional da receita 
+  // Método para gerar o valor nutricional da receita
   public void gerarValorNutricional() {
     this.valorNutricional = (int) (truncarParaUmaCasaDecimal(this.tabelaNutricional.getCaloria()));
   }
@@ -83,7 +85,6 @@ public class Receita {
     this.tabelaNutricional.setGordura(truncarParaUmaCasaDecimal(this.tabelaNutricional.getGordura()));
     this.tabelaNutricional.setProteina(truncarParaUmaCasaDecimal(this.tabelaNutricional.getProteina()));
   }
-
 
   // Método para truncar um valor para uma casa decimal
   double truncarParaUmaCasaDecimal(double valor) {
@@ -230,6 +231,26 @@ public class Receita {
 
   public void setIdUsuarioDonoReceita(Integer idUsuarioDonoReceita) {
     this.idUsuarioDonoReceita = idUsuarioDonoReceita;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+
+    Receita receita = (Receita) o;
+
+    return id == receita.id &&
+        Objects.equals(nome, receita.nome) &&
+        Objects.equals(tempoPreparo, receita.tempoPreparo) &&
+        Objects.equals(valorNutricional, receita.valorNutricional);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, nome, tempoPreparo, valorNutricional);
   }
 
 }

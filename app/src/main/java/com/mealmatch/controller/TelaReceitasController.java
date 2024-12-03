@@ -89,6 +89,7 @@ public class TelaReceitasController implements Initializable {
   private int dificuldadeSelecionada;
 
   private ObservableList<Receita> receitasObservable;
+  private List<Receita> receitasAnteriores = new ArrayList<>();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -147,10 +148,11 @@ public class TelaReceitasController implements Initializable {
 
   @FXML
   void buscar() {
+    ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());
 
     List<Receita> receitasBuscadas = new ArrayList<>();
-    ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());// Quem busca as Receitas
 
+    // Realiza a busca
     if (nomeReceita_toggle.isSelected()) {
       receitasBuscadas = fetchReceitasByName(receitasBuscadas, receitaDAO);
     } else if (ingrediente_toogle.isSelected()) {
@@ -159,7 +161,16 @@ public class TelaReceitasController implements Initializable {
 
     receitasBuscadas = getFilteredReceitas(receitasBuscadas);
 
-    // Atualizar o ListView com as receitas buscadas
+    // Verifica se as listas de resultados são iguais
+    if (receitasAnteriores.equals(receitasBuscadas)) {
+      System.out.println("Lista de receitas igual à anterior. Evitando atualização.");
+      return;
+    }
+
+    // Atualiza o histórico de receitas
+    receitasAnteriores = new ArrayList<>(receitasBuscadas);
+
+    // Atualiza a ListView com as novas receitas
     atualizarListaReceitas(receitasBuscadas);
   }
 
