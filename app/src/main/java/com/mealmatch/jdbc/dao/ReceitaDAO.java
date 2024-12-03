@@ -16,7 +16,6 @@ import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.Receita;
 import com.mealmatch.model.ReceitaIngrediente;
 
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 
 public class ReceitaDAO {
@@ -28,14 +27,6 @@ public class ReceitaDAO {
   }
 
   public List<Receita> findByName(String name) throws SQLException {
-    if (name == null || name.trim().isEmpty()) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Erro");
-      alert.setHeaderText("Nome da receita inválido");
-      alert.setContentText("O nome da receita não pode ser vazio.");
-      alert.showAndWait();
-      return new ArrayList<>();
-    }
 
     String sql = "SELECT idreceita, nomereceita, modopreparo, tempopreparo, dificuldade, imagemreceita, numerolikes, numerodislikes FROM receita WHERE nomereceita LIKE ?";
     List<Receita> receitas = new ArrayList<>();
@@ -67,9 +58,26 @@ public class ReceitaDAO {
       receita.gerarTabela();// Gera a tabela nutricional da receita
       receita.gerarValorNutricional();// Gera o valor nutricional da receita
       receita.setIdUsuarioDonoReceita(findUserIDOwnerReceipe(receita)); // Acha o id do usuário dono da receita
+      receita.setRestricoes(findRestricoes(receita)); // Acha as restrições da receita
     }
 
     return receitas;
+  }
+
+  private ArrayList<Integer> findRestricoes(Receita receita) {
+    String sql = "SELECT idrestricao FROM receitarestricao WHERE idreceita = ?";
+    ArrayList<Integer> restricoes = new ArrayList<>();
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+      stmt.setInt(1, receita.getId());
+      try (ResultSet rs = stmt.executeQuery()) {
+        while (rs.next()) {
+          restricoes.add(rs.getInt("idrestricao"));
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return restricoes;
   }
 
   // Encontra os ingredientes de uma receita
@@ -204,6 +212,20 @@ public class ReceitaDAO {
       System.out.println("Ingrediente adicionado à receita com sucesso!");
     } catch (SQLException e) {
       System.err.println("Erro ao adicionar ingrediente na receita: " + e.getMessage());
+    }
+  }
+
+  public void adicionarRestricaoNaReceita(int idReceita, int restricao) {
+    String sql = "INSERT INTO receitarestricao (idrestricao, idreceita) VALUES (?, ?)";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setInt(1, restricao);
+      statement.setInt(2, idReceita);
+
+      statement.execute();
+      System.out.println("Restrição adicionada à receita com sucesso!");
+    } catch (SQLException e) {
+      System.err.println("Erro ao adicionar restrição na receita: " + e.getMessage());
     }
   }
 

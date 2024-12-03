@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mealmatch.enums.RestricaoEnum;
 import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.IngredienteDAO;
 import com.mealmatch.jdbc.dao.ReceitaDAO;
@@ -141,6 +142,7 @@ public class TelaAdicionarReceitaController implements Initializable {
 
   private byte[] imagemEmBytes;
   List<Ingrediente> listaObjetoIngredientes;
+  List<Integer> restricoes;
 
   Scene scene;
   Stage stage;
@@ -158,6 +160,7 @@ public class TelaAdicionarReceitaController implements Initializable {
     listaDePreparo.setItems(passosModoPreparo);// setando a lista de preparo
 
     listaObjetoIngredientes = new ArrayList<>();// inicializando a lista de objetos ingrediente
+    restricoes = new ArrayList<>();// inicializando a lista de restricoes
   }
 
   @FXML
@@ -195,6 +198,14 @@ public class TelaAdicionarReceitaController implements Initializable {
 
       receitaDao.adicionarIngredienteNaReceita(idReceita,ingrediente.getId_ingrediente(), quantidade, unidade);
     }
+
+    List <Integer> restricoes = validaRestricoes();
+    if(restricoes.size()>0){
+      for (int restricao : validaRestricoes()) {
+        receitaDao.adicionarRestricaoNaReceita(idReceita, restricao);
+      }
+    }
+
   }
 
   // Método para formatar o tempo de preparo
@@ -333,6 +344,29 @@ public class TelaAdicionarReceitaController implements Initializable {
       String passoSemNumero = passosModoPreparo.get(i).substring(passosModoPreparo.get(i).indexOf(". ") + 2);
       passosModoPreparo.set(i, (i + 1) + ". " + passoSemNumero);
     }
+  }
+
+  private ArrayList<Integer> validaRestricoes(){
+    ArrayList<Integer> restricoes = new ArrayList<>();
+    if (frutos_do_mar_toogle.isSelected()) {
+      restricoes.add(RestricaoEnum.FRUTOS_DO_MAR.getValor());
+    }
+    if (vegana_toogle.isSelected()) {
+      restricoes.add(RestricaoEnum.VEGANA.getValor());
+    }
+    if (vegetariana_toogle.isSelected()) {
+      restricoes.add(RestricaoEnum.VEGETARIANA.getValor());
+    }
+    if (acucar_toogle.isSelected()) {
+      restricoes.add(RestricaoEnum.ACUCAR.getValor());
+    }
+    if (lactose_toogle.isSelected()) {
+      restricoes.add(RestricaoEnum.LACTOSE.getValor());
+    }
+    if (gluten_toogle.isSelected()) {
+      restricoes.add(RestricaoEnum.GLUTEN.getValor());
+    }
+    return restricoes;
   }
 
   private void atualizarPromptText() {
