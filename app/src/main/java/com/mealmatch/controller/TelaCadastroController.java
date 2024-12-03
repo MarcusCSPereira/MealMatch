@@ -22,18 +22,27 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class TelaCadastroController implements Initializable {
+
+  @FXML
+  private Hyperlink linkTermos;
+
+  @FXML
+  private CheckBox checkTermos;
 
   @FXML
   private DatePicker date_picker;
@@ -71,6 +80,8 @@ public class TelaCadastroController implements Initializable {
   @FXML
   private AnchorPane screen;
 
+  ImageView imageView = new ImageView();
+
   // ########################################################################
   private final int TOTAL_FIELDS = 7;
   private double progressStep = 1.0 / TOTAL_FIELDS;
@@ -87,6 +98,17 @@ public class TelaCadastroController implements Initializable {
     controleProgressBar(complete_username, email_user, username, date_picker, password, confirm_password, sexo);
 
     controleSenhasIguais(password, confirm_password);
+
+  }
+
+  @FXML
+  private void linkTermos(ActionEvent event) throws IOException{
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_licenca.fxml"));
+      Parent root = loader.load();
+      scene = new Scene(root);
+      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      stage.setScene(scene);
+      stage.show();
   }
 
   private void controleProgressBar(TextField complete_username, TextField email_user, TextField username,
@@ -152,7 +174,8 @@ public class TelaCadastroController implements Initializable {
   void cadastrar_usuario(ActionEvent event) {
     if (checkSexo() == null || !checkEmail(email_user) || !checkAge(date_picker)
         || !checkPassword(password, confirm_password)
-        || verificaSenhas_label.isVisible() || !checkCamposVazios()) {
+        || verificaSenhas_label.isVisible() || !checkCamposVazios()
+        || !checkLicense(checkTermos)) {
       return;
     }
 
@@ -219,6 +242,18 @@ public class TelaCadastroController implements Initializable {
       alert.setHeaderText("Selecione um sexo");
       alert.showAndWait();
       return null;
+    }
+  }
+
+  private Boolean checkLicense(CheckBox checkTermos){
+    if(checkTermos.isSelected()){
+      return true;
+    } else {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Atenção!");
+      alert.setHeaderText("Concordar com os Termos de Servico é Obrigatório!");
+      alert.showAndWait();
+      return false;
     }
   }
 
