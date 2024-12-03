@@ -232,6 +232,7 @@ public class ReceitaListCellController extends ListCell<Receita> {
     Stage novoStage = new Stage();
     novoStage.setOnHidden(e -> stage.show());
     novoStage.setScene(scene);
+    novoStage.show();
   }
 
   @FXML

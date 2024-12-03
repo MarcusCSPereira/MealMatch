@@ -78,7 +78,6 @@
       <RadioButton fx:id="vegana_toggle" focusTraversable="false" layoutX="584.0" layoutY="165.0" mnemonicParsing="false" text="Vegana" />
       <RadioButton fx:id="frutos_do_mar_toggle" focusTraversable="false" layoutX="735.0" layoutY="165.0" mnemonicParsing="false" text="Frutos do Mar" />
       <RadioButton fx:id="acucar_toggle" focusTraversable="false" layoutX="665.0" layoutY="165.0" mnemonicParsing="false" text="Açúcar" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="93.0" layoutX="560.0" layoutY="110.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="285.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="157.0" layoutX="246.0" layoutY="81.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="183.0" />
       <ImageView fx:id="clobe_button_image" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
          <image>
@@ -130,16 +129,21 @@
       </TextField>
       <ChoiceBox fx:id="unidadeDeMedida" layoutX="317.0" layoutY="617.0" prefHeight="25.0" prefWidth="83.0" />
       <Button fx:id="salvar" layoutX="564.0" layoutY="553.0" mnemonicParsing="false" onAction="#salvarModoPreparo" prefHeight="25.0" prefWidth="85.0" text="Salvar" />
-      <Label alignment="CENTER" layoutX="645.0" layoutY="579.0" prefHeight="26.0" prefWidth="240.0" text="Tempo de Preparo:">
+      <Label alignment="CENTER" layoutX="545.0" layoutY="592.0" prefHeight="26.0" prefWidth="240.0" text="Tempo de Preparo:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="horas_box" layoutX="648.0" layoutY="629.0" prefHeight="26.0" prefWidth="62.0" promptText="0" visibleRowCount="3" />
-      <ComboBox fx:id="minutos_box" layoutX="725.0" layoutY="629.0" prefHeight="26.0" prefWidth="62.0" promptText="0" visibleRowCount="3" />
-      <ComboBox fx:id="segundos_box" layoutX="803.0" layoutY="629.0" prefHeight="26.0" prefWidth="62.0" promptText="0" visibleRowCount="3" />
-      <Label layoutX="663.0" layoutY="609.0" text="Horas" />
-      <Label layoutX="734.0" layoutY="609.0" text="Minutos" />
-      <Label layoutX="806.0" layoutY="609.0" text="Segundos" />
+      <ComboBox fx:id="horas_box" layoutX="548.0" layoutY="642.0" prefHeight="26.0" prefWidth="62.0" promptText="0" visibleRowCount="3" />
+      <ComboBox fx:id="minutos_box" layoutX="625.0" layoutY="642.0" prefHeight="26.0" prefWidth="62.0" promptText="0" visibleRowCount="3" />
+      <ComboBox fx:id="segundos_box" layoutX="703.0" layoutY="642.0" prefHeight="26.0" prefWidth="62.0" promptText="0" visibleRowCount="3" />
+      <Label layoutX="563.0" layoutY="622.0" text="Horas" />
+      <Label layoutX="634.0" layoutY="622.0" text="Minutos" />
+      <Label layoutX="706.0" layoutY="622.0" text="Segundos" />
+      <ImageView fx:id="salvar_receita_image" fitHeight="93.0" fitWidth="109.0" layoutX="834.0" layoutY="571.0" onMouseClicked="#salvar_receita" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/check_button.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

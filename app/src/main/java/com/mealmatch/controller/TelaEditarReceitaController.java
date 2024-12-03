@@ -2,6 +2,7 @@ package com.mealmatch.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +11,9 @@ import java.util.stream.Collectors;
 
 import com.mealmatch.enums.DificuldadeEnum;
 import com.mealmatch.enums.RestricaoEnum;
+import com.mealmatch.jdbc.connection.ConnectionFactory;
+import com.mealmatch.jdbc.dao.IngredienteDAO;
+import com.mealmatch.jdbc.dao.ReceitaDAO;
 import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.NutrienteValor;
 import com.mealmatch.model.Receita;
@@ -45,6 +49,9 @@ public class TelaEditarReceitaController implements Initializable {
 
   @FXML
   private ComboBox<Integer> horas_box;
+
+  @FXML
+  private ImageView salvar_receita_image;
 
   @FXML
   private ComboBox<Integer> minutos_box;
@@ -154,8 +161,11 @@ public class TelaEditarReceitaController implements Initializable {
 
     Platform.runLater(() -> screen.requestFocus());
     horas_box.getItems().addAll(horas);
+    horas_box.setValue(0);
     minutos_box.getItems().addAll(minutos);
+    minutos_box.setValue(0);
     segundos_box.getItems().addAll(segundos);
+    segundos_box.setValue(0);
     unidadeDeMedida.getItems().addAll(unidadesDeMedida);
 
   }
@@ -171,6 +181,42 @@ public class TelaEditarReceitaController implements Initializable {
       preencherTabelaNutricional(item);
       preencherRestricoes(item);
     });
+  }
+
+  @FXML
+  void salvar_receita(MouseEvent event) {
+    receita.setNome(nome_receita_label.getText());
+    receita.setModoPreparo(text_area_modo_preparo.getText());
+    receita.setTempoPreparo(formatarTempoPreparo());
+
+    if (facil_toggle.isSelected()) {
+      receita.setDificuldade(1);
+    } else if (medio_toggle.isSelected()) {
+      receita.setDificuldade(2);
+    } else if (dificil_toggle.isSelected()) {
+      receita.setDificuldade(3);
+    }
+
+    receita.setRestricoes(obterRestricoesSelecionadas());
+
+    try {
+      ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());
+      receitaDAO.atualizarReceita(receita);
+      System.out.println("Receita atualizada com sucesso!");
+    } catch (SQLException e) {
+      System.out.println("Erro ao atualizar receita: " + e.getMessage());
+    }
+  }
+
+  private int formatarTempoPreparo() { // Obtém o texto do campo
+    int totalSegundos = 0;
+
+    // Converte horas, minutos e segundos para segundos
+    totalSegundos += horas_box.getValue() * 3600;
+    totalSegundos += minutos_box.getValue() * 60;
+    totalSegundos += segundos_box.getValue();
+
+    return totalSegundos; // Retorna o tempo total em segundos
   }
 
   private void preencherRestricoes(Receita item) {
@@ -274,6 +320,23 @@ public class TelaEditarReceitaController implements Initializable {
     return novoNome;
   }
 
+  private ArrayList<Integer> obterRestricoesSelecionadas() {
+    ArrayList<Integer> restricoes = new ArrayList<>();
+    if (frutos_do_mar_toggle.isSelected())
+      restricoes.add(RestricaoEnum.FRUTOS_DO_MAR.getValor());
+    if (vegana_toggle.isSelected())
+      restricoes.add(RestricaoEnum.VEGANA.getValor());
+    if (vegetariana_toggle.isSelected())
+      restricoes.add(RestricaoEnum.VEGETARIANA.getValor());
+    if (acucar_toggle.isSelected())
+      restricoes.add(RestricaoEnum.ACUCAR.getValor());
+    if (lactose_toggle.isSelected())
+      restricoes.add(RestricaoEnum.LACTOSE.getValor());
+    if (gluten_toggle.isSelected())
+      restricoes.add(RestricaoEnum.GLUTEN.getValor());
+    return restricoes;
+  }
+
   @FXML
   void adicionarIngrediente(ActionEvent event) {
     String nome = nomeIngredienteField.getText();
@@ -288,26 +351,19 @@ public class TelaEditarReceitaController implements Initializable {
     try {
       double quantidade = Double.parseDouble(quantidadeText);
 
-      // Atualize o modelo , deixei comentado pois o construtor de ingrediente
-      // possui tabela nuutricional e nao sei como vai ser feito
+      ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());
+      receitaDAO.adicionarIngredienteNaReceita(receita.getId(), nome, quantidade, unidade);
 
-      // Ingrediente novoIngrediente = new Ingrediente(nome); // Supondo que você
-      // tenha uma classe Ingrediente
-      // ReceitaIngrediente relacao = new ReceitaIngrediente(novoIngrediente,
-      // quantidade, unidade);
-      // receita.getIngredientesMapping().put(novoIngrediente, relacao);
-
-      // Atualize a lista
       String itemLista = "\u25CF " + nome + " - " + quantidade + " " + unidade;
       list_view_ingredientes.getItems().add(itemLista);
 
-      // Limpa os campos
       nomeIngredienteField.clear();
       quantidadeIngredienteField.clear();
       unidadeDeMedida.setValue(null);
-
     } catch (NumberFormatException e) {
       System.out.println("A quantidade deve ser um número válido.");
+    } catch (SQLException e) {
+      System.out.println("Erro ao adicionar ingrediente: " + e.getMessage());
     }
   }
 
@@ -317,7 +373,6 @@ public class TelaEditarReceitaController implements Initializable {
 
     if (receita != null) {
       receita.setModoPreparo(novoModoPreparo);
-      System.out.println("Modo de preparo atualizado: " + novoModoPreparo);
       // Adicione uma lógica para salvar no banco ou na camada de dados
     } else {
       System.out.println("Nenhuma receita selecionada para atualizar.");
@@ -332,21 +387,22 @@ public class TelaEditarReceitaController implements Initializable {
       System.out.println("Selecione um ingrediente para remover.");
       return;
     }
-    // Remover do modelo
-    String nomeIngrediente = ingredienteSelecionado.split("-")[0].trim().substring(2);
-    Ingrediente ingredienteParaRemover = null;
-    for (Ingrediente ing : receita.getIngredientesMapping().keySet()) {
-      if (ing.getNomeIngrediente().equalsIgnoreCase(nomeIngrediente)) {
-        ingredienteParaRemover = ing;
-        break;
-      }
-    }
-    if (ingredienteParaRemover != null) {
-      receita.getIngredientesMapping().remove(ingredienteParaRemover);
-    }
 
-    // Remover da lista
-    list_view_ingredientes.getItems().remove(ingredienteSelecionado);
+    String nomeIngrediente = ingredienteSelecionado.split("-")[0].trim().substring(2);
+
+    try {
+      ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());
+      IngredienteDAO ingredienteDAO = new IngredienteDAO(ConnectionFactory.getConnection());
+      Ingrediente ingrediente = ingredienteDAO.getIngredienteByNome(nomeIngrediente);
+
+      if (ingrediente != null) {
+        receitaDAO.removerIngredienteDaReceita(receita.getId(), ingrediente.getId_ingrediente());
+        receita.getIngredientesMapping().remove(ingrediente);
+        list_view_ingredientes.getItems().remove(ingredienteSelecionado);
+      }
+    } catch (SQLException e) {
+      System.out.println("Erro ao remover ingrediente: " + e.getMessage());
+    }
   }
 
   @FXML

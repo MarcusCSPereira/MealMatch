@@ -349,4 +349,70 @@ public class ReceitaDAO {
     return receitas;
   }
 
+  public void removerIngredienteDaReceita(int idReceita, int idIngrediente) throws SQLException {
+    String sql = "DELETE FROM receitaingrediente WHERE idreceita = ? AND idingrediente = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+      stmt.setInt(1, idReceita);
+      stmt.setInt(2, idIngrediente);
+      stmt.executeUpdate();
+      System.out.println("Ingrediente removido com sucesso da receita.");
+    }
+  }
+
+  public void atualizarReceita(Receita receita) throws SQLException {
+    String sqlReceita = "UPDATE receita SET nomereceita = ?, modopreparo = ?, tempopreparo = ?, dificuldade = ? WHERE idreceita = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sqlReceita)) {
+      stmt.setString(1, receita.getNome());
+      stmt.setString(2, receita.getModoPreparo());
+      stmt.setInt(3, receita.getTempoPreparo());
+      stmt.setInt(4, receita.getDificuldade());
+      stmt.setInt(5, receita.getId());
+      stmt.executeUpdate();
+    }
+
+    // Atualizar as restrições
+    atualizarRestricoesDaReceita(receita);
+
+  }
+
+  private void atualizarRestricoesDaReceita(Receita receita) throws SQLException {
+    String sqlDelete = "DELETE FROM receitarestricao WHERE idreceita = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sqlDelete)) {
+      stmt.setInt(1, receita.getId());
+      stmt.executeUpdate();
+    }
+
+    String sqlInsert = "INSERT INTO receitarestricao (idrestricao, idreceita) VALUES (?, ?)";
+    try (PreparedStatement stmt = connection.prepareStatement(sqlInsert)) {
+      for (Integer restricao : receita.getRestricoes()) {
+        stmt.setInt(1, restricao);
+        stmt.setInt(2, receita.getId());
+        stmt.addBatch();
+      }
+      stmt.executeBatch();
+      System.out.println("Restrições atualizadas com sucesso.");
+    }
+  }
+
+  public void adicionarIngredienteNaReceita(int idReceita, String nomeIngrediente, Double quantidade, String unidade) throws SQLException {
+    IngredienteDAO ingredienteDAO = new IngredienteDAO(connection);
+    Ingrediente ingrediente = ingredienteDAO.getIngredienteByNome(nomeIngrediente);
+
+    if (ingrediente == null) {
+        throw new SQLException("Ingrediente não encontrado na base de dados.");
+    }
+
+    String sql = "INSERT INTO receitaingrediente (idreceita, idingrediente, quantidade, medida) VALUES (?, ?, ?, ?)";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        stmt.setInt(1, idReceita);
+        stmt.setInt(2, ingrediente.getId_ingrediente());
+        stmt.setDouble(3, quantidade);
+        stmt.setString(4, unidade);
+        stmt.executeUpdate();
+        System.out.println("Ingrediente adicionado com sucesso à receita.");
+    }
+}
+
+  
+
 }
