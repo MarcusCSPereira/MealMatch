@@ -22,8 +22,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -161,11 +163,8 @@ public class TelaEditarReceitaController implements Initializable {
 
     Platform.runLater(() -> screen.requestFocus());
     horas_box.getItems().addAll(horas);
-    horas_box.setValue(0);
     minutos_box.getItems().addAll(minutos);
-    minutos_box.setValue(0);
     segundos_box.getItems().addAll(segundos);
-    segundos_box.setValue(0);
     unidadeDeMedida.getItems().addAll(unidadesDeMedida);
 
   }
@@ -180,11 +179,12 @@ public class TelaEditarReceitaController implements Initializable {
       preencherDificuldade(item.getDificuldade());
       preencherTabelaNutricional(item);
       preencherRestricoes(item);
+      formatarTempo(item.getTempoPreparo());
     });
   }
 
   @FXML
-  void salvar_receita(MouseEvent event) {
+  void salvar_receita(MouseEvent event) throws IOException {
     receita.setNome(nome_receita_label.getText());
     receita.setModoPreparo(text_area_modo_preparo.getText());
     receita.setTempoPreparo(formatarTempoPreparo());
@@ -202,10 +202,19 @@ public class TelaEditarReceitaController implements Initializable {
     try {
       ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());
       receitaDAO.atualizarReceita(receita);
-      System.out.println("Receita atualizada com sucesso!");
+      voltar_tela(event);
     } catch (SQLException e) {
       System.out.println("Erro ao atualizar receita: " + e.getMessage());
     }
+  }
+
+  // Formata o tempo de preparo da receita para aparecer no formato h m s
+  private void formatarTempo(int tempoPreparoEmSegundos) {
+    Platform.runLater(() -> {
+      horas_box.setValue(tempoPreparoEmSegundos / 3600);
+      minutos_box.setValue((tempoPreparoEmSegundos % 3600) / 60);
+      segundos_box.setValue(tempoPreparoEmSegundos % 60);
+    });
   }
 
   private int formatarTempoPreparo() { // Obtém o texto do campo
@@ -388,20 +397,32 @@ public class TelaEditarReceitaController implements Initializable {
       return;
     }
 
-    String nomeIngrediente = ingredienteSelecionado.split("-")[0].trim().substring(2);
-
     try {
+      // Remove o "•" no início e o texto entre parênteses
+      String nomeIngrediente = ingredienteSelecionado.replaceAll("^[^\\w]*", "").split("\\(")[0].trim();
+
       ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());
       IngredienteDAO ingredienteDAO = new IngredienteDAO(ConnectionFactory.getConnection());
+
+      // Busca o ingrediente no banco de dados pelo nome
       Ingrediente ingrediente = ingredienteDAO.getIngredienteByNome(nomeIngrediente);
 
       if (ingrediente != null) {
+        // Remove a relação da tabela receitaingrediente
         receitaDAO.removerIngredienteDaReceita(receita.getId(), ingrediente.getId_ingrediente());
+
+        // Remove o ingrediente do HashMap da receita
         receita.getIngredientesMapping().remove(ingrediente);
+
+        // Remove o item da ListView
         list_view_ingredientes.getItems().remove(ingredienteSelecionado);
+
+      } else {
+        System.out.println("Ingrediente não encontrado no banco de dados.");
       }
     } catch (SQLException e) {
       System.out.println("Erro ao remover ingrediente: " + e.getMessage());
+      e.printStackTrace();
     }
   }
 
@@ -414,7 +435,6 @@ public class TelaEditarReceitaController implements Initializable {
     } else if (dificil_toggle.isSelected()) {
       receita.setDificuldade(3);
     }
-    System.out.println("Dificuldade escolhida: " + receita.getDificuldade());
   }
 
   @FXML
@@ -424,8 +444,12 @@ public class TelaEditarReceitaController implements Initializable {
 
   @FXML
   void voltar_tela(MouseEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/tela_receitas.fxml"));
+    Parent root = loader.load();
+    scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.close();
+    stage.setScene(scene);
+    stage.show();
   }
 
 }

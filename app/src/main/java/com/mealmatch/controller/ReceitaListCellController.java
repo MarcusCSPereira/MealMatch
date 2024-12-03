@@ -228,12 +228,10 @@ public class ReceitaListCellController extends ListCell<Receita> {
     detailsController.setReceita(getItem());
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    stage.hide();
-    Stage novoStage = new Stage();
-    novoStage.setOnHidden(e -> stage.show());
-    novoStage.setScene(scene);
-    novoStage.show();
+    stage.setScene(scene);
+    stage.show();
   }
+
 
   @FXML
   void favorite_receipe(MouseEvent event) {

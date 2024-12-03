@@ -390,7 +390,6 @@ public class ReceitaDAO {
         stmt.addBatch();
       }
       stmt.executeBatch();
-      System.out.println("Restrições atualizadas com sucesso.");
     }
   }
 
@@ -409,7 +408,6 @@ public class ReceitaDAO {
         stmt.setDouble(3, quantidade);
         stmt.setString(4, unidade);
         stmt.executeUpdate();
-        System.out.println("Ingrediente adicionado com sucesso à receita.");
     }
 }
 
