@@ -17,6 +17,7 @@ import com.mealmatch.utils.ControleDeSessao;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,6 +32,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class TelaReceitasController implements Initializable {
@@ -46,6 +48,9 @@ public class TelaReceitasController implements Initializable {
 
   @FXML
   private RadioButton difMedio;
+
+  @FXML
+  private Button escolherRestricoesButton;
 
   @FXML
   private RadioButton difDificil;
@@ -267,6 +272,26 @@ public class TelaReceitasController implements Initializable {
     novoStage.setScene(scene);
     novoStage.show();
   }
+
+      @FXML
+    void telaEscolherRestricoes(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_restricoes.fxml"));
+    Parent root = loader.load();
+    scene = new Scene(root);
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    //stage.hide();
+    Stage novoStage = new Stage();
+
+
+    novoStage.setOnHidden(e -> {
+  
+      stage.show();
+    });
+    novoStage.initOwner(stage);
+    novoStage.initModality(Modality.WINDOW_MODAL);
+    novoStage.setScene(scene);
+    novoStage.showAndWait();
+    }
 
   @FXML
   void adicionar_receita(MouseEvent event) throws IOException {

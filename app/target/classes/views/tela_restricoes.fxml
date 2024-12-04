@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaRestricoesController">
+   <children>
+      <Label layoutX="87.0" layoutY="26.0" text="Selecione as restrições de sua receita">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="glutenCheck" layoutX="98.0" layoutY="102.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Glúten" />
+      <CheckBox fx:id="lactoseCheck" layoutX="313.0" layoutY="102.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Lactose" />
+      <CheckBox fx:id="veganaCheck" layoutX="98.0" layoutY="150.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegana" />
+      <CheckBox fx:id="frutosDoMarCheck" layoutX="98.0" layoutY="210.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Frutos do Mar" />
+      <CheckBox fx:id="vegetarianaCheck" layoutX="313.0" layoutY="150.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegetariana" />
+      <CheckBox fx:id="acucarCheck" layoutX="313.0" layoutY="210.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Açúcar" />
+   </children>
+</AnchorPane>
