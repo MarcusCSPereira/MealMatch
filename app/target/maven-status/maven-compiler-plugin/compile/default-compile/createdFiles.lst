@@ -1,9 +1,11 @@
 com/mealmatch/controller/TelaDetalhesReceitaController$1.class
 com/mealmatch/controller/TelaCadastroController.class
 com/mealmatch/Main.class
+com/mealmatch/controller/TelaEditarReceitaController.class
 com/mealmatch/jdbc/dao/UserDAO.class
 com/mealmatch/controller/TelaEditarReceitaController$1.class
 com/mealmatch/controller/ReceitaListCellController.class
+com/mealmatch/controller/LicenseController.class
 com/mealmatch/controller/TelaPerfilController.class
 com/mealmatch/model/Receita.class
 com/mealmatch/jdbc/connection/ConnectionFactory.class
@@ -12,8 +14,10 @@ com/mealmatch/controller/TelaLoginController$1.class
 com/mealmatch/model/User.class
 com/mealmatch/enums/DificuldadeEnum.class
 com/mealmatch/utils/ImageSelector.class
+com/mealmatch/controller/TelaRestricoesController.class
 com/mealmatch/jdbc/dao/IngredienteDAO.class
 com/mealmatch/utils/EncriptadorDeSenhas.class
+com/mealmatch/enums/RestricaoEnum.class
 com/mealmatch/model/NutrienteValor.class
 com/mealmatch/utils/EmailSender.class
 com/mealmatch/model/TabelaNutricional.class

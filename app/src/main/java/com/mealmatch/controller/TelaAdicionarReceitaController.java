@@ -196,11 +196,11 @@ public class TelaAdicionarReceitaController implements Initializable {
 
       Double quantidade = Double.parseDouble(quantidadeStr);
 
-      receitaDao.adicionarIngredienteNaReceita(idReceita,ingrediente.getId_ingrediente(), quantidade, unidade);
+      receitaDao.adicionarIngredienteNaReceita(idReceita, ingrediente.getId_ingrediente(), quantidade, unidade);
     }
 
-    List <Integer> restricoes = validaRestricoes();
-    if(restricoes.size()>0){
+    List<Integer> restricoes = validaRestricoes();
+    if (restricoes.size() > 0) {
       for (int restricao : validaRestricoes()) {
         receitaDao.adicionarRestricaoNaReceita(idReceita, restricao);
       }
@@ -268,7 +268,7 @@ public class TelaAdicionarReceitaController implements Initializable {
   void adiciona_ingrediente(ActionEvent event) throws SQLException {
     String quantidade = quantidade_ingrediente.getText();
     String unidade = unidadeDeMedida.getValue();
-    String ingredienteString = ingrediente_adicionado.getText();
+    String ingredienteString = formatName(ingrediente_adicionado.getText());
 
     if (quantidade.isEmpty() || unidade == null || ingredienteString.isEmpty()) {
       System.out.println("Preencha todos os campos!");
@@ -346,7 +346,7 @@ public class TelaAdicionarReceitaController implements Initializable {
     }
   }
 
-  private ArrayList<Integer> validaRestricoes(){
+  private ArrayList<Integer> validaRestricoes() {
     ArrayList<Integer> restricoes = new ArrayList<>();
     if (frutos_do_mar_toogle.isSelected()) {
       restricoes.add(RestricaoEnum.FRUTOS_DO_MAR.getValor());
@@ -384,6 +384,14 @@ public class TelaAdicionarReceitaController implements Initializable {
       default:
         campoModoPreparo.setPromptText(proximoPasso + "º passo");
     }
+  }
+
+  // Método para formatar a string: primeira letra maiúscula, demais minúsculas
+  private String formatName(String nome) {
+    if (nome == null || nome.isEmpty()) {
+      return nome;
+    }
+    return nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
   }
 
 }

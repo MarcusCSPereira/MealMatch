@@ -7,6 +7,8 @@ import javafx.scene.control.CheckBox;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mealmatch.enums.RestricaoEnum;
+
 public class TelaRestricoesController {
 
     @FXML
@@ -27,40 +29,40 @@ public class TelaRestricoesController {
     @FXML
     private CheckBox vegetarianaCheck;
 
+    // Lista para armazenar as restrições selecionadas
+    private List<RestricaoEnum> restricoesSelecionadas = new ArrayList<>();
+
     @FXML
     void definirRestricoes(ActionEvent event) {
-        // Lista para armazenar as restrições selecionadas
-        List<String> restricoesSelecionadas = new ArrayList<>();
+        // Limpar as restrições selecionadas antes de adicionar as novas
+        restricoesSelecionadas.clear();
 
-        // Verifica cada CheckBox e adiciona a restrição caso esteja marcada
+        // Adicionar as restrições selecionadas
         if (acucarCheck.isSelected()) {
-            restricoesSelecionadas.add("Açúcar");
+            restricoesSelecionadas.add(RestricaoEnum.ACUCAR);
         }
         if (frutosDoMarCheck.isSelected()) {
-            restricoesSelecionadas.add("Frutos do Mar");
+            restricoesSelecionadas.add(RestricaoEnum.FRUTOS_DO_MAR);
         }
         if (glutenCheck.isSelected()) {
-            restricoesSelecionadas.add("Glúten");
+            restricoesSelecionadas.add(RestricaoEnum.GLUTEN);
         }
         if (lactoseCheck.isSelected()) {
-            restricoesSelecionadas.add("Lactose");
+            restricoesSelecionadas.add(RestricaoEnum.LACTOSE);
         }
         if (veganaCheck.isSelected()) {
-            restricoesSelecionadas.add("Vegana");
+            restricoesSelecionadas.add(RestricaoEnum.VEGANA);
         }
         if (vegetarianaCheck.isSelected()) {
-            restricoesSelecionadas.add("Vegetariana");
+            restricoesSelecionadas.add(RestricaoEnum.VEGETARIANA);
         }
 
         // Exibe as restrições selecionadas (para debug)
         System.out.println("Restrições selecionadas: " + restricoesSelecionadas);
-
-        // Chamada para armazenar ou processar as restrições
-        armazenarRestricoes(restricoesSelecionadas);
     }
 
-    private void armazenarRestricoes(List<String> restricoes) {
-        // Lógica para armazenar ou processar as restrições selecionadas
-        System.out.println("Restrições armazenadas: " + restricoes);
+    // Método público para recuperar as restrições selecionadas
+    public List<RestricaoEnum> getRestricoesSelecionadas() {
+        return restricoesSelecionadas;
     }
 }
