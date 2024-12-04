@@ -44,7 +44,7 @@
             <Font name="Gabriola" size="36.0" />
          </font>
       </Hyperlink>
-      <ImageView fx:id="close_btt" fitHeight="97.0" fitWidth="60.0" layoutX="936.0" layoutY="1.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
+      <ImageView fx:id="close_btt" fitHeight="40.0" fitWidth="37.0" layoutX="936.0" layoutY="1.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
          <image>
             <Image url="@../images/close_button.png" />
          </image>
