@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import com.mealmatch.enums.RestricaoEnum;
 import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.ReceitaDAO;
 import com.mealmatch.model.Receita;
@@ -166,6 +167,8 @@ public class TelaReceitasController implements Initializable {
 
     receitasBuscadas = getFilteredReceitas(receitasBuscadas);
 
+    receitasBuscadas = getRestrictionsReceitas(receitasBuscadas);
+
     // Verifica se as listas de resultados são iguais
     if (receitasAnteriores.equals(receitasBuscadas)) {
       System.out.println("Lista de receitas igual à anterior. Evitando atualização.");
@@ -199,6 +202,28 @@ public class TelaReceitasController implements Initializable {
 
     return receitasBuscadas;
   }
+
+// Nao esta funcionando , acredito que por que ao fechar a tela nao fica salvo as escolhas do usuario
+private List<Receita> getRestrictionsReceitas(List<Receita> receitas){
+   // Obtém as restrições selecionadas
+    TelaRestricoesController restricoesController = new TelaRestricoesController();
+    List<RestricaoEnum> restricoesSelecionadas = restricoesController.getRestricoesSelecionadas();
+
+  System.out.println(restricoesSelecionadas);
+  
+    // Filtra as receitas com base nas restrições
+    List<Receita> receitasFiltradas = receitas.stream()
+        .filter(receita -> receita.getRestricoes().stream()
+            .noneMatch(restricao -> restricoesSelecionadas.contains(restricao)))
+        .collect(Collectors.toList());
+
+    // Exibe as receitas filtradas (ou atualiza a interface)
+    System.out.println("Receitas Filtradas: " + receitasFiltradas);
+
+    return receitasFiltradas;
+}
+
+
 
   private List<Receita> fetchReceitasByIngredients(List<Receita> receitasBuscadas, ReceitaDAO receitaDAO) {
 
