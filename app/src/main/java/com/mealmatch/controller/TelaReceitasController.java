@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-import com.mealmatch.enums.RestricaoEnum;
 import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.ReceitaDAO;
 import com.mealmatch.model.Receita;
@@ -167,7 +166,7 @@ public class TelaReceitasController implements Initializable {
 
     receitasBuscadas = getFilteredReceitas(receitasBuscadas);
 
-    receitasBuscadas = getRestrictionsReceitas(receitasBuscadas);
+    //receitasBuscadas = getRestrictionsReceitas(receitasBuscadas);
 
     // Verifica se as listas de resultados são iguais
     if (receitasAnteriores.equals(receitasBuscadas)) {
@@ -204,7 +203,7 @@ public class TelaReceitasController implements Initializable {
   }
 
 // Nao esta funcionando , acredito que por que ao fechar a tela nao fica salvo as escolhas do usuario
-private List<Receita> getRestrictionsReceitas(List<Receita> receitas){
+/*private List<Receita> getRestrictionsReceitas(List<Receita> receitas){
    // Obtém as restrições selecionadas
     TelaRestricoesController restricoesController = new TelaRestricoesController();
     List<RestricaoEnum> restricoesSelecionadas = restricoesController.getRestricoesSelecionadas();
@@ -221,7 +220,7 @@ private List<Receita> getRestrictionsReceitas(List<Receita> receitas){
     System.out.println("Receitas Filtradas: " + receitasFiltradas);
 
     return receitasFiltradas;
-}
+}*/
 
 
 

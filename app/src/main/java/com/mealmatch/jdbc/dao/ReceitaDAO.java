@@ -343,6 +343,7 @@ public class ReceitaDAO {
         receita.gerarTabela();// Gera a tabela nutricional da receita
         receita.gerarValorNutricional();// Gera o valor nutricional da receita
         receita.setIdUsuarioDonoReceita(findUserIDOwnerReceipe(receita)); // Acha o id do usuário dono da receita
+        receita.setRestricoes(findRestricoes(receita)); // Acha as restrições da receita
       }
     } catch (SQLException e) {
       throw new RuntimeException("Erro ao buscar receitas por ingredientes: " + e.getMessage(), e);
