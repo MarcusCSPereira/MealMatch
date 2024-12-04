@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaRestricoesController">
    <children>
@@ -12,11 +14,15 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <CheckBox fx:id="glutenCheck" layoutX="98.0" layoutY="102.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Glúten" />
-      <CheckBox fx:id="lactoseCheck" layoutX="313.0" layoutY="102.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Lactose" />
-      <CheckBox fx:id="veganaCheck" layoutX="98.0" layoutY="150.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegana" />
-      <CheckBox fx:id="frutosDoMarCheck" layoutX="98.0" layoutY="210.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Frutos do Mar" />
-      <CheckBox fx:id="vegetarianaCheck" layoutX="313.0" layoutY="150.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegetariana" />
-      <CheckBox fx:id="acucarCheck" layoutX="313.0" layoutY="210.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Açúcar" />
+      <RadioButton fx:id="glutenRaddio" layoutX="98.0" layoutY="102.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Glúten">
+         <toggleGroup>
+            <ToggleGroup fx:id="restrições" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="lactoseRadio" layoutX="313.0" layoutY="102.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Lactose" toggleGroup="$restrições" />
+      <RadioButton fx:id="veganaRadio" layoutX="98.0" layoutY="150.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegana" toggleGroup="$restrições" />
+      <RadioButton fx:id="frutosDoMarRaddio" layoutX="98.0" layoutY="210.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Frutos do mar" toggleGroup="$restrições" />
+      <RadioButton fx:id="vegetarianaRadio" layoutX="313.0" layoutY="150.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegetariana" toggleGroup="$restrições" />
+      <RadioButton fx:id="acucarRadio" layoutX="313.0" layoutY="210.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Açúcar" toggleGroup="$restrições" />
    </children>
 </AnchorPane>
