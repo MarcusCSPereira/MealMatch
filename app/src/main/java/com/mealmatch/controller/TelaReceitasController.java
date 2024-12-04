@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import com.mealmatch.enums.RestricaoEnum;
 import com.mealmatch.jdbc.connection.ConnectionFactory;
 import com.mealmatch.jdbc.dao.ReceitaDAO;
 import com.mealmatch.model.Receita;
+import com.mealmatch.model.RestricoesSelecionadas;
 import com.mealmatch.utils.ControleDeSessao;
 
 import javafx.application.Platform;
@@ -166,7 +169,7 @@ public class TelaReceitasController implements Initializable {
 
     receitasBuscadas = getFilteredReceitas(receitasBuscadas);
 
-    //receitasBuscadas = getRestrictionsReceitas(receitasBuscadas);
+    receitasBuscadas = getRestrictionsReceitas(receitasBuscadas);
 
     // Verifica se as listas de resultados são iguais
     if (receitasAnteriores.equals(receitasBuscadas)) {
@@ -203,25 +206,20 @@ public class TelaReceitasController implements Initializable {
   }
 
 // Nao esta funcionando , acredito que por que ao fechar a tela nao fica salvo as escolhas do usuario
-/*private List<Receita> getRestrictionsReceitas(List<Receita> receitas){
-   // Obtém as restrições selecionadas
-    TelaRestricoesController restricoesController = new TelaRestricoesController();
-    List<RestricaoEnum> restricoesSelecionadas = restricoesController.getRestricoesSelecionadas();
+private List<Receita> getRestrictionsReceitas(List<Receita> receitas) {
+    List<RestricaoEnum> restricoesSelecionadas = RestricoesSelecionadas.getInstance().getRestricoes();
 
-  System.out.println(restricoesSelecionadas);
-  
-    // Filtra as receitas com base nas restrições
     List<Receita> receitasFiltradas = receitas.stream()
         .filter(receita -> receita.getRestricoes().stream()
-            .noneMatch(restricao -> restricoesSelecionadas.contains(restricao)))
+            .map(RestricaoEnum::fromInt) // Converte Integer para RestricaoEnum
+            .noneMatch(restricoesSelecionadas::contains))
         .collect(Collectors.toList());
 
-    // Exibe as receitas filtradas (ou atualiza a interface)
-    System.out.println("Receitas Filtradas: " + receitasFiltradas);
-
     return receitasFiltradas;
-}*/
+}
 
+
+ 
 
 
   private List<Receita> fetchReceitasByIngredients(List<Receita> receitasBuscadas, ReceitaDAO receitaDAO) {

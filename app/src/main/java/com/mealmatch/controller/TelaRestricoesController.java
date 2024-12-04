@@ -2,14 +2,18 @@ package com.mealmatch.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import com.mealmatch.enums.RestricaoEnum;
+import com.mealmatch.model.RestricoesSelecionadas;
 
-public class TelaRestricoesController {
+public class TelaRestricoesController implements Initializable {
 
     @FXML
     private CheckBox acucarCheck;
@@ -57,6 +61,9 @@ public class TelaRestricoesController {
             restricoesSelecionadas.add(RestricaoEnum.VEGETARIANA);
         }
 
+         // Atualizar o estado no Singleton
+        RestricoesSelecionadas.getInstance().setRestricoes(restricoesSelecionadas);
+
         // Exibe as restrições selecionadas (para debug)
         System.out.println("Restrições selecionadas: " + restricoesSelecionadas);
     }
@@ -64,5 +71,21 @@ public class TelaRestricoesController {
     // Método público para recuperar as restrições selecionadas
     public List<RestricaoEnum> getRestricoesSelecionadas() {
         return restricoesSelecionadas;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Método chamado quando a tela é inicializada
+         // Carregar restrições previamente salvas no Singleton
+        List<RestricaoEnum> restricoesSelecionadas = RestricoesSelecionadas.getInstance().getRestricoes();
+
+        // Atualizar os checkboxes com base nas restrições salvas
+        acucarCheck.setSelected(restricoesSelecionadas.contains(RestricaoEnum.ACUCAR));
+        frutosDoMarCheck.setSelected(restricoesSelecionadas.contains(RestricaoEnum.FRUTOS_DO_MAR));
+        glutenCheck.setSelected(restricoesSelecionadas.contains(RestricaoEnum.GLUTEN));
+        lactoseCheck.setSelected(restricoesSelecionadas.contains(RestricaoEnum.LACTOSE));
+        veganaCheck.setSelected(restricoesSelecionadas.contains(RestricaoEnum.VEGANA));
+        vegetarianaCheck.setSelected(restricoesSelecionadas.contains(RestricaoEnum.VEGETARIANA));
+
     }
 }

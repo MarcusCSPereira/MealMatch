@@ -27,4 +27,14 @@ public enum RestricaoEnum {
         }
         throw new IllegalArgumentException("Valor de restricao inválido: " + valor);
     }
+
+        public static RestricaoEnum fromInt(int codigo) {
+        for (RestricaoEnum restricao : values()) {
+            if (restricao.valor  == codigo) {
+                return restricao;
+            }
+        }
+        throw new IllegalArgumentException("Código inválido: " + codigo);
+    }
+    
 }
