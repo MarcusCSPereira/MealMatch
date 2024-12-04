@@ -34,6 +34,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class TelaCadastroController implements Initializable {
@@ -107,8 +108,19 @@ public class TelaCadastroController implements Initializable {
       Parent root = loader.load();
       scene = new Scene(root);
       stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      stage.setScene(scene);
-      stage.show();
+      //stage.hide();
+      Stage novoStage = new Stage();
+
+      novoStage.setOnHidden(e -> {
+  
+        stage.show();
+      });
+
+      novoStage.initOwner(stage);
+      novoStage.initModality(Modality.WINDOW_MODAL);
+      novoStage.setScene(scene);
+      novoStage.showAndWait();
+
   }
 
   private void controleProgressBar(TextField complete_username, TextField email_user, TextField username,
