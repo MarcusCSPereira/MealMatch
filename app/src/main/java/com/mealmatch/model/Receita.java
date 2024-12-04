@@ -2,18 +2,21 @@ package com.mealmatch.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import javafx.scene.image.Image;
 
+@SuppressWarnings("unused")
 public class Receita {
   private Integer id;
   private String nome;
   private Integer idUsuarioDonoReceita; // Id do usuário que criou a receita, pode ser 0 caso seja uma receita padrão do
                                         // sistema ou ter um valor caso seja uma receita de um usuário
   Map<Ingrediente, ReceitaIngrediente> ingredientesMapping = new HashMap<>();
+  private ArrayList<Integer> restricoes;
   private String ingredientesFormatados;
   private String modoPreparo;
   private int tempoPreparo;
@@ -42,7 +45,6 @@ public class Receita {
   }
 
   public void gerarTabela() {
-    @SuppressWarnings("unused")
     int count = 0;
     for (Map.Entry<Ingrediente, ReceitaIngrediente> tupla : ingredientesMapping.entrySet()) {
       Ingrediente ingrediente = tupla.getKey(); // Pega o objeto ingrediente
@@ -231,6 +233,14 @@ public class Receita {
 
   public void setIdUsuarioDonoReceita(Integer idUsuarioDonoReceita) {
     this.idUsuarioDonoReceita = idUsuarioDonoReceita;
+  }
+
+  public void setRestricoes(ArrayList<Integer> restricoes){
+    this.restricoes = restricoes;
+  }
+
+  public ArrayList<Integer> getRestricoes(){
+    return restricoes;
   }
 
   @Override

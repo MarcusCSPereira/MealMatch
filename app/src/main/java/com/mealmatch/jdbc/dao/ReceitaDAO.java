@@ -16,7 +16,6 @@ import com.mealmatch.model.Ingrediente;
 import com.mealmatch.model.Receita;
 import com.mealmatch.model.ReceitaIngrediente;
 
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 
 public class ReceitaDAO {
@@ -28,14 +27,6 @@ public class ReceitaDAO {
   }
 
   public List<Receita> findByName(String name) throws SQLException {
-    if (name == null || name.trim().isEmpty()) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Erro");
-      alert.setHeaderText("Nome da receita inválido");
-      alert.setContentText("O nome da receita não pode ser vazio.");
-      alert.showAndWait();
-      return new ArrayList<>();
-    }
 
     String sql = "SELECT idreceita, nomereceita, modopreparo, tempopreparo, dificuldade, imagemreceita, numerolikes, numerodislikes FROM receita WHERE nomereceita LIKE ?";
     List<Receita> receitas = new ArrayList<>();
@@ -67,9 +58,26 @@ public class ReceitaDAO {
       receita.gerarTabela();// Gera a tabela nutricional da receita
       receita.gerarValorNutricional();// Gera o valor nutricional da receita
       receita.setIdUsuarioDonoReceita(findUserIDOwnerReceipe(receita)); // Acha o id do usuário dono da receita
+      receita.setRestricoes(findRestricoes(receita)); // Acha as restrições da receita
     }
 
     return receitas;
+  }
+
+  private ArrayList<Integer> findRestricoes(Receita receita) {
+    String sql = "SELECT idrestricao FROM receitarestricao WHERE idreceita = ?";
+    ArrayList<Integer> restricoes = new ArrayList<>();
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+      stmt.setInt(1, receita.getId());
+      try (ResultSet rs = stmt.executeQuery()) {
+        while (rs.next()) {
+          restricoes.add(rs.getInt("idrestricao"));
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return restricoes;
   }
 
   // Encontra os ingredientes de uma receita
@@ -207,6 +215,20 @@ public class ReceitaDAO {
     }
   }
 
+  public void adicionarRestricaoNaReceita(int idReceita, int restricao) {
+    String sql = "INSERT INTO receitarestricao (idrestricao, idreceita) VALUES (?, ?)";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setInt(1, restricao);
+      statement.setInt(2, idReceita);
+
+      statement.execute();
+      System.out.println("Restrição adicionada à receita com sucesso!");
+    } catch (SQLException e) {
+      System.err.println("Erro ao adicionar restrição na receita: " + e.getMessage());
+    }
+  }
+
   // Adiciona ou atualiza a reação do usuário
   public void reagirReceita(int idUsuario, int idReceita, int reacao) throws SQLException {
     String sql = "INSERT INTO reagirreceita (idusuario, idreceita, reacao) " +
@@ -326,5 +348,69 @@ public class ReceitaDAO {
 
     return receitas;
   }
+
+  public void removerIngredienteDaReceita(int idReceita, int idIngrediente) throws SQLException {
+    String sql = "DELETE FROM receitaingrediente WHERE idreceita = ? AND idingrediente = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+      stmt.setInt(1, idReceita);
+      stmt.setInt(2, idIngrediente);
+      stmt.executeUpdate();
+      System.out.println("Ingrediente removido com sucesso da receita.");
+    }
+  }
+
+  public void atualizarReceita(Receita receita) throws SQLException {
+    String sqlReceita = "UPDATE receita SET nomereceita = ?, modopreparo = ?, tempopreparo = ?, dificuldade = ? WHERE idreceita = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sqlReceita)) {
+      stmt.setString(1, receita.getNome());
+      stmt.setString(2, receita.getModoPreparo());
+      stmt.setInt(3, receita.getTempoPreparo());
+      stmt.setInt(4, receita.getDificuldade());
+      stmt.setInt(5, receita.getId());
+      stmt.executeUpdate();
+    }
+
+    // Atualizar as restrições
+    atualizarRestricoesDaReceita(receita);
+
+  }
+
+  private void atualizarRestricoesDaReceita(Receita receita) throws SQLException {
+    String sqlDelete = "DELETE FROM receitarestricao WHERE idreceita = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sqlDelete)) {
+      stmt.setInt(1, receita.getId());
+      stmt.executeUpdate();
+    }
+
+    String sqlInsert = "INSERT INTO receitarestricao (idrestricao, idreceita) VALUES (?, ?)";
+    try (PreparedStatement stmt = connection.prepareStatement(sqlInsert)) {
+      for (Integer restricao : receita.getRestricoes()) {
+        stmt.setInt(1, restricao);
+        stmt.setInt(2, receita.getId());
+        stmt.addBatch();
+      }
+      stmt.executeBatch();
+    }
+  }
+
+  public void adicionarIngredienteNaReceita(int idReceita, String nomeIngrediente, Double quantidade, String unidade) throws SQLException {
+    IngredienteDAO ingredienteDAO = new IngredienteDAO(connection);
+    Ingrediente ingrediente = ingredienteDAO.getIngredienteByNome(nomeIngrediente);
+
+    if (ingrediente == null) {
+        throw new SQLException("Ingrediente não encontrado na base de dados.");
+    }
+
+    String sql = "INSERT INTO receitaingrediente (idreceita, idingrediente, quantidade, medida) VALUES (?, ?, ?, ?)";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        stmt.setInt(1, idReceita);
+        stmt.setInt(2, ingrediente.getId_ingrediente());
+        stmt.setDouble(3, quantidade);
+        stmt.setString(4, unidade);
+        stmt.executeUpdate();
+    }
+}
+
+  
 
 }
