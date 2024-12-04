@@ -2,12 +2,14 @@ package com.mealmatch.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import com.mealmatch.enums.DificuldadeEnum;
+import com.mealmatch.enums.RestricaoEnum;
 import com.mealmatch.model.NutrienteValor;
 import com.mealmatch.model.Receita;
 
@@ -124,7 +126,28 @@ public class TelaDetalhesReceitaController implements Initializable {
       text_area_modo_preparo.setText(item.getModoPreparo());
       preencherDificuldade(item.getDificuldade());
       preencherTabelaNutricional(item);
+      preencherRestricoes(item);
     });
+  }
+
+  private void preencherRestricoes(Receita item) {
+    ArrayList<Integer> restricoesDaReceita = item.getRestricoes();
+    for (Integer restricao : restricoesDaReceita) {
+      if(restricao == RestricaoEnum.FRUTOS_DO_MAR.getValor()) {
+        frutos_do_mar_toggle.setSelected(true);
+      } else if(restricao == RestricaoEnum.VEGANA.getValor()) {
+        vegana_toggle.setSelected(true);
+      } else if(restricao == RestricaoEnum.VEGETARIANA.getValor()) {
+        vegetariana_toggle.setSelected(true);
+      } else if(restricao == RestricaoEnum.ACUCAR.getValor()) {
+        acucar_toggle.setSelected(true);
+      } else if(restricao == RestricaoEnum.LACTOSE.getValor()) {
+        lactose_toggle.setSelected(true);
+      } else if(restricao == RestricaoEnum.GLUTEN.getValor()) {
+        gluten_toggle.setSelected(true);
+
+      }
+    }
   }
 
   // Método auxiliar para preencher a tabela nutricional da receita

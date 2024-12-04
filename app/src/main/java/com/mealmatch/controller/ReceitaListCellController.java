@@ -230,8 +230,8 @@ public class ReceitaListCellController extends ListCell<Receita> {
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
-    System.out.println("Editar receita de id: " + getItem().getId());
   }
+
 
   @FXML
   void favorite_receipe(MouseEvent event) {
