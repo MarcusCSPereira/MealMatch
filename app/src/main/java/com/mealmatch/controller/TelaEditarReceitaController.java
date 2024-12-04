@@ -348,7 +348,7 @@ public class TelaEditarReceitaController implements Initializable {
 
   @FXML
   void adicionarIngrediente(ActionEvent event) {
-    String nome = nomeIngredienteField.getText();
+    String nome = formatName(nomeIngredienteField.getText());
     String quantidadeText = quantidadeIngredienteField.getText();
     String unidade = unidadeDeMedida.getValue();
 
@@ -444,12 +444,20 @@ public class TelaEditarReceitaController implements Initializable {
 
   @FXML
   void voltar_tela(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/tela_receitas.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_receitas.fxml"));
     Parent root = loader.load();
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
+  }
+
+  // Método para formatar a string: primeira letra maiúscula, demais minúsculas
+  private String formatName(String nome) {
+    if (nome == null || nome.isEmpty()) {
+      return nome;
+    }
+    return nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
   }
 
 }
