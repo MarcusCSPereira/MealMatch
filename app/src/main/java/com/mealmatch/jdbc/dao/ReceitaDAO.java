@@ -28,17 +28,19 @@ public class ReceitaDAO {
 
   public List<Receita> findByName(String name) throws SQLException {
 
+    String upperCaseName = name.toUpperCase();
+
     String sql = "SELECT idreceita, nomereceita, modopreparo, tempopreparo, dificuldade, imagemreceita, numerolikes, numerodislikes FROM receita WHERE nomereceita LIKE ?";
     List<Receita> receitas = new ArrayList<>();
 
     // Primeiro busca as receitas sem os ingredientes
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-      stmt.setString(1, "%" + name.trim() + "%");
+      stmt.setString(1, "%" + upperCaseName.trim() + "%");
       try (ResultSet rs = stmt.executeQuery()) {
         while (rs.next()) {
           Receita receita = new Receita(
               rs.getInt("idreceita"),
-              rs.getString("nomereceita"),
+              formatName(rs.getString("nomereceita")),
               rs.getString("modopreparo"),
               rs.getInt("tempopreparo"),
               rs.getInt("dificuldade"),
@@ -90,7 +92,7 @@ public class ReceitaDAO {
         while (rs.next()) {
           Ingrediente ingrediente = new Ingrediente(
               rs.getInt("idingrediente"),
-              rs.getString("nomeingrediente"),
+              formatName(rs.getString("nomeingrediente")),
               rs.getDouble("carboidrato"),
               rs.getDouble("gordura"),
               rs.getDouble("proteina"),
@@ -138,7 +140,7 @@ public class ReceitaDAO {
       // Inserção na tabela 'receitas'
       try (PreparedStatement statementReceita = connection.prepareStatement(sqlReceita,
           Statement.RETURN_GENERATED_KEYS)) {
-        statementReceita.setString(1, receita.getNome());
+        statementReceita.setString(1, receita.getNome().toUpperCase());
         statementReceita.setInt(2, 0); // Inicializando com 0 likes
         statementReceita.setInt(3, 0); // Inicializando com 0 dislikes
         statementReceita.setString(4, receita.getModoPreparo());
@@ -312,7 +314,7 @@ public class ReceitaDAO {
       // Preenche os parâmetros com os ingredientes
       int index = 1;
       for (String ingrediente : ingredientesList) {
-        stmt.setString(index++, ingrediente.trim());
+        stmt.setString(index++, ingrediente.trim().toUpperCase());
       }
 
       // Define o último parâmetro como o número de ingredientes fornecidos
@@ -323,7 +325,7 @@ public class ReceitaDAO {
         while (rs.next()) {
           Receita receita = new Receita(
               rs.getInt("idreceita"),
-              rs.getString("nomereceita"),
+              formatName(rs.getString("nomereceita")),
               rs.getString("modopreparo"),
               rs.getInt("tempopreparo"),
               rs.getInt("dificuldade"),
@@ -362,7 +364,7 @@ public class ReceitaDAO {
   public void atualizarReceita(Receita receita) throws SQLException {
     String sqlReceita = "UPDATE receita SET nomereceita = ?, modopreparo = ?, tempopreparo = ?, dificuldade = ? WHERE idreceita = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sqlReceita)) {
-      stmt.setString(1, receita.getNome());
+      stmt.setString(1, receita.getNome().toUpperCase());
       stmt.setString(2, receita.getModoPreparo());
       stmt.setInt(3, receita.getTempoPreparo());
       stmt.setInt(4, receita.getDificuldade());
@@ -393,24 +395,31 @@ public class ReceitaDAO {
     }
   }
 
-  public void adicionarIngredienteNaReceita(int idReceita, String nomeIngrediente, Double quantidade, String unidade) throws SQLException {
+  public void adicionarIngredienteNaReceita(int idReceita, String nomeIngrediente, Double quantidade, String unidade)
+      throws SQLException {
     IngredienteDAO ingredienteDAO = new IngredienteDAO(connection);
     Ingrediente ingrediente = ingredienteDAO.getIngredienteByNome(nomeIngrediente);
 
     if (ingrediente == null) {
-        throw new SQLException("Ingrediente não encontrado na base de dados.");
+      throw new SQLException("Ingrediente não encontrado na base de dados.");
     }
 
     String sql = "INSERT INTO receitaingrediente (idreceita, idingrediente, quantidade, medida) VALUES (?, ?, ?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-        stmt.setInt(1, idReceita);
-        stmt.setInt(2, ingrediente.getId_ingrediente());
-        stmt.setDouble(3, quantidade);
-        stmt.setString(4, unidade);
-        stmt.executeUpdate();
+      stmt.setInt(1, idReceita);
+      stmt.setInt(2, ingrediente.getId_ingrediente());
+      stmt.setDouble(3, quantidade);
+      stmt.setString(4, unidade);
+      stmt.executeUpdate();
     }
-}
+  }
 
-  
+  // Método para formatar a string: primeira letra maiúscula, demais minúsculas
+  private String formatName(String nome) {
+    if (nome == null || nome.isEmpty()) {
+      return nome;
+    }
+    return nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
+  }
 
 }
