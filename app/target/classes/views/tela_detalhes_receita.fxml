@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaDetalhesReceitaController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaDetalhesReceitaController">
    <children>
       <BorderPane prefHeight="240.0" prefWidth="240.0">
          <center>
@@ -76,7 +76,7 @@
             <Image url="@../images/close_button.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="back_button_image" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#voltar_tela" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="248.0" AnchorPane.topAnchor="7.0">
+      <ImageView fx:id="back_button_image" fitHeight="30.0" fitWidth="27.0" onMouseClicked="#voltar_tela" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="248.0" AnchorPane.topAnchor="7.0">
          <image>
             <Image url="@../images/back_button.png" />
          </image>
