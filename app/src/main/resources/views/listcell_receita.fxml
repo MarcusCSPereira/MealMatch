@@ -17,7 +17,7 @@
       <Pane fx:id="screen_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="953.0" style="-fx-background-color: ffffff; -fx-background-radius: 28; -fx-border-radius: 28;">
          <children>
             <Line endX="14.0" endY="14.0" startX="14.5" startY="138.5" />
-            <ImageView fx:id="receita_image" fitHeight="131.0" fitWidth="131.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true">
+            <ImageView fx:id="receita_image" fitHeight="126.0" fitWidth="131.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/frango.png" />
                </image>

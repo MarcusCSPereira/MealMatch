@@ -37,6 +37,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class TelaReceitasController implements Initializable {
 
@@ -344,6 +345,7 @@ public class TelaReceitasController implements Initializable {
     Stage novoStage = new Stage();
     novoStage.setOnHidden(e -> stage.show());
     novoStage.setScene(scene);
+    novoStage.initStyle(StageStyle.UNDECORATED);
     novoStage.show();
   }
 

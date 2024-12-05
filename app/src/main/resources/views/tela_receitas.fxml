@@ -34,7 +34,7 @@
             <Font name="Gabriola" size="70.0" />
          </font>
       </Label>
-      <TextField fx:id="search_field" layoutX="200.0" layoutY="100.0" onAction="#buscar" prefHeight="30.0" prefWidth="500.0" promptText="Digite os Ingredientes para buscar separados por vírgula. EX: Frango, Manteiga, ..." style="-fx-background-radius: 28;" />
+      <TextField fx:id="search_field" layoutX="200.0" layoutY="100.0" onAction="#buscar" prefHeight="30.0" prefWidth="500.0" promptText="Digite o nome da receita que deseja buscar" style="-fx-background-radius: 28;" />
       <ImageView fx:id="search_button" fitHeight="30.0" fitWidth="28.0" layoutX="668.0" layoutY="102.0" onMouseClicked="#buscar" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/search_button.png" />

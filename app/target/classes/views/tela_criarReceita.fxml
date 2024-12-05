@@ -69,7 +69,7 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <RadioButton fx:id="dificuldadeFacil" layoutX="43.0" layoutY="628.0" mnemonicParsing="false" onAction="#definirDificuldade" text="fácil" textFill="WHITE">
+      <RadioButton fx:id="dificuldadeFacil" layoutX="43.0" layoutY="628.0" mnemonicParsing="false" onAction="#definirDificuldade" text="Fácil" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -77,12 +77,12 @@
             <ToggleGroup fx:id="dificuldadeReceita" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="dificuldadeMedio" layoutX="143.0" layoutY="628.0" mnemonicParsing="false" onAction="#definirDificuldade" text="médio" textFill="WHITE" toggleGroup="$dificuldadeReceita">
+      <RadioButton fx:id="dificuldadeMedio" layoutX="143.0" layoutY="628.0" mnemonicParsing="false" onAction="#definirDificuldade" text="Médio" textFill="WHITE" toggleGroup="$dificuldadeReceita">
          <font>
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="dificuldadeDificil" layoutX="243.0" layoutY="628.0" mnemonicParsing="false" onAction="#definirDificuldade" text="difícil" textFill="WHITE" toggleGroup="$dificuldadeReceita">
+      <RadioButton fx:id="dificuldadeDificil" layoutX="243.0" layoutY="628.0" mnemonicParsing="false" onAction="#definirDificuldade" text="Difícil" textFill="WHITE" toggleGroup="$dificuldadeReceita">
          <font>
             <Font size="15.0" />
          </font>
@@ -126,7 +126,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <RadioButton fx:id="acucar_toogle" layoutX="24.0" layoutY="417.0" mnemonicParsing="false" text="Açúcar" textFill="WHITE">
+      <RadioButton fx:id="acucar_toogle" layoutX="24.0" layoutY="417.0" mnemonicParsing="false" text="Contém Açúcar" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
@@ -136,22 +136,22 @@
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="vegana_toogle" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" text="Vegana" textFill="WHITE">
+      <RadioButton fx:id="vegana_toogle" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" text="Não Vegana" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="lactose_toogle" layoutX="190.0" layoutY="475.0" mnemonicParsing="false" text="Lactose" textFill="WHITE">
+      <RadioButton fx:id="lactose_toogle" layoutX="190.0" layoutY="475.0" mnemonicParsing="false" text="Contém Lactose" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="vegetariana_toogle" layoutX="24.0" layoutY="537.0" mnemonicParsing="false" text="Vegetariana" textFill="WHITE">
+      <RadioButton fx:id="vegetariana_toogle" layoutX="24.0" layoutY="537.0" mnemonicParsing="false" text="Não Vegetariana" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="gluten_toogle" layoutX="190.0" layoutY="537.0" mnemonicParsing="false" text="Glúten" textFill="WHITE">
+      <RadioButton fx:id="gluten_toogle" layoutX="190.0" layoutY="537.0" mnemonicParsing="false" text="Contém Glúten" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
