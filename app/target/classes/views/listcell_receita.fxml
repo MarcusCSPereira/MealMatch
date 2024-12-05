@@ -12,9 +12,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="962.0" style="-fx-background-color: ffffff; -fx-background-radius: 28;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="951.0" style="-fx-background-color: ffffff; -fx-background-radius: 28;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="screen_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="962.0" style="-fx-background-color: ffffff; -fx-background-radius: 28; -fx-border-radius: 28;">
+      <Pane fx:id="screen_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="953.0" style="-fx-background-color: ffffff; -fx-background-radius: 28; -fx-border-radius: 28;">
          <children>
             <Line endX="14.0" endY="14.0" startX="14.5" startY="138.5" />
             <ImageView fx:id="receita_image" fitHeight="131.0" fitWidth="131.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true">
@@ -76,7 +76,6 @@
                   <Font name="Gabriola" size="25.0" />
                </font>
             </Label>
-            <Line endX="160.5" endY="137.5" layoutX="617.0" layoutY="3.0" startX="158.5" startY="7.5" />
             <ImageView fx:id="like_button" fitHeight="36.0" fitWidth="36.0" layoutX="783.0" layoutY="27.0" onMouseClicked="#like_receipe" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/like_button.png" />
@@ -129,9 +128,6 @@
             </ImageView>
             <Line endX="147.0" endY="12.292892456054688" startX="14.5" startY="13.5" />
             <Line endX="145.0" endY="139.0" startX="15.0" startY="139.0" />
-            <Line endX="932.5" endY="11.0" layoutX="13.0" layoutY="-1.0" startX="932.5" startY="141.0" />
-            <Line endX="401.0" endY="106.5" layoutX="544.0" layoutY="34.0" startX="234.0" startY="107.0" />
-            <Line endX="72.0" endY="-12.207107543945312" layoutX="872.0" layoutY="22.0" startX="-97.20709228515625" startY="-12.207107543945312" />
          </children>
       </Pane>
    </children>

@@ -310,7 +310,6 @@ public class TelaAdicionarReceitaController implements Initializable {
     } else if (dificuldadeDificil.isSelected()) {
       dificuldade = 3;
     }
-    System.out.println("Dificuldade escolhida: " + dificuldade);
   }
 
   @FXML
