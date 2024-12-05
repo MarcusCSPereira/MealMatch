@@ -91,7 +91,7 @@
       <RadioButton fx:id="dificil_toggle" focusTraversable="false" layoutX="457.0" layoutY="194.0" mnemonicParsing="false" text="Difícil" toggleGroup="$dificuldade_group" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="135.0" layoutX="442.0" layoutY="91.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="104.0" />
       <ListView fx:id="list_view_ingredientes" layoutX="32.0" layoutY="311.0" prefHeight="379.0" prefWidth="404.0" />
-      <Label layoutX="32.0" layoutY="277.0" prefHeight="30.0" prefWidth="234.0" text="Ingredientes:">
+      <Label layoutX="32.0" layoutY="277.0" prefHeight="30.0" prefWidth="70.0" text="Ingredientes:">
          <font>
             <Font size="20.0" />
          </font>
