@@ -1,14 +1,15 @@
 .list-view {
-    -fx-background-color: #FFA500; /* Cor de fundo laranja */
-    -fx-border-color: #FF4500; /* Cor da borda */
+    -fx-background-color: #e15707; /* Cor de fundo laranja */
+    -fx-border-color: #e15707; /* Cor da borda */
     -fx-border-radius: 28px;
     -fx-background-radius: 5px;
+    -fx-border-radius: 28px;
 }
 
 .list-cell {
     -fx-text-fill: #FFFFFF; /* Texto branco */
-    -fx-background-color: #000; /* Cor do item */
+    -fx-background-color: #FFFFFF; /* Cor do item */
     -fx-background-radius: 28px;
-    -fx-border-color: #ffff;
+    -fx-border-color: rgb(0, 0, 0);
     -fx-border-radius: 28px;
-}
+} 
