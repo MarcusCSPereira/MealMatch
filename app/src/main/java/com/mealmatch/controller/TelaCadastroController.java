@@ -32,6 +32,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -102,23 +103,23 @@ public class TelaCadastroController implements Initializable {
   }
 
   @FXML
-  private void linkTermos(ActionEvent event) throws IOException{
+  private void linkTermos(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_licenca.fxml"));
-      Parent root = loader.load();
-      scene = new Scene(root);
-      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      //stage.hide();
-      Stage novoStage = new Stage();
+    Parent root = loader.load();
+    scene = new Scene(root);
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    // stage.hide();
+    Stage novoStage = new Stage();
 
-      novoStage.setOnHidden(e -> {
-  
-        stage.show();
-      });
+    novoStage.setOnHidden(e -> {
 
-      novoStage.initOwner(stage);
-      novoStage.initModality(Modality.WINDOW_MODAL);
-      novoStage.setScene(scene);
-      novoStage.showAndWait();
+      stage.show();
+    });
+
+    novoStage.initOwner(stage);
+    novoStage.initModality(Modality.WINDOW_MODAL);
+    novoStage.setScene(scene);
+    novoStage.showAndWait();
 
   }
 
@@ -211,7 +212,21 @@ public class TelaCadastroController implements Initializable {
     alert.setTitle("Cadastro realizado");
     alert.setHeaderText("Usuário cadastrado com sucesso");
     alert.showAndWait();
-    voltar_para_login(event);
+    voltar(event);
+  }
+
+  private void voltar(ActionEvent event) {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_login.fxml"));
+      Parent root = loader.load();
+      scene = new Scene(root);
+      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      stage.setScene(scene);
+      stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
+      stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @FXML
@@ -220,17 +235,18 @@ public class TelaCadastroController implements Initializable {
   }
 
   @FXML
-  void voltar_para_login(ActionEvent event) throws IOException {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_login.fxml"));
-      Parent root = loader.load();
-      scene = new Scene(root);
-      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+  void voltar_para_login(MouseEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_login.fxml"));
+    Parent root = loader.load();
+    scene = new Scene(root);
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
+    stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
     stage.show();
   }
 
-  private Boolean checkCamposVazios(){
-    if (progress < 1){
+  private Boolean checkCamposVazios() {
+    if (progress < 1) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Erro");
       alert.setHeaderText("Preencha todos os campos");
@@ -257,8 +273,8 @@ public class TelaCadastroController implements Initializable {
     }
   }
 
-  private Boolean checkLicense(CheckBox checkTermos){
-    if(checkTermos.isSelected()){
+  private Boolean checkLicense(CheckBox checkTermos) {
+    if (checkTermos.isSelected()) {
       return true;
     } else {
       Alert alert = new Alert(Alert.AlertType.ERROR);
