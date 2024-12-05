@@ -16,7 +16,7 @@ public class IngredienteDAO {
   }
 
   public Ingrediente getIngredienteById(int idingrediente) throws SQLException {
-    String sql = "SELECT * FROM ingrediente WHERE idingrediente = ?";
+    String sql = "SELECT * FROM ingrediente WHERE id_ingrediente = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setInt(1, idingrediente);
       try (ResultSet rs = stmt.executeQuery()) {
@@ -30,7 +30,7 @@ public class IngredienteDAO {
 
   // Método de busca de ingredientes por nome com ajuste para maiúsculas
   public Ingrediente getIngredienteByNome(String nome) throws SQLException {
-    String sql = "SELECT * FROM ingrediente WHERE nomeingrediente = ?";
+    String sql = "SELECT * FROM ingrediente WHERE nome_ingrediente = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setString(1, nome.toUpperCase()); // Converte para maiúsculas antes da busca
       try (ResultSet rs = stmt.executeQuery()) {
@@ -49,8 +49,8 @@ public class IngredienteDAO {
     ingrediente.setCarboidrato(rs.getDouble("carboidrato"));
     ingrediente.setGordura(rs.getDouble("gordura"));
     ingrediente.setProteina(rs.getDouble("proteina"));
-    ingrediente.setNomeIngrediente(formatName(rs.getString("nomeingrediente"))); // Formata o nome
-    ingrediente.setId_ingrediente(rs.getInt("idingrediente"));
+    ingrediente.setNomeIngrediente(formatName(rs.getString("nome_ingrediente"))); // Formata o nome
+    ingrediente.setId_ingrediente(rs.getInt("id_ingrediente"));
 
     return ingrediente;
   }

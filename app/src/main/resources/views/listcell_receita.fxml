@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="962.0" style="-fx-background-color: ffffff; -fx-background-radius: 28;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="962.0" style="-fx-background-color: ffffff; -fx-background-radius: 28;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="screen_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="962.0" style="-fx-background-color: ffffff; -fx-background-radius: 28; -fx-border-radius: 28;">
          <children>
@@ -71,7 +71,7 @@
                   <Font name="Gabriola" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="valor_nutricional_label" layoutX="300.0" layoutY="104.0" text="1.000 kcal">
+            <Label fx:id="valor_nutricional_label" layoutX="310.0" layoutY="104.0" text="1.000 kcal">
                <font>
                   <Font name="Gabriola" size="25.0" />
                </font>
@@ -82,7 +82,7 @@
                   <Image url="@../images/like_button.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="dislike_button" fitHeight="36.0" fitWidth="36.0" layoutX="907.0" layoutY="27.0" onMouseClicked="#dislike_receipe" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="dislike_button" fitHeight="36.0" fitWidth="36.0" layoutX="901.0" layoutY="27.0" onMouseClicked="#dislike_receipe" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/dislike_button.png" />
                </image>
@@ -107,7 +107,7 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <Label fx:id="numero_dislike_label" alignment="CENTER" layoutX="896.0" layoutY="68.0" prefHeight="13.0" prefWidth="58.0" text="50">
+            <Label fx:id="numero_dislike_label" alignment="CENTER" layoutX="890.0" layoutY="68.0" prefHeight="13.0" prefWidth="58.0" text="50">
                <font>
                   <Font size="10.0" />
                </font>
@@ -117,7 +117,7 @@
                   <Image url="@../images/check_button.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="check_dislike_button" fitHeight="21.0" fitWidth="17.0" layoutX="928.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="check_dislike_button" fitHeight="21.0" fitWidth="17.0" layoutX="925.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/check_button.png" />
                </image>

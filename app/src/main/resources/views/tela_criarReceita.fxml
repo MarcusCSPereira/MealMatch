@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaAdicionarReceitaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaAdicionarReceitaController">
    <children>
       <ImageView fitHeight="631.0" fitWidth="983.0" layoutX="10.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -52,7 +52,7 @@
       </Label>
       <ChoiceBox fx:id="unidadeDeMedida" layoutX="478.0" layoutY="265.0" prefHeight="25.0" prefWidth="125.0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" />
       <Button fx:id="botaoAdicionar" layoutX="381.0" layoutY="309.0" mnemonicParsing="false" onAction="#adiciona_ingrediente" prefHeight="31.0" prefWidth="149.0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" text="Adicionar" />
-      <ListView fx:id="listaView" layoutX="349.0" layoutY="390.0" prefHeight="299.0" prefWidth="214.0" style="-fx-background-radius: 28;" />
+      <ListView fx:id="listaView" layoutX="349.0" layoutY="390.0" prefHeight="299.0" prefWidth="214.0" />
       <Label layoutX="460.0" layoutY="226.0" text="Unidade de Medida:" textFill="WHITE">
          <font>
             <Font size="19.0" />
@@ -92,7 +92,7 @@
          </font>
       </Label>
       <TextField fx:id="campoModoPreparo" layoutX="676.0" layoutY="132.0" prefHeight="50.0" prefWidth="267.0" promptText="Primeiro passo" style="-fx-background-radius: 28;" />
-      <ListView fx:id="listaDePreparo" layoutX="676.0" layoutY="211.0" prefHeight="226.0" prefWidth="267.0" style="-fx-background-radius: 28;" />
+      <ListView fx:id="listaDePreparo" layoutX="676.0" layoutY="211.0" prefHeight="226.0" prefWidth="267.0" />
       <Button fx:id="adicionaPasso" layoutX="689.0" layoutY="445.0" mnemonicParsing="false" onAction="#adicionarPasso" style="-fx-background-radius: 28; -fx-background-color: ffffff;" text="Adiciona Passo" />
       <Button fx:id="removerPasso" layoutX="840.0" layoutY="446.0" mnemonicParsing="false" onAction="#removerPasso" style="-fx-background-radius: 28; -fx-background-color: ffffff;" text="Remover Passo" />
       <Label layoutX="730.0" layoutY="482.0" text="Tempo de Preparo:" textFill="WHITE">

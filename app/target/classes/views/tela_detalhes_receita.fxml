@@ -93,7 +93,7 @@
       </RadioButton>
       <RadioButton fx:id="medio_toggle" focusTraversable="false" layoutX="490.0" layoutY="159.0" mnemonicParsing="false" text="Médio" textFill="WHITE" toggleGroup="$dificuldade_group" />
       <RadioButton fx:id="dificil_toggle" focusTraversable="false" layoutX="490.0" layoutY="190.0" mnemonicParsing="false" text="Difícil" textFill="WHITE" toggleGroup="$dificuldade_group" />
-      <ListView fx:id="list_view_ingredientes" layoutX="32.0" layoutY="311.0" prefHeight="379.0" prefWidth="404.0" style="-fx-background-radius: 28;" />
+      <ListView fx:id="list_view_ingredientes" layoutX="32.0" layoutY="311.0" prefHeight="379.0" prefWidth="404.0" />
       <Label layoutX="32.0" layoutY="277.0" prefHeight="30.0" prefWidth="135.0" text="Ingredientes:" textFill="WHITE">
          <font>
             <Font size="20.0" />
@@ -104,7 +104,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <TextArea fx:id="text_area_modo_preparo" layoutX="560.0" layoutY="311.0" prefHeight="379.0" prefWidth="404.0" style="-fx-background-radius: 28;" />
+      <TextArea fx:id="text_area_modo_preparo" layoutX="560.0" layoutY="311.0" prefHeight="379.0" prefWidth="404.0" wrapText="true" />
       <Rectangle arcHeight="50.0" arcWidth="50.0" fill="DODGERBLUE" height="394.0" layoutX="22.0" layoutY="304.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="966.0" />
       <Rectangle arcHeight="50.0" arcWidth="50.0" fill="DODGERBLUE" height="167.0" layoutX="251.0" layoutY="56.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="727.0" />
    </children>

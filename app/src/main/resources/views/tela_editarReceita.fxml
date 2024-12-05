@@ -102,13 +102,13 @@
       </RadioButton>
       <RadioButton fx:id="medio_toggle" focusTraversable="false" layoutX="490.0" layoutY="159.0" mnemonicParsing="false" onAction="#salvarDificuldade" text="Médio" textFill="WHITE" toggleGroup="$dificuldade_group" />
       <RadioButton fx:id="dificil_toggle" focusTraversable="false" layoutX="490.0" layoutY="190.0" mnemonicParsing="false" onAction="#salvarDificuldade" text="Difícil" textFill="WHITE" toggleGroup="$dificuldade_group" />
-      <ListView fx:id="list_view_ingredientes" layoutX="32.0" layoutY="285.0" prefHeight="262.0" prefWidth="404.0" style="-fx-background-radius: 28;" />
+      <ListView fx:id="list_view_ingredientes" layoutX="32.0" layoutY="285.0" prefHeight="262.0" prefWidth="404.0" />
       <Label layoutX="32.0" layoutY="251.0" text="Ingredientes:" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextArea fx:id="text_area_modo_preparo" layoutX="564.0" layoutY="285.0" prefHeight="262.0" prefWidth="404.0" />
+      <TextArea fx:id="text_area_modo_preparo" layoutX="564.0" layoutY="285.0" prefHeight="262.0" prefWidth="404.0" wrapText="true" />
       <Label alignment="CENTER" layoutX="560.0" layoutY="251.0" prefHeight="26.0" prefWidth="172.0" text="Modo de Preparo:" textFill="WHITE">
          <font>
             <Font size="20.0" />
@@ -139,10 +139,10 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <ComboBox fx:id="horas_box" layoutX="548.0" layoutY="642.0" prefHeight="26.0" prefWidth="62.0" promptText="0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" visibleRowCount="3" />
-      <ComboBox fx:id="minutos_box" layoutX="625.0" layoutY="642.0" prefHeight="26.0" prefWidth="62.0" promptText="0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" visibleRowCount="3" />
-      <ComboBox fx:id="segundos_box" layoutX="703.0" layoutY="642.0" prefHeight="26.0" prefWidth="62.0" promptText="0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" visibleRowCount="3" />
-      <Label layoutX="563.0" layoutY="622.0" text="Horas" textFill="WHITE" />
+      <ComboBox fx:id="horas_box" layoutX="543.0" layoutY="642.0" prefHeight="26.0" prefWidth="67.0" promptText="0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" visibleRowCount="3" />
+      <ComboBox fx:id="minutos_box" layoutX="623.0" layoutY="642.0" prefHeight="26.0" prefWidth="67.0" promptText="0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" visibleRowCount="3" />
+      <ComboBox fx:id="segundos_box" layoutX="703.0" layoutY="642.0" prefHeight="26.0" prefWidth="67.0" promptText="0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" visibleRowCount="3" />
+      <Label layoutX="560.0" layoutY="622.0" text="Horas" textFill="WHITE" />
       <Label layoutX="634.0" layoutY="622.0" text="Minutos" textFill="WHITE" />
       <Label layoutX="706.0" layoutY="622.0" text="Segundos" textFill="WHITE" />
       <ImageView fx:id="salvar_receita_image" fitHeight="84.0" fitWidth="86.0" layoutX="841.0" layoutY="580.0" onMouseClicked="#salvar_receita" pickOnBounds="true" preserveRatio="true">

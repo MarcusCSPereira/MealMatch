@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 @SuppressWarnings("unused")
 public class Main extends Application {
@@ -37,6 +38,8 @@ public class Main extends Application {
 
         primaryStage.setTitle("MealMatch");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
 

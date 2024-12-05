@@ -111,8 +111,11 @@ public class ReceitaListCellController extends ListCell<Receita> {
     super.updateItem(receita, empty);
 
     if (empty || receita == null) {
-      setGraphic(null);
+      // Configura o estilo da célula quando ela estiver vazia
+      setStyle("-fx-background-color: #e15707; -fx-border-color: #e15707;");
+      setGraphic(null); // Remove qualquer gráfico
     } else {
+
       receita_image.setImage(receita.getImagem());
       receita_image.setPreserveRatio(true);
       nome_receita_label.setText(receita.getNome());
@@ -231,7 +234,6 @@ public class ReceitaListCellController extends ListCell<Receita> {
     stage.setScene(scene);
     stage.show();
   }
-
 
   @FXML
   void favorite_receipe(MouseEvent event) {

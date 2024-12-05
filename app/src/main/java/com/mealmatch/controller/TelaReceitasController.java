@@ -315,8 +315,8 @@ public class TelaReceitasController implements Initializable {
     Stage novoStage = new Stage();
 
     novoStage.setOnHidden(e -> {
-
       stage.show();
+      buscar();
     });
     novoStage.initOwner(stage);
     novoStage.initModality(Modality.WINDOW_MODAL);
@@ -334,7 +334,6 @@ public class TelaReceitasController implements Initializable {
     Stage novoStage = new Stage();
     novoStage.setOnHidden(e -> {
       stage.show();
-      buscar();
     });
     novoStage.setScene(scene);
     novoStage.show();

@@ -24,19 +24,19 @@ public class UserDAO {
   // Método auxiliar para mapear um ResultSet para um objeto User
   private User mapResultSetToUser(ResultSet rs) throws SQLException {
     return new User(
-        rs.getInt("idusuario"),
-        rs.getString("nomecompleto"),
+        rs.getInt("id_usuario"),
+        rs.getString("nome_completo"),
         rs.getString("email"),
-        rs.getString("nomeusuario"),
+        rs.getString("nome_usuario"),
         rs.getString("senha"),
-        rs.getDate("datanascimento"),
+        rs.getDate("data_nascimento"),
         User.Sex.valueOf(rs.getString("sexo")),
-        rs.getBytes("fotoperfil") != null ? new Image(new ByteArrayInputStream(rs.getBytes("fotoperfil"))): null);
+        rs.getBytes("foto_perfil") != null ? new Image(new ByteArrayInputStream(rs.getBytes("foto_perfil"))): null);
   }
 
   // Método para inserir um novo usuário
   public void save(User user) throws SQLException {
-    String sql = "INSERT INTO usuario (nomecompleto, nomeusuario, email, senha, sexo, datanascimento) VALUES (?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO usuario (nome_completo, nome_usuario, email, senha, sexo, data_nascimento) VALUES (?, ?, ?, ?, ?, ?)";
     try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
       stmt.setString(1, user.getCompleteName());
       stmt.setString(2, user.getUsername());
@@ -58,7 +58,7 @@ public class UserDAO {
 
   // Método para buscar um usuário pelo ID
   public User findById(int id) throws SQLException {
-    String sql = "SELECT * FROM usuario WHERE idusuario = ?";
+    String sql = "SELECT * FROM usuario WHERE id_usuario = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setInt(1, id);
       try (ResultSet rs = stmt.executeQuery()) {
@@ -86,7 +86,7 @@ public class UserDAO {
 
   // Método para atualizar um usuário
   public void update(User user) throws SQLException {
-    String sql = "UPDATE usuario SET nomecompleto = ?, nomeusuario = ?, email = ?, senha = ?, sexo = ?, datanascimento = ? WHERE idusuario = ?";
+    String sql = "UPDATE usuario SET nome_completo = ?, nome_usuario = ?, email = ?, senha = ?, sexo = ?, data_nascimento = ? WHERE id_usuario = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setString(1, user.getCompleteName());
       stmt.setString(2, user.getUsername());
@@ -102,7 +102,7 @@ public class UserDAO {
 
   // Método para deletar um usuário pelo ID
   public void delete(int id) throws SQLException {
-    String sql = "DELETE FROM usuario WHERE idusuario = ?";
+    String sql = "DELETE FROM usuario WHERE id_usuario = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setInt(1, id);
       stmt.executeUpdate();
@@ -110,7 +110,7 @@ public class UserDAO {
   }
 
   public boolean validarLogin(String nomeUsuario, String senha) {
-    String sql = "SELECT senha FROM usuario WHERE nomeusuario = ?";
+    String sql = "SELECT senha FROM usuario WHERE nome_usuario = ?";
 
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       // Configura o parâmetro para o nome de usuário
@@ -138,7 +138,7 @@ public class UserDAO {
   }
 
   public String buscaEmail(String nomeUsuario) {
-    String sql = "SELECT email FROM usuario WHERE nomeusuario = ?";
+    String sql = "SELECT email FROM usuario WHERE nome_usuario = ?";
 
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       // Configura o parâmetro para o nome de usuário
@@ -204,12 +204,12 @@ public class UserDAO {
   }
 
   public Integer getUserIdByUsername(String username) {
-    String sql = "SELECT idusuario FROM usuario WHERE nomeusuario = ?";
+    String sql = "SELECT id_usuario FROM usuario WHERE nome_usuario = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setString(1, username);
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
-          return rs.getInt("idusuario");
+          return rs.getInt("id_usuario");
         }
       }
     } catch (SQLException e) {
@@ -219,20 +219,20 @@ public class UserDAO {
   }
 
   public User getUserById(Integer id) {
-    String sql = "SELECT * FROM usuario WHERE idusuario = ?";
+    String sql = "SELECT * FROM usuario WHERE id_usuario = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setInt(1, id);
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
           User user =  new User(
-              rs.getInt("idusuario"),
-              rs.getString("nomecompleto"),
+              rs.getInt("id_usuario"),
+              rs.getString("nome_completo"),
               rs.getString("email"),
-              rs.getString("nomeusuario"),
+              rs.getString("nome_usuario"),
               rs.getString("senha"),
-              rs.getDate("datanascimento"),
+              rs.getDate("data_nascimento"),
               User.Sex.valueOf(rs.getString("sexo")),
-              rs.getBytes("fotoperfil") != null ? new Image(new ByteArrayInputStream(rs.getBytes("fotoperfil")))
+              rs.getBytes("foto_perfil") != null ? new Image(new ByteArrayInputStream(rs.getBytes("foto_perfil")))
                   : null);
               user.setNumeroReceitasCriadas(getNumReceipesCreated(id));
           return user;
@@ -245,7 +245,7 @@ public class UserDAO {
   }
 
   public int getNumReceipesCreated(Integer userId) {
-    String sql = "SELECT COUNT(*) AS num_receitas FROM criarreceita WHERE criarreceita.idusuario = ?";
+    String sql = "SELECT COUNT(*) AS num_receitas FROM criar_receita WHERE criar_receita.id_usuario = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setInt(1, userId);
       try (ResultSet rs = stmt.executeQuery()) {
@@ -260,7 +260,7 @@ public class UserDAO {
   }
 
   public boolean updatePassword(Integer userId, String novaSenha) {
-    String sql = "UPDATE usuario SET senha = ? WHERE idUsuario = ?";
+    String sql = "UPDATE usuario SET senha = ? WHERE id_usuario = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setString(1, EncriptadorDeSenhas.hashPassword(novaSenha)); // Criptografa a senha
       stmt.setInt(2, userId);
@@ -272,7 +272,7 @@ public class UserDAO {
   }
 
   public void updateProfileImage(Integer userId, byte[] imageBytes) {
-    String sql = "UPDATE usuario SET fotoperfil = ? WHERE idusuario = ?";
+    String sql = "UPDATE usuario SET foto_perfil = ? WHERE id_usuario = ?";
     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
       stmt.setBytes(1, imageBytes);
       stmt.setInt(2, userId);
