@@ -423,4 +423,62 @@ public class ReceitaDAO {
     return nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
   }
 
+  public List<Receita> buscarReceitasFavoritasComFiltro(int idUsuario, String termoBusca, boolean buscarPorIngredientes)
+      throws SQLException {
+    String sql;
+    List<Receita> receitas = new ArrayList<>();
+
+    if (buscarPorIngredientes) {
+      // Busca por ingredientes favoritos
+      sql = "SELECT DISTINCT r.id_receita, r.nome_receita, r.modo_preparo, r.tempo_preparo, r.dificuldade, r.imagemreceita, r.numero_likes, r.numero_dislikes "
+          +
+          "FROM receita r " +
+          "JOIN favoritar_receita f ON r.id_receita = f.id_receita " +
+          "JOIN receita_ingrediente ri ON r.id_receita = ri.id_receita " +
+          "JOIN ingrediente i ON ri.id_ingrediente = i.id_ingrediente " +
+          "WHERE f.id_usuario = ? AND i.nome_ingrediente LIKE ? " +
+          "GROUP BY r.id_receita";
+    } else {
+      // Busca por nome de receita favorita
+      sql = "SELECT r.id_receita, r.nome_receita, r.modo_preparo, r.tempo_preparo, r.dificuldade, r.imagemreceita, r.numero_likes, r.numero_dislikes "
+          +
+          "FROM receita r " +
+          "JOIN favoritar_receita f ON r.id_receita = f.id_receita " +
+          "WHERE f.id_usuario = ? AND r.nome_receita LIKE ?";
+    }
+
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+      stmt.setInt(1, idUsuario);
+      stmt.setString(2, "%" + termoBusca.trim().toUpperCase() + "%");
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        while (rs.next()) {
+          Receita receita = new Receita(
+              rs.getInt("id_receita"),
+              formatName(rs.getString("nome_receita")),
+              rs.getString("modo_preparo"),
+              rs.getInt("tempo_preparo"),
+              rs.getInt("dificuldade"),
+              rs.getBytes("imagemreceita") != null ? new Image(new ByteArrayInputStream(rs.getBytes("imagemreceita")))
+                  : null,
+              rs.getInt("numero_likes"),
+              rs.getInt("numero_dislikes"));
+          receitas.add(receita);
+        }
+      }
+    }
+
+    // Associa informações adicionais às receitas
+    for (Receita receita : receitas) {
+      receita.setIngredientesMapping(findIngredientes(receita));
+      receita.gerarStringIngredientes();
+      receita.gerarTabela();
+      receita.gerarValorNutricional();
+      receita.setIdUsuarioDonoReceita(findUserIDOwnerReceipe(receita));
+      receita.setRestricoes(findRestricoes(receita));
+    }
+
+    return receitas;
+  }
+
 }

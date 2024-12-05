@@ -17,7 +17,6 @@ public class ConnectionFactory {
     String password = dotenv.get("DATABASE_PASSWORD");
 
     try {
-      System.out.println("Conectado com sucesso");
       return DriverManager.getConnection(url, user, password);
     } catch (SQLException e) {
       e.printStackTrace();

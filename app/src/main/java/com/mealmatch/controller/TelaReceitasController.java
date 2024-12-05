@@ -26,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -163,32 +164,40 @@ public class TelaReceitasController implements Initializable {
 
   @FXML
   void buscar() {
-    ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());
+    try {
+      ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());
 
-    List<Receita> receitasBuscadas = new ArrayList<>();
+      List<Receita> receitasBuscadas = new ArrayList<>();
 
-    // Realiza a busca
-    if (nomeReceita_toggle.isSelected()) {
-      receitasBuscadas = fetchReceitasByName(receitasBuscadas, receitaDAO);
-    } else if (ingrediente_toogle.isSelected()) {
-      receitasBuscadas = fetchReceitasByIngredients(receitasBuscadas, receitaDAO);
+      // Realiza a busca com base no tipo de filtro selecionado
+      if(check_favoritos_image.isVisible()) {
+        buscaFavoritas();
+        return;
+      }
+      else if (nomeReceita_toggle.isSelected()) {
+        receitasBuscadas = fetchReceitasByName(receitasBuscadas, receitaDAO);
+      } else if (ingrediente_toogle.isSelected()) {
+        receitasBuscadas = fetchReceitasByIngredients(receitasBuscadas, receitaDAO);
+      }
+
+      // Aplica filtros adicionais (dificuldade e restrições)
+      receitasBuscadas = getFilteredReceitas(receitasBuscadas);
+      receitasBuscadas = getRestrictionsReceitas(receitasBuscadas);
+
+      // Verifica se há resultados diferentes da busca anterior
+      if (receitasAnteriores.equals(receitasBuscadas)) {
+        System.out.println("Lista de receitas igual à anterior. Evitando atualização.");
+        return;
+      }
+
+      // Atualiza o histórico de receitas e o ListView
+      receitasAnteriores = new ArrayList<>(receitasBuscadas);
+      atualizarListaReceitas(receitasBuscadas);
+
+    } catch (Exception e) {
+      System.err.println("Erro ao buscar receitas: " + e.getMessage());
+      e.printStackTrace();
     }
-
-    receitasBuscadas = getFilteredReceitas(receitasBuscadas);
-
-    receitasBuscadas = getRestrictionsReceitas(receitasBuscadas);
-
-    // Verifica se as listas de resultados são iguais
-    if (receitasAnteriores.equals(receitasBuscadas)) {
-      System.out.println("Lista de receitas igual à anterior. Evitando atualização.");
-      return;
-    }
-
-    // Atualiza o histórico de receitas
-    receitasAnteriores = new ArrayList<>(receitasBuscadas);
-
-    // Atualiza a ListView com as novas receitas
-    atualizarListaReceitas(receitasBuscadas);
   }
 
   private List<Receita> getFilteredReceitas(List<Receita> receitasBuscadas) {
@@ -282,13 +291,46 @@ public class TelaReceitasController implements Initializable {
   }
 
   @FXML
-  void acessar_favoritas(MouseEvent event) throws IOException {
+  void acessar_favoritas(MouseEvent event) {
     if (check_favoritos_image.isVisible()) {
       check_favoritos_image.setVisible(false);
-      // Atualizar a lista de receitas, retirando o filtro de favoritas
+      buscar();
     } else {
-      // Atualizar a lista de receitas, aplicando o filtro de favoritas
       check_favoritos_image.setVisible(true);
+      buscaFavoritas();
+    }
+  }
+
+  private void buscaFavoritas() {
+    try {
+      ReceitaDAO receitaDAO = new ReceitaDAO(ConnectionFactory.getConnection());
+      int idUsuario = ControleDeSessao.getInstance().getUserId(); // Obtém o ID do usuário logado
+      String termoBusca = search_field.getText(); // Obtém o texto do campo de busca
+      boolean buscarPorIngredientes = ingrediente_toogle.isSelected(); // Verifica o tipo de busca
+
+      List<Receita> receitasFavoritas = receitaDAO.buscarReceitasFavoritasComFiltro(idUsuario, termoBusca,
+          buscarPorIngredientes);
+
+      if (receitasAnteriores.equals(receitasFavoritas)) {
+        System.out.println("Lista de receitas igual à anterior. Evitando atualização.");
+        return;
+      }
+
+      if (receitasFavoritas.isEmpty()) {
+        receitasObservable.clear(); // Limpa a lista caso não haja favoritos
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Nenhuma Receita Favorita Encontrada");
+        alert.setHeaderText("Nenhuma receita favorita foi encontrada");
+        alert.setContentText("Adicione receitas aos favoritos para visualizá-las aqui.");
+        alert.showAndWait();
+      } else {
+        // Atualiza o histórico de receitas e o ListView
+        receitasAnteriores = new ArrayList<>(receitasFavoritas);
+        atualizarListaReceitas(receitasFavoritas); // Atualiza o ListView com as receitas favoritas
+      }
+    } catch (SQLException e) {
+      System.err.println("Erro ao buscar receitas favoritas: " + e.getMessage());
+      e.printStackTrace();
     }
   }
 

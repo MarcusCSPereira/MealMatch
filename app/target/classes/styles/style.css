@@ -1,14 +1,20 @@
 .list-view {
+    background-color: #e15707; /* Cor de fundo laranja */
     -fx-background-color: #e15707; /* Cor de fundo laranja */
+    border-color: #e15707;
     -fx-border-color: #e15707; /* Cor da borda */
+    border-radius: 8px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
 }
 
 .list-cell {
     -fx-text-fill: #FFFFFF; /* Texto branco */
+    background-color: #FFFFFF;
     -fx-background-color: #FFFFFF; /* Cor do item */
     -fx-background-radius: 5px;
+    border-color: rgb(0, 0, 0);
     -fx-border-color: rgb(0, 0, 0);
+    border-radius: 5px;
     -fx-border-radius: 5px;
 } 

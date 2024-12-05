@@ -32,7 +32,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -183,7 +182,7 @@ public class TelaCadastroController implements Initializable {
   }
 
   @FXML
-  void cadastrar_usuario(ActionEvent event) {
+  void cadastrar_usuario(ActionEvent event) throws IOException {
     if (checkSexo() == null || !checkEmail(email_user) || !checkAge(date_picker)
         || !checkPassword(password, confirm_password)
         || verificaSenhas_label.isVisible() || !checkCamposVazios()
@@ -212,6 +211,7 @@ public class TelaCadastroController implements Initializable {
     alert.setTitle("Cadastro realizado");
     alert.setHeaderText("Usuário cadastrado com sucesso");
     alert.showAndWait();
+    voltar_para_login(event);
   }
 
   @FXML
@@ -220,11 +220,11 @@ public class TelaCadastroController implements Initializable {
   }
 
   @FXML
-  void voltar_para_login(MouseEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_login.fxml"));
-    Parent root = loader.load();
-    scene = new Scene(root);
-    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+  void voltar_para_login(ActionEvent event) throws IOException {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_login.fxml"));
+      Parent root = loader.load();
+      scene = new Scene(root);
+      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
     stage.show();
   }

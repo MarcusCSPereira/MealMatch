@@ -27,6 +27,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javafx.scene.input.MouseEvent;
 
@@ -297,6 +298,7 @@ public class ReceitaListCellController extends ListCell<Receita> {
     Stage novoStage = new Stage();
     novoStage.setOnHidden(e -> stage.show());
     novoStage.setScene(scene);
+    novoStage.initStyle(StageStyle.UNDECORATED);
     novoStage.show();
   }
 

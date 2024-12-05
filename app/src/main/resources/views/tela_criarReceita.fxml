@@ -11,6 +11,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaAdicionarReceitaController">
@@ -155,11 +156,6 @@
             <Font size="15.0" />
          </font>
       </RadioButton>
-      <ImageView fx:id="add_receita_image" fitHeight="50.0" fitWidth="50.0" layoutX="785.0" layoutY="623.0" onMouseClicked="#criar_receita" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/add_button.png" />
-         </image>
-      </ImageView>
       <Label layoutX="672.0" layoutY="580.0" text="Clique para adicionar a sua receita:" textFill="WHITE">
          <font>
             <Font size="19.0" />
@@ -171,5 +167,11 @@
       <ComboBox fx:id="horas_box" focusTraversable="false" layoutX="620.0" layoutY="526.0" prefHeight="26.0" prefWidth="66.0" promptText="0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" visibleRowCount="3" />
       <ComboBox fx:id="minutos_box" layoutX="730.0" layoutY="526.0" prefHeight="26.0" prefWidth="66.0" promptText="0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" visibleRowCount="3" />
       <ComboBox fx:id="segundos_box" layoutX="857.0" layoutY="526.0" prefHeight="26.0" prefWidth="66.0" promptText="0" style="-fx-background-radius: 28; -fx-background-color: ffffff;" visibleRowCount="3" />
+      <Circle fill="WHITE" layoutX="810.0" layoutY="648.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fx:id="add_receita_image" fitHeight="50.0" fitWidth="50.0" layoutX="785.0" layoutY="623.0" onMouseClicked="#criar_receita" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/add_button.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
