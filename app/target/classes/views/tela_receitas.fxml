@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaReceitasController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaReceitasController">
    <children>
       <ImageView fitHeight="50.0" fitWidth="39.0" layoutX="20.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -46,7 +46,7 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="nomeReceita_toggle" layoutX="872.0" layoutY="89.0" mnemonicParsing="false" text="Nome da receita" textFill="WHITE" toggleGroup="$busca_de_receitas" />
-      <ListView fx:id="receitas_listview" layoutX="375.0" layoutY="150.0" prefHeight="540.0" prefWidth="611.0" style="-fx-background-radius: 50; -fx-background-color: e15707;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <ListView fx:id="receitas_listview" layoutX="8.0" layoutY="150.0" prefHeight="540.0" prefWidth="983.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" />
       <ImageView fx:id="fav_button" fitHeight="40.0" fitWidth="40.0" layoutX="129.0" layoutY="95.0" onMouseClicked="#acessar_favoritas" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fav_button.png" />
@@ -71,5 +71,10 @@
       <RadioButton fx:id="difDificil" layoutX="920.0" layoutY="66.0" mnemonicParsing="false" text="Difícil" textFill="WHITE" toggleGroup="$toggleGroupDificuldade" />
       <Button fx:id="escolherRestricoesButton" layoutX="780.0" layoutY="113.0" mnemonicParsing="false" onAction="#telaEscolherRestricoes" prefHeight="25.0" prefWidth="145.0" style="-fx-background-color: ffffff; -fx-background-radius: 28;" text="Selecionar Restrições" textFill="#f28907" />
       <Label layoutX="720.0" layoutY="66.0" text="Dificuldade:" textFill="WHITE" />
+      <ImageView fx:id="check_favoritos_image" fitHeight="26.0" fitWidth="18.0" layoutX="158.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/check_button.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

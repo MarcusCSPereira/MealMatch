@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.mealmatch.enums.RestricaoEnum;
@@ -65,6 +64,9 @@ public class TelaReceitasController implements Initializable {
   private ImageView fav_button;
 
   @FXML
+  private ImageView check_favoritos_image;
+
+  @FXML
   private RadioButton ingrediente_toogle;
 
   @FXML
@@ -112,6 +114,8 @@ public class TelaReceitasController implements Initializable {
     limparListaReceitas();
     consumirEventoDeSelecaoDeReceita();
 
+    receitas_listview.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+
   }
 
   private void controlePromptTextoBusca() {
@@ -150,8 +154,11 @@ public class TelaReceitasController implements Initializable {
   }
 
   private void atualizarListaReceitas(List<Receita> receitasBuscadas) {
-    receitasObservable.clear(); // Limpa a lista antes de adicionar novos itens, afinal é uma nova busca
-    receitasObservable.addAll(receitasBuscadas); // Adiciona as receitas buscadas na lista
+    receitasObservable.clear(); // Limpa a lista antes de adicionar novos itens
+    if (receitasBuscadas != null && !receitasBuscadas.isEmpty()) {
+      receitasObservable.addAll(receitasBuscadas); // Adiciona apenas itens válidos
+    }
+    receitas_listview.setItems(receitasObservable); // Atualiza o ListView
   }
 
   @FXML
@@ -205,8 +212,9 @@ public class TelaReceitasController implements Initializable {
     return receitasBuscadas;
   }
 
-// Nao esta funcionando , acredito que por que ao fechar a tela nao fica salvo as escolhas do usuario
-private List<Receita> getRestrictionsReceitas(List<Receita> receitas) {
+  // Nao esta funcionando , acredito que por que ao fechar a tela nao fica salvo
+  // as escolhas do usuario
+  private List<Receita> getRestrictionsReceitas(List<Receita> receitas) {
     List<RestricaoEnum> restricoesSelecionadas = RestricoesSelecionadas.getInstance().getRestricoes();
 
     List<Receita> receitasFiltradas = receitas.stream()
@@ -216,11 +224,7 @@ private List<Receita> getRestrictionsReceitas(List<Receita> receitas) {
         .collect(Collectors.toList());
 
     return receitasFiltradas;
-}
-
-
- 
-
+  }
 
   private List<Receita> fetchReceitasByIngredients(List<Receita> receitasBuscadas, ReceitaDAO receitaDAO) {
 
@@ -279,7 +283,13 @@ private List<Receita> getRestrictionsReceitas(List<Receita> receitas) {
 
   @FXML
   void acessar_favoritas(MouseEvent event) throws IOException {
-    System.out.println("Mostra apenas as receitas favoritadas pelo usuario");
+    if (check_favoritos_image.isVisible()) {
+      check_favoritos_image.setVisible(false);
+      // Atualizar a lista de receitas, retirando o filtro de favoritas
+    } else {
+      // Atualizar a lista de receitas, aplicando o filtro de favoritas
+      check_favoritos_image.setVisible(true);
+    }
   }
 
   @FXML
@@ -295,25 +305,24 @@ private List<Receita> getRestrictionsReceitas(List<Receita> receitas) {
     novoStage.show();
   }
 
-      @FXML
-    void telaEscolherRestricoes(ActionEvent event) throws IOException {
+  @FXML
+  void telaEscolherRestricoes(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/tela_restricoes.fxml"));
     Parent root = loader.load();
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    //stage.hide();
+    // stage.hide();
     Stage novoStage = new Stage();
 
-
     novoStage.setOnHidden(e -> {
-  
+
       stage.show();
     });
     novoStage.initOwner(stage);
     novoStage.initModality(Modality.WINDOW_MODAL);
     novoStage.setScene(scene);
     novoStage.showAndWait();
-    }
+  }
 
   @FXML
   void adicionar_receita(MouseEvent event) throws IOException {

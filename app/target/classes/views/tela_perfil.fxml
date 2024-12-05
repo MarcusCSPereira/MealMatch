@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaPerfilController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaPerfilController">
    <children>
       <ImageView fitHeight="594.0" fitWidth="662.0" layoutX="197.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -69,7 +69,7 @@
          </font>
       </Label>
       <Button fx:id="alterar_senha_button" layoutX="500.0" layoutY="556.0" mnemonicParsing="false" onAction="#alterar_senha" style="-fx-background-color: ffffff; -fx-background-radius: 28;" text="Alterar Senha" textFill="#e15707" />
-      <TextField fx:id="senha_textfield" layoutX="354.0" layoutY="500.0" prefHeight="0.0" prefWidth="331.0" style="-fx-background-radius: 28;">
+      <TextField fx:id="senha_textfield" layoutX="356.0" layoutY="499.0" prefHeight="31.0" prefWidth="334.0" style="-fx-background-radius: 28;">
          <font>
             <Font size="14.0" />
          </font>
@@ -79,7 +79,7 @@
             <Font size="14.0" />
          </font>
       </PasswordField>
-      <ImageView fx:id="no_view_senha_image" fitHeight="31.0" fitWidth="31.0" layoutX="698.0" layoutY="499.0" onMouseClicked="#ocultar_senha" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="no_view_senha_image" fitHeight="31.0" fitWidth="31.0" layoutX="697.0" layoutY="498.0" onMouseClicked="#ocultar_senha" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/no_view_password_button.png" />
          </image>

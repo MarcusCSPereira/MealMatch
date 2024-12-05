@@ -1,1 +1,14 @@
-/* Estilos CSS Aqui */
+.list-view {
+    -fx-background-color: #FFA500; /* Cor de fundo laranja */
+    -fx-border-color: #FF4500; /* Cor da borda */
+    -fx-border-radius: 28px;
+    -fx-background-radius: 5px;
+}
+
+.list-cell {
+    -fx-text-fill: #FFFFFF; /* Texto branco */
+    -fx-background-color: #000; /* Cor do item */
+    -fx-background-radius: 28px;
+    -fx-border-color: #ffff;
+    -fx-border-radius: 28px;
+}
