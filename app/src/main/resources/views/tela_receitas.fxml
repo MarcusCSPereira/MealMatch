@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaReceitasController">
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaReceitasController">
    <children>
       <ImageView fitHeight="50.0" fitWidth="39.0" layoutX="20.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -46,7 +46,7 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton fx:id="nomeReceita_toggle" layoutX="872.0" layoutY="89.0" mnemonicParsing="false" text="Nome da receita" textFill="WHITE" toggleGroup="$busca_de_receitas" />
-      <ListView fx:id="receitas_listview" layoutX="8.0" layoutY="150.0" prefHeight="540.0" prefWidth="983.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" />
+      <ListView fx:id="receitas_listview" layoutX="8.0" layoutY="150.0" prefHeight="545.0" prefWidth="984.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" />
       <ImageView fx:id="fav_button" fitHeight="40.0" fitWidth="40.0" layoutX="129.0" layoutY="95.0" onMouseClicked="#acessar_favoritas" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fav_button.png" />

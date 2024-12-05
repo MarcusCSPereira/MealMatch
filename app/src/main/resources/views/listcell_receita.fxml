@@ -12,38 +12,38 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="962.0" style="-fx-background-color: e15707; -fx-background-radius: 28; -fx-border-color: e15707; -fx-border-radius: 28;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="962.0" style="-fx-background-color: ffffff; -fx-background-radius: 28;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="screen_pane" layoutY="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="962.0" style="-fx-background-color: d93f07; -fx-background-radius: 28; -fx-border-color: black; -fx-border-radius: 28;">
+      <Pane fx:id="screen_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="962.0" style="-fx-background-color: ffffff; -fx-background-radius: 28; -fx-border-radius: 28;">
          <children>
-            <Line endX="14.0" endY="14.0" startX="14.5" startY="138.5" stroke="WHITE" />
+            <Line endX="14.0" endY="14.0" startX="14.5" startY="138.5" />
             <ImageView fx:id="receita_image" fitHeight="131.0" fitWidth="131.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/frango.png" />
                </image>
             </ImageView>
-            <Line endX="145.0" endY="139.0" startX="147.0" startY="13.0" stroke="WHITE" />
-            <Label layoutX="155.0" layoutY="15.0" text="Nome da Receita:" textFill="WHITE">
+            <Line endX="145.0" endY="139.0" startX="147.0" startY="13.0" />
+            <Label layoutX="161.0" layoutY="15.0" text="Nome da Receita:">
                <font>
                   <Font name="Gabriola" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="155.0" layoutY="59.0" text="Tempo de preparo:" textFill="WHITE">
+            <Label layoutX="161.0" layoutY="59.0" text="Tempo de preparo:">
                <font>
                   <Font name="Gabriola" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="158.0" layoutY="104.0" text="Valor Nutricional:" textFill="WHITE">
+            <Label layoutX="164.0" layoutY="104.0" text="Valor Nutricional:">
                <font>
                   <Font name="Gabriola" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="611.0" layoutY="61.0" text="Dificuldade:" textFill="WHITE">
+            <Label layoutX="611.0" layoutY="61.0" text="Dificuldade:">
                <font>
                   <Font name="Gabriola" size="25.0" />
                </font>
             </Label>
-            <RadioButton fx:id="facil_dificuldade_toogle" layoutX="569.0" layoutY="99.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="42.0" text="Fácil" textFill="WHITE">
+            <RadioButton fx:id="facil_dificuldade_toogle" layoutX="569.0" layoutY="99.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="42.0" text="Fácil">
                <font>
                   <Font size="10.0" />
                </font>
@@ -51,32 +51,32 @@
                   <ToggleGroup fx:id="dificuldade_receita" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="medio_dificuldade_toggle" layoutX="633.0" layoutY="99.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Médio" textFill="WHITE" toggleGroup="$dificuldade_receita">
+            <RadioButton fx:id="medio_dificuldade_toggle" layoutX="633.0" layoutY="99.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Médio" toggleGroup="$dificuldade_receita">
                <font>
                   <Font size="10.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="dificil_dificuldade_toogle" layoutX="705.0" layoutY="99.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Difícil" textFill="WHITE" toggleGroup="$dificuldade_receita">
+            <RadioButton fx:id="dificil_dificuldade_toogle" layoutX="705.0" layoutY="99.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Difícil" toggleGroup="$dificuldade_receita">
                <font>
                   <Font size="10.0" />
                </font>
             </RadioButton>
-            <Label fx:id="nome_receita_label" layoutX="297.0" layoutY="15.0" text="Frango assado" textFill="WHITE">
+            <Label fx:id="nome_receita_label" layoutX="303.0" layoutY="15.0" text="Frango assado">
                <font>
                   <Font name="Gabriola" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="tempo_receita_label" layoutX="304.0" layoutY="59.0" prefHeight="31.0" prefWidth="265.0" text="1 hora | 30 minutos | 10 segundos" textFill="WHITE">
+            <Label fx:id="tempo_receita_label" layoutX="310.0" layoutY="59.0" prefHeight="31.0" prefWidth="265.0" text="1 hora | 30 minutos | 10 segundos">
                <font>
                   <Font name="Gabriola" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="valor_nutricional_label" layoutX="300.0" layoutY="104.0" text="1.000 kcal" textFill="WHITE">
+            <Label fx:id="valor_nutricional_label" layoutX="300.0" layoutY="104.0" text="1.000 kcal">
                <font>
                   <Font name="Gabriola" size="25.0" />
                </font>
             </Label>
-            <Line endX="160.5" endY="137.5" layoutX="617.0" layoutY="3.0" startX="158.5" startY="7.5" stroke="WHITE" />
+            <Line endX="160.5" endY="137.5" layoutX="617.0" layoutY="3.0" startX="158.5" startY="7.5" />
             <ImageView fx:id="like_button" fitHeight="36.0" fitWidth="36.0" layoutX="783.0" layoutY="27.0" onMouseClicked="#like_receipe" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/like_button.png" />
@@ -102,12 +102,12 @@
                   <Blend />
                </effect>
             </Button>
-            <Label fx:id="numero_likes_label" alignment="CENTER" layoutX="772.0" layoutY="68.0" prefHeight="13.0" prefWidth="58.0" text="100" textFill="WHITE">
+            <Label fx:id="numero_likes_label" alignment="CENTER" layoutX="772.0" layoutY="68.0" prefHeight="13.0" prefWidth="58.0" text="100">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <Label fx:id="numero_dislike_label" alignment="CENTER" layoutX="896.0" layoutY="68.0" prefHeight="13.0" prefWidth="58.0" text="50" textFill="WHITE">
+            <Label fx:id="numero_dislike_label" alignment="CENTER" layoutX="896.0" layoutY="68.0" prefHeight="13.0" prefWidth="58.0" text="50">
                <font>
                   <Font size="10.0" />
                </font>
@@ -127,11 +127,11 @@
                   <Image url="@../images/edit_button.png" />
                </image>
             </ImageView>
-            <Line endX="147.0" endY="12.292892456054688" startX="14.5" startY="13.5" stroke="WHITE" />
-            <Line endX="145.0" endY="139.0" startX="15.0" startY="139.0" stroke="WHITE" />
-            <Line endX="932.5" endY="11.0" layoutX="13.0" layoutY="-1.0" startX="932.5" startY="141.0" stroke="WHITE" />
-            <Line endX="401.0" endY="106.5" layoutX="544.0" layoutY="34.0" startX="234.0" startY="107.0" stroke="WHITE" />
-            <Line endX="72.0" endY="-12.207107543945312" layoutX="872.0" layoutY="22.0" startX="-97.20709228515625" startY="-12.207107543945312" stroke="WHITE" />
+            <Line endX="147.0" endY="12.292892456054688" startX="14.5" startY="13.5" />
+            <Line endX="145.0" endY="139.0" startX="15.0" startY="139.0" />
+            <Line endX="932.5" endY="11.0" layoutX="13.0" layoutY="-1.0" startX="932.5" startY="141.0" />
+            <Line endX="401.0" endY="106.5" layoutX="544.0" layoutY="34.0" startX="234.0" startY="107.0" />
+            <Line endX="72.0" endY="-12.207107543945312" layoutX="872.0" layoutY="22.0" startX="-97.20709228515625" startY="-12.207107543945312" />
          </children>
       </Pane>
    </children>
