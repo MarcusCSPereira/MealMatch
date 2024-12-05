@@ -57,7 +57,7 @@
             <Font name="Gabriola" size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="564.0" layoutY="185.0" prefHeight="44.0" prefWidth="392.0" promptText="Digite um e-mail válido" style="-fx-background-radius: 28;" AnchorPane.leftAnchor="564.0">
+      <TextField fx:id="username" layoutX="566.0" layoutY="257.0" prefHeight="44.0" prefWidth="392.0" promptText="Digite um nome de usuário" style="-fx-background-radius: 28;" AnchorPane.leftAnchor="566.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -106,7 +106,7 @@
          </font>
       </Button>
       <ProgressBar fx:id="register_progress" layoutX="575.0" layoutY="595.0" prefHeight="25.0" prefWidth="250.0" progress="0.0" style="-fx-accent: #4CAF50; -fx-background-radius: 28;" />
-      <TextField fx:id="email_user" layoutX="566.0" layoutY="257.0" prefHeight="44.0" prefWidth="392.0" promptText="Digite um nome de usuário" style="-fx-background-radius: 28;">
+      <TextField fx:id="email_user" layoutX="564.0" layoutY="186.0" prefHeight="44.0" prefWidth="392.0" promptText="Digite um e-mail válido" style="-fx-background-radius: 28;">
          <font>
             <Font size="20.0" />
          </font>
