@@ -2,21 +2,28 @@
 
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaRestricoesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaRestricoesController">
    <children>
-      <Label layoutX="87.0" layoutY="26.0" text="Selecione as restrições de sua receita">
+      <ImageView fitHeight="247.0" fitWidth="268.0" layoutX="116.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fundo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="53.0" text="Selecione as restrições de sua receita" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="Gabriola" size="36.0" />
          </font>
       </Label>
-      <CheckBox fx:id="glutenCheck" layoutX="98.0" layoutY="102.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Glúten" />
-      <CheckBox fx:id="lactoseCheck" layoutX="313.0" layoutY="102.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Lactose" />
-      <CheckBox fx:id="veganaCheck" layoutX="98.0" layoutY="150.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegana" />
-      <CheckBox fx:id="frutosDoMarCheck" layoutX="98.0" layoutY="210.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Frutos do Mar" />
-      <CheckBox fx:id="vegetarianaCheck" layoutX="313.0" layoutY="150.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegetariana" />
-      <CheckBox fx:id="acucarCheck" layoutX="313.0" layoutY="210.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Açúcar" />
+      <CheckBox fx:id="glutenCheck" layoutX="131.0" layoutY="77.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Glúten" textFill="WHITE" />
+      <CheckBox fx:id="lactoseCheck" layoutX="295.0" layoutY="77.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Lactose" textFill="WHITE" />
+      <CheckBox fx:id="veganaCheck" layoutX="129.0" layoutY="158.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegana" textFill="WHITE" />
+      <CheckBox fx:id="frutosDoMarCheck" layoutX="129.0" layoutY="237.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Frutos do Mar" textFill="WHITE" />
+      <CheckBox fx:id="vegetarianaCheck" layoutX="295.0" layoutY="158.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Vegetariana" textFill="WHITE" />
+      <CheckBox fx:id="acucarCheck" layoutX="297.0" layoutY="237.0" mnemonicParsing="false" onAction="#definirRestricoes" text="Açúcar" textFill="WHITE" />
    </children>
 </AnchorPane>

@@ -4,91 +4,135 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="screen_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="945.0" style="-fx-border-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="976.0" style="-fx-background-color: e15707; -fx-background-radius: 28;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="receita_image" fitHeight="140.0" fitWidth="140.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/frango.png" />
-         </image>
-      </ImageView>
-      <Line endX="145.0" endY="149.0" startX="145.0" startY="1.0" />
-      <Label layoutX="153.0" layoutY="10.0" text="Nome da Receita:" />
-      <Label layoutX="153.0" layoutY="37.0" text="Tempo de preparo:" />
-      <Label layoutX="153.0" layoutY="62.0" text="Valor Nutricional:" />
-      <Label layoutX="153.0" layoutY="87.0" text="Dificuldade:" />
-      <RadioButton fx:id="facil_dificuldade_toogle" layoutX="149.0" layoutY="115.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="42.0" text="Fácil">
-         <font>
-            <Font size="10.0" />
-         </font>
-         <toggleGroup>
-            <ToggleGroup fx:id="dificuldade_receita" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="medio_dificuldade_toggle" layoutX="196.0" layoutY="115.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Médio" toggleGroup="$dificuldade_receita">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="dificil_dificuldade_toogle" layoutX="247.0" layoutY="115.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Difícil" toggleGroup="$dificuldade_receita">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </RadioButton>
-      <Label fx:id="nome_receita_label" layoutX="260.0" layoutY="10.0" text="Frango assado" />
-      <Label fx:id="tempo_receita_label" layoutX="260.0" layoutY="37.0" text="1 hora | 30 minutos | 10 segundos" />
-      <Label fx:id="valor_nutricional_label" layoutX="260.0" layoutY="62.0" text="1.000 kcal" />
-      <Line endX="145.0" endY="149.0" layoutX="584.0" startX="145.0" startY="1.0" />
-      <ImageView fx:id="like_button" fitHeight="36.0" fitWidth="36.0" layoutX="740.0" layoutY="8.0" onMouseClicked="#like_receipe" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/like_button.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="dislike_button" fitHeight="36.0" fitWidth="36.0" layoutX="890.0" layoutY="8.0" onMouseClicked="#dislike_receipe" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/dislike_button.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="unfavorite_button" fitHeight="70.0" fitWidth="70.0" layoutX="801.0" layoutY="-8.0" onMouseClicked="#unfavorite_receipe" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/favorite_button.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="favorite_button" fitHeight="70.0" fitWidth="70.0" layoutX="801.0" layoutY="-8.0" onMouseClicked="#favorite_receipe" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/unfavorite_button.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="detail_button" layoutX="803.0" layoutY="105.0" mnemonicParsing="false" onAction="#receipe_details" text="Ver Mais" />
-      <Label fx:id="numero_likes_label" alignment="CENTER" layoutX="730.0" layoutY="43.0" prefHeight="13.0" prefWidth="58.0" text="100">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
-      <Label fx:id="numero_dislike_label" alignment="CENTER" layoutX="880.0" layoutY="43.0" prefHeight="13.0" prefWidth="58.0" text="50">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="check_like_button" fitHeight="21.0" fitWidth="17.0" layoutX="767.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/check_button.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="check_dislike_button" fitHeight="21.0" fitWidth="17.0" layoutX="916.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/check_button.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="edit_receipe_image" fitHeight="150.0" fitWidth="36.0" layoutX="817.0" layoutY="57.0" onMouseClicked="#editar_receita" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/edit_button.png" />
-         </image>
-      </ImageView>
+      <Pane fx:id="screen_pane" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="962.0" style="-fx-background-color: d93f07; -fx-background-radius: 28; -fx-border-color: black; -fx-border-radius: 28;">
+         <children>
+            <Line endX="14.0" endY="14.0" startX="14.5" startY="138.5" stroke="WHITE" />
+            <ImageView fx:id="receita_image" fitHeight="126.0" fitWidth="133.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/frango.png" />
+               </image>
+            </ImageView>
+            <Line endX="145.0" endY="139.0" startX="147.0" startY="13.0" stroke="WHITE" />
+            <Label layoutX="155.0" layoutY="15.0" text="Nome da Receita:" textFill="WHITE">
+               <font>
+                  <Font name="Gabriola" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="155.0" layoutY="59.0" text="Tempo de preparo:" textFill="WHITE">
+               <font>
+                  <Font name="Gabriola" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="158.0" layoutY="104.0" text="Valor Nutricional:" textFill="WHITE">
+               <font>
+                  <Font name="Gabriola" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="611.0" layoutY="61.0" text="Dificuldade:" textFill="WHITE">
+               <font>
+                  <Font name="Gabriola" size="25.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="facil_dificuldade_toogle" layoutX="569.0" layoutY="99.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="42.0" text="Fácil" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="dificuldade_receita" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="medio_dificuldade_toggle" layoutX="633.0" layoutY="99.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Médio" textFill="WHITE" toggleGroup="$dificuldade_receita">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="dificil_dificuldade_toogle" layoutX="705.0" layoutY="99.0" maxWidth="104.0" mnemonicParsing="false" prefHeight="13.0" prefWidth="50.0" text="Difícil" textFill="WHITE" toggleGroup="$dificuldade_receita">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </RadioButton>
+            <Label fx:id="nome_receita_label" layoutX="297.0" layoutY="15.0" text="Frango assado" textFill="WHITE">
+               <font>
+                  <Font name="Gabriola" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="tempo_receita_label" layoutX="304.0" layoutY="59.0" prefHeight="31.0" prefWidth="265.0" text="1 hora | 30 minutos | 10 segundos" textFill="WHITE">
+               <font>
+                  <Font name="Gabriola" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="valor_nutricional_label" layoutX="300.0" layoutY="104.0" text="1.000 kcal" textFill="WHITE">
+               <font>
+                  <Font name="Gabriola" size="25.0" />
+               </font>
+            </Label>
+            <Line endX="160.5" endY="137.5" layoutX="617.0" layoutY="3.0" startX="158.5" startY="7.5" stroke="WHITE" />
+            <ImageView fx:id="like_button" fitHeight="36.0" fitWidth="36.0" layoutX="783.0" layoutY="27.0" onMouseClicked="#like_receipe" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/like_button.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="dislike_button" fitHeight="36.0" fitWidth="36.0" layoutX="907.0" layoutY="27.0" onMouseClicked="#dislike_receipe" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/dislike_button.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="unfavorite_button" fitHeight="70.0" fitWidth="70.0" layoutX="827.0" layoutY="11.0" onMouseClicked="#unfavorite_receipe" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/favorite_button.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="favorite_button" fitHeight="70.0" fitWidth="70.0" layoutX="827.0" layoutY="11.0" onMouseClicked="#favorite_receipe" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/unfavorite_button.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="detail_button" layoutX="830.0" layoutY="106.0" mnemonicParsing="false" onAction="#receipe_details" prefHeight="23.0" prefWidth="64.0" style="-fx-background-color: f2f2f2; -fx-border-color: black; -fx-border-width: 1;" text="Ver Mais">
+               <effect>
+                  <Blend />
+               </effect>
+            </Button>
+            <Label fx:id="numero_likes_label" alignment="CENTER" layoutX="772.0" layoutY="68.0" prefHeight="13.0" prefWidth="58.0" text="100" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="numero_dislike_label" alignment="CENTER" layoutX="896.0" layoutY="68.0" prefHeight="13.0" prefWidth="58.0" text="50" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="check_like_button" fitHeight="21.0" fitWidth="17.0" layoutX="811.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/check_button.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="check_dislike_button" fitHeight="21.0" fitWidth="17.0" layoutX="899.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/check_button.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="edit_receipe_image" fitHeight="150.0" fitWidth="36.0" layoutX="844.0" layoutY="65.0" onMouseClicked="#editar_receita" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/edit_button.png" />
+               </image>
+            </ImageView>
+            <Line endX="147.70709228515625" endY="12.292892456054688" startX="14.5" startY="13.5" stroke="WHITE" />
+            <Line endX="145.0" endY="139.0" startX="15.0" startY="139.0" stroke="WHITE" />
+            <Line endX="932.5" endY="11.0" layoutX="13.0" layoutY="-1.0" startX="932.5" startY="141.0" stroke="WHITE" />
+            <Line endX="401.0" endY="106.5" layoutX="544.0" layoutY="34.0" startX="234.0" startY="107.0" stroke="WHITE" />
+            <Line endX="72.0" endY="-12.207107543945312" layoutX="872.0" layoutY="22.0" startX="-97.20709228515625" startY="-12.207107543945312" stroke="WHITE" />
+         </children>
+      </Pane>
    </children>
-</Pane>
+</AnchorPane>

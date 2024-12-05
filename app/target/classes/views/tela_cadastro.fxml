@@ -14,115 +14,133 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaCadastroController">
-  <children>
-    <Label alignment="CENTER" layoutY="14.0" text="Realize seu Cadastro:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-      <font>
-        <Font size="42.0" />
-      </font>
-    </Label>
-    <Label layoutX="200.0" layoutY="257.0" text="Nome de Usuário:">
-      <font>
-        <Font size="27.0" />
-      </font>
-    </Label>
-    <Label layoutX="200.0" layoutY="117.0" text="Nome completo:">
-      <font>
-        <Font size="27.0" />
-      </font>
-    </Label>
-    <Label layoutX="232.0" layoutY="471.0" text="Data de Nascimento:">
-      <font>
-        <Font size="27.0" />
-      </font>
-    </Label>
-    <Label layoutX="200.0" layoutY="320.0" text="Senha:">
-      <font>
-        <Font size="27.0" />
-      </font>
-    </Label>
-    <Label layoutX="200.0" layoutY="190.0" text="E-mail:">
-      <font>
-        <Font size="27.0" />
-      </font>
-    </Label>
-    <Label layoutX="200.0" layoutY="520.0" text="Sexo:">
-      <font>
-        <Font size="27.0" />
-      </font>
-    </Label>
-    <TextField fx:id="username" layoutX="434.0" layoutY="257.0" prefHeight="39.0" prefWidth="380.0" promptText="Digite um nome de usuário" AnchorPane.leftAnchor="434.0">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </TextField>
-    <TextField fx:id="complete_username" layoutX="434.0" layoutY="117.0" prefHeight="39.0" prefWidth="380.0" promptText="Digite seu nome completo">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </TextField>
-    <PasswordField fx:id="password" layoutX="435.0" layoutY="320.0" prefHeight="39.0" prefWidth="380.0" promptText="Digite sua senha" AnchorPane.leftAnchor="435.0">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </PasswordField>
-    <PasswordField fx:id="confirm_password" layoutX="434.0" layoutY="370.0" prefHeight="39.0" prefWidth="380.0" promptText="Digite novamente sua senha">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </PasswordField>
-    <ImageView fitHeight="150.0" fitWidth="60.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="640.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
-      <image>
-        <Image url="@../images/close_button.png" />
-      </image>
-    </ImageView>
-    <ImageView fitHeight="150.0" fitWidth="60.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#voltar_para_login" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
-      <image>
-        <Image url="@../images/back_button.png" />
-      </image>
-    </ImageView>
-    <RadioButton fx:id="male_user" layoutX="435.0" layoutY="523.0" mnemonicParsing="false" text="Masculino">
-      <font>
-        <Font size="20.0" />
-      </font>
-      <toggleGroup>
-        <ToggleGroup fx:id="sexo" />
-      </toggleGroup>
-    </RadioButton>
-    <RadioButton fx:id="female_user" layoutX="700.0" layoutY="523.0" mnemonicParsing="false" text="Feminino" toggleGroup="$sexo">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </RadioButton>
-    <Button layoutX="469.0" layoutY="610.0" mnemonicParsing="false" onAction="#cadastrar_usuario" text="Cadastrar" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </Button>
-    <ProgressBar fx:id="register_progress" layoutX="375.0" layoutY="570.0" prefHeight="25.0" prefWidth="250.0" progress="0.0" style="-fx-accent: #4CAF50;" />
-    <TextField fx:id="email_user" layoutX="434.0" layoutY="190.0" prefHeight="39.0" prefWidth="380.0" promptText="Digite um nome de usuário">
-      <font>
-        <Font size="20.0" />
-      </font>
-    </TextField>
-    <Label fx:id="verificaSenhas_label" alignment="CENTER" layoutX="435.0" layoutY="409.0" prefHeight="17.0" prefWidth="380.0" text="Senhas não coincidem!" textFill="RED" visible="false">
-      <font>
-        <Font size="18.0" />
-      </font>
-    </Label>
-    <DatePicker fx:id="date_picker" layoutX="544.0" layoutY="471.0" prefHeight="33.0" prefWidth="224.0" />
-    <Text layoutX="341.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Li e concordo com os">
-      <font>
-        <Font size="18.0" />
-      </font>
-    </Text>
-    <Hyperlink fx:id="linkTermos" layoutX="505.0" layoutY="422.0" onAction="#linkTermos" text="Termos de Uso do Serviço" underline="true">
-      <font>
-        <Font size="18.0" />
-      </font>
-    </Hyperlink>
-    <CheckBox fx:id="checkTermos" layoutX="317.0" layoutY="430.0" mnemonicParsing="false" />
-  </children>
+<AnchorPane fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: d93f07;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mealmatch.controller.TelaCadastroController">
+   <children>
+      <ImageView fitHeight="681.0" fitWidth="585.0" layoutX="381.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fundo_cadastro.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="linkTermos" layoutX="397.0" layoutY="560.0" onAction="#linkTermos" text="Termos de Uso do Serviço">
+         <graphic>
+            <CheckBox fx:id="checkTermos" mnemonicParsing="false" text="Li e concordo com os " textFill="WHITE" />
+         </graphic>
+      </Hyperlink>
+      <Label layoutX="402.0" layoutY="262.0" text="Nome de Usuário:" textFill="WHITE">
+         <font>
+            <Font name="Gabriola" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="400.0" layoutY="122.0" text="Nome completo:" textFill="WHITE">
+         <font>
+            <Font name="Gabriola" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="398.0" layoutY="455.0" text="Data de Nascimento:" textFill="WHITE">
+         <font>
+            <Font name="Gabriola" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="402.0" layoutY="331.0" text="Senha:" textFill="WHITE">
+         <font>
+            <Font name="Gabriola" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="400.0" layoutY="188.0" text="E-mail:" textFill="WHITE">
+         <font>
+            <Font name="Gabriola" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="400.0" layoutY="508.0" text="Sexo:" textFill="WHITE">
+         <font>
+            <Font name="Gabriola" size="32.0" />
+         </font>
+      </Label>
+      <TextField fx:id="username" layoutX="566.0" layoutY="257.0" prefHeight="44.0" prefWidth="392.0" promptText="Digite um nome de usuário" style="-fx-background-radius: 28;" AnchorPane.leftAnchor="566.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="complete_username" layoutX="564.0" layoutY="119.0" prefHeight="44.0" prefWidth="392.0" promptText="Digite seu nome completo" style="-fx-background-radius: 28;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password" layoutX="566.0" layoutY="328.0" prefHeight="44.0" prefWidth="392.0" promptText="Digite sua senha" style="-fx-background-radius: 28;" AnchorPane.leftAnchor="566.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="confirm_password" layoutX="566.0" layoutY="379.0" prefHeight="44.0" prefWidth="392.0" promptText="Digite novamente sua senha" style="-fx-background-radius: 28;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </PasswordField>
+      <ImageView fitHeight="34.0" fitWidth="35.0" onMouseClicked="#fechar_programa" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="659.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
+         <image>
+            <Image url="@../images/close_button.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="44.0" fitWidth="43.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#voltar_para_login" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+         <image>
+            <Image url="@../images/back_button.png" />
+         </image>
+      </ImageView>
+      <RadioButton fx:id="male_user" layoutX="547.0" layoutY="514.0" mnemonicParsing="false" text="Masculino" textFill="WHITE">
+         <toggleGroup>
+            <ToggleGroup fx:id="sexo" />
+         </toggleGroup>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="female_user" layoutX="772.0" layoutY="514.0" mnemonicParsing="false" text="Feminino" textFill="WHITE" toggleGroup="$sexo">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </RadioButton>
+      <Button layoutX="550.0" layoutY="635.0" mnemonicParsing="false" onAction="#cadastrar_usuario" style="-fx-background-radius: 28; -fx-background-color: ffffff;" text="Cadastrar" textFill="#f28907" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="150.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ProgressBar fx:id="register_progress" layoutX="575.0" layoutY="595.0" prefHeight="25.0" prefWidth="250.0" progress="0.0" style="-fx-accent: #4CAF50; -fx-background-radius: 28;" />
+      <TextField fx:id="email_user" layoutX="564.0" layoutY="186.0" prefHeight="44.0" prefWidth="392.0" promptText="Digite um e-mail válido" style="-fx-background-radius: 28;">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label fx:id="verificaSenhas_label" alignment="CENTER" layoutX="484.0" layoutY="423.0" prefHeight="17.0" prefWidth="380.0" text="As senhas não coincidem!" textFill="WHITE" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="date_picker" layoutX="625.0" layoutY="456.0" prefHeight="33.0" prefWidth="224.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="161.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/enfeite.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="328.0" fitWidth="348.0" layoutX="24.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/circle.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="376.0" fitWidth="374.0" layoutX="7.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/icon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="25.0" layoutY="166.0" text="MealMatch" textFill="WHITE">
+         <font>
+            <Font name="Gabriola" size="96.0" />
+         </font>
+      </Label>
+      <Label layoutX="397.0" layoutY="16.0" text=" Realize seu cadastro:" textFill="WHITE">
+         <font>
+            <Font name="Gabriola" size="85.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
