@@ -32,11 +32,11 @@ O software MealMatch é uma plataforma inovadora que busca facilitar a vida de p
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ## 👨🏽‍💻 Autores do projeto:
-- [Marcus César Santos](https://github.com/MarcusCSPereira)
-- [Hércules Sampaio Oliveira](https://github.com/HerculesDraycon)
-- [Franco Ribeiro Borba](https://github.com/FrancoBorba)
-- [Lucca Nolasco Trancoso](https://github.com/LuccaNolasco)
-- [Kauan Rubem Matos](https://github.com/kauanrubem)
+![Marcus César Santos](https://github.com/MarcusCSPereira.png?size=50)[Marcus César Santos](https://github.com/MarcusCSPereira)<br>
+![Hércules Sampaio Oliveira](https://github.com/HerculesDraycon.png?size=50)[Hércules Sampaio Oliveira](https://github.com/HerculesDraycon)<br>
+![Franco Ribeiro Borba](https://github.com/FrancoBorba.png?size=50)[Franco Ribeiro Borba](https://github.com/FrancoBorba)<br>
+![Lucca Nolasco Trancoso](https://github.com/LuccaNolasco.png?size=50)[Lucca Nolasco Trancoso](https://github.com/LuccaNolasco)<br>
+![Kauan Rubem Matos](https://github.com/kauanrubem.png?size=50)[Kauan Rubem Matos](https://github.com/kauanrubem)
 
 ## 📝 Licença
 
