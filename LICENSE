@@ -1,21 +1,27 @@
-MIT License
+## LICENÇA DE USO DE SOFTWARE
 
-Copyright (c) 2024 Marcus César Santos Pereira
+Este é um contrato legal entre a MealMatch ("Licenciante") e o usuário final ("Licenciado"). Ao usar este software, você concorda com os termos e condições descritos a seguir.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+#### 1. CONCESSÃO DE LICENÇA<br>
+O Licenciante concede ao Licenciado uma licença limitada, não exclusiva e intransferível para usar o software MealMatch, exclusivamente para fins pessoais ou comerciais, conforme estabelecido nesta licença.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+#### 2. RESTRIÇÕES<br>
+O Licenciado não pode:
+   - Modificar, descompilar, desmontar ou realizar engenharia reversa do software.
+   - Distribuir, sublicenciar, alugar ou vender o software a terceiros sem autorização prévia do Licenciante.
+   - Usar o software para qualquer fim ilegal ou não autorizado.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+#### 3. DIREITOS AUTORAIS<br>
+O software é protegido por direitos autorais e outras leis de propriedade intelectual. Todos os direitos sobre o software permanecem com o Licenciante.
+
+#### 4. ISENÇÃO DE GARANTIAS<br>
+O software é fornecido "como está", sem garantias de qualquer tipo. O Licenciante não será responsável por quaisquer danos resultantes do uso ou incapacidade de usar o software.
+
+#### 5. RESCISÃO<br>
+A licença será rescindida automaticamente se o Licenciado violar qualquer termo desta licença.
+
+#### 6. LEI APLICÁVEL<br>
+Esta licença será regida pela Lei 9.609/98 que dispõe sobre a proteção da propriedade intelectual de programa de computador, sua comercialização no País, e dá outras providências, sem consideração aos seus conflitos de princípios legais.
+
+Equipe de Desenvolvimento MealMatch - 2024.<br>
+Todos os direitos reservados.

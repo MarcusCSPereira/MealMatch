@@ -2,17 +2,16 @@
 
 ## 🔎 Sobre o Projeto
 
-Este projeto consiste em uma [breve descrição do projeto], desenvolvido utilizando [tecnologias principais]. O principal objetivo da aplicação é [resumo do objetivo do projeto]. Com isso, é possível realizar operações como [resumo das funcionalidades principais].
+Este projeto consiste em uma aplicação nativa desktop de criação, alteração, busca, publicação e compartilhamento de receitas culinárias desenvolvido utilizando principalmente Maven, Java 8, JavaFX e PostgreSQL. O projeto foi desenvolvido em uma proposta curricular no curso de Ciência da Computação - Bach. da Universidade Estadual do Sudoeste da Bahia (UESB) nas matérias de Banco de Dados I e Engenharia de Software que propuseram aos alunos a atividade de desenvolver uma aplicação que correlacionasse os assuntos abordados nas duas matérias ao longo do semestre.<br>
+O software MealMatch é uma plataforma inovadora que busca facilitar a vida de pessoas que desejam otimizar seu tempo na cozinha, preparando refeições com base nos ingredientes que já possuem em casa. Muitas vezes, a falta de ideias ou a combinação errada de alimentos pode gerar desperdício e frustração no planejamento das refeições. O MealMatch resolve esse problema ao oferecer receitas personalizadas de acordo com os ingredientes disponíveis, permitindo que os usuários aproveitem ao máximo o que têm, sem a necessidade de compras adicionais. Além disso, o site proporciona uma experiência culinária eficiente e criativa, garantindo praticidade para quem busca refeições saborosas e rápidas de preparar.
 
-A aplicação foi projetada para ser simples e intuitiva, facilitando a integração com outras aplicações ou o uso em sistemas que necessitem de [descrição do propósito da aplicação]. Este projeto foi desenvolvido com o intuito de [objetivo pessoal/profissional do projeto].
 
 ##
 
 ## 🖼️ Imagens:
+<mark> Caputuras com demonstração parcial do software em funcionamento: <mark/><br>
 
-### Exemplo de [descrição da imagem] :
-
-![PREVIEW1][preview-preview1]
+![Demo1](https://github.com/MarcusCSPereira/MealMatch/tree/main/app/src/main/resources/images/demo1.png)
 
 ##
 
@@ -24,7 +23,7 @@ A aplicação foi projetada para ser simples e intuitiva, facilitando a integra�
 
 ##
 
-## 👨🏽‍💻 Tecnologias Utilizadas:
+## 🧰 Tecnologias Utilizadas:
 
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
@@ -32,83 +31,15 @@ A aplicação foi projetada para ser simples e intuitiva, facilitando a integra�
 ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
-##
-
-# ⭐️ Começando:
-
-### Para obter uma cópia local e executar o projeto, siga as etapas a seguir:
-
-##
-
-### 💻 Pré-requisitos:
-
-* Git
-
-```sh
-sudo apt-get install git
-```
-
-##
-
-#### Outros comandos Aqui
-
-##
-
-### 🚀 Instalação:
- 
-1. Clone o repositório
-```sh
-git clone [url-do-repositorio]
-```
-##
-
-2. Navegue até o diretório do projeto:
-```sh
-cd [diretorio-do-repositorio]
-```
-##
-
-
-4. Instale as dependências necessárias (especificar dependências):
-```sh
-instalar dependências
-```
-##
-
-<!-- USAGE EXAMPLES -->
-### 🖥️ Utilizando o projeto:
-
-1. Navegue até o diretório do projeto:
-```sh
-cd [diretorio-do-projeto]
-```
-
-##
-
-#### O passo a passo para execução do mesmo.
-
-##
-
-<!-- CONTACT -->
-## 📫 Contato
-
-<div align="left">
-  <a href="https://www.linkedin.com/in/marcus-césar-santos-pereira-70991a28a/" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="47" height="35" alt="linkedin logo"  />
-  </a>
-  <a href="contato.marcuscspereira@gmail.com" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg" width="47" height="35" alt="gmail logo"  />
-  </a>
-  <a href="https://www.instagram.com/_marcus.cesar/" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="47" height="35" alt="instagram logo"  />
-  </a>
-</div>
-
-<!-- Adicionar LINKS & IMAGES -->
-[preview-preview1]: preview/preview_1.png
+## 👨🏽‍💻 Autores do projeto:
+![Marcus César Santos](https://github.com/MarcusCSPereira.png?size=50)[Marcus César Santos](https://github.com/MarcusCSPereira)<br>
+![Hércules Sampaio Oliveira](https://github.com/HerculesDraycon.png?size=50)[Hércules Sampaio Oliveira](https://github.com/HerculesDraycon)<br>
+![Franco Ribeiro Borba](https://github.com/FrancoBorba.png?size=50)[Franco Ribeiro Borba](https://github.com/FrancoBorba)<br>
+![Lucca Nolasco Trancoso](https://github.com/LuccaNolasco.png?size=50)[Lucca Nolasco Trancoso](https://github.com/LuccaNolasco)<br>
+![Kauan Rubem Matos](https://github.com/kauanrubem.png?size=50)[Kauan Rubem Matos](https://github.com/kauanrubem)
 
 ## 📝 Licença
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+Esse projeto está sob licença. Veja o arquivo [LICENSE](https://github.com/MarcusCSPereira/MealMatch/blob/main/LICENSE) para mais detalhes.
 
 
