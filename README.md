@@ -11,7 +11,7 @@ O software MealMatch é uma plataforma inovadora que busca facilitar a vida de p
 ## 🖼️ Imagens:
 <mark> Caputuras com demonstração parcial do software em funcionamento: <mark/><br>
 
-![Demo1](https://github.com/MarcusCSPereira/MealMatch/tree/main/app/src/main/resources/images/demo1.png)
+<img src="https://github.com/MarcusCSPereira/MealMatch/tree/main/app/src/main/resources/images/demo1.png">
 
 ##
 
