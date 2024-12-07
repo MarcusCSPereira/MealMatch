@@ -17,6 +17,7 @@ com/mealmatch/utils/ImageSelector.class
 com/mealmatch/controller/TelaRestricoesController.class
 com/mealmatch/jdbc/dao/IngredienteDAO.class
 com/mealmatch/utils/EncriptadorDeSenhas.class
+com/mealmatch/model/RestricoesSelecionadas.class
 com/mealmatch/enums/RestricaoEnum.class
 com/mealmatch/model/NutrienteValor.class
 com/mealmatch/utils/EmailSender.class

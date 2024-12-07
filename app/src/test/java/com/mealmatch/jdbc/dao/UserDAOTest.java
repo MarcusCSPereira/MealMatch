@@ -84,7 +84,7 @@ public class UserDAOTest {
   void testGetUserIdByUsername() throws Exception {
     // Simula o comportamento do ResultSet para buscar o ID
     when(mockResultSet.next()).thenReturn(true);
-    when(mockResultSet.getInt("idusuario")).thenReturn(1);
+    when(mockResultSet.getInt("id_usuario")).thenReturn(1);
 
     Integer userId = userDAO.getUserIdByUsername("testUser");
 

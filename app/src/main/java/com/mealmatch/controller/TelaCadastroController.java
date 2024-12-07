@@ -222,7 +222,6 @@ public class TelaCadastroController implements Initializable {
       scene = new Scene(root);
       stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setScene(scene);
-      stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
       stage.show();
     } catch (IOException e) {
       e.printStackTrace();
@@ -241,7 +240,6 @@ public class TelaCadastroController implements Initializable {
     scene = new Scene(root);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
-    stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
     stage.show();
   }
 

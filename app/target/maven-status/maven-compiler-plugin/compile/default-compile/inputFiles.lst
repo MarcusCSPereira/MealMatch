@@ -20,6 +20,7 @@
 /Users/marcus_cs_pereira/Programacao/github/MealMatch/app/src/main/java/com/mealmatch/model/NutrienteValor.java
 /Users/marcus_cs_pereira/Programacao/github/MealMatch/app/src/main/java/com/mealmatch/model/Receita.java
 /Users/marcus_cs_pereira/Programacao/github/MealMatch/app/src/main/java/com/mealmatch/model/ReceitaIngrediente.java
+/Users/marcus_cs_pereira/Programacao/github/MealMatch/app/src/main/java/com/mealmatch/model/RestricoesSelecionadas.java
 /Users/marcus_cs_pereira/Programacao/github/MealMatch/app/src/main/java/com/mealmatch/model/TabelaNutricional.java
 /Users/marcus_cs_pereira/Programacao/github/MealMatch/app/src/main/java/com/mealmatch/model/User.java
 /Users/marcus_cs_pereira/Programacao/github/MealMatch/app/src/main/java/com/mealmatch/utils/ControleDeSessao.java
