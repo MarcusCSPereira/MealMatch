@@ -31,6 +31,68 @@ O software MealMatch é uma plataforma inovadora que busca facilitar a vida de p
 ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
+## 
+
+## 🚀 Utilizando o projeto:
+
+### Pré-requisitos:
+Certifique-se de ter instalado em sua máquina:
+1. **Java 8** ou superior: [Baixar Java](https://www.oracle.com/java/technologies/javase-downloads.html)
+2. **Apache Maven**: [Baixar Maven](https://maven.apache.org/download.cgi)
+3. **PostgreSQL**: [Baixar PostgreSQL](https://www.postgresql.org/download/)
+
+## 
+
+### Passo a passo:
+
+#### 1. Clone o repositório:
+Abra o terminal e execute o comando abaixo para clonar o repositório:
+```bash
+git clone https://github.com/MarcusCSPereira/MealMatch.git .
+
+```
+
+#### 2. Acesse a pasta em que clonou o projeto:
+```bash
+cd <pasta-do-clone-do-projeto>
+```
+
+#### 3. Configure o ambiente:
+##### Copie o arquivo .env.example para .env e preencha as informações necessárias, como credenciais do banco de dados PostgreSQL e configurações de conexão. Por exemplo:
+```bash
+cp .env.example .env
+```
+
+##### Abra o arquivo .env em qualquer editor de texto e configure as variáveis de ambiente:
+
+```env
+DATABASE_HOST=EXEMPLO
+DATABASE_PORT=EXEMPLO
+DATABASE_USER=EXEMPLO
+DATABASE_PASSWORD=EXEMPLO
+DATABASE_NAME=EXEMPLO
+DATABASE_URL=EXEMPLO
+EMAIL_PASSWORD_APP=EXEMPLO
+```
+##### *Para solicitar os dados do .env corretos envie um email para: [contato.marcuscspereira@gmail.com](mailto:contato.marcuscspereira@gmail.com)*
+
+#### 4. Dentro do diretório que clonou o projeto acesse o diretório app/ e use o Maven para instalar as dependências do projeto, no terminal execute:
+```bash
+cd app
+mvn clean install
+```
+
+#### 5. Execute o projeto:
+##### Compile e execute o projeto. A classe principal (Main) está localizada em src/main/java/com/mealmatch/Main.java.
+```bash
+mvn exec:java -Dexec.mainClass="com.mealmatch.Main"
+```
+
+#### 6. Abra o aplicativo:
+##### Após a execução do comando acima, o aplicativo será iniciado. Utilize a interface gráfica para navegar, criar e buscar receitas.
+
+##
+
 ## 👨🏽‍💻 Autores do projeto:
 ![Marcus César Santos](https://github.com/MarcusCSPereira.png?size=50)[Marcus César Santos](https://github.com/MarcusCSPereira)<br>
 ![Hércules Sampaio Oliveira](https://github.com/HerculesDraycon.png?size=50)[Hércules Sampaio Oliveira](https://github.com/HerculesDraycon)<br>
