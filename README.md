@@ -11,7 +11,7 @@ O software MealMatch é uma plataforma inovadora que busca facilitar a vida de p
 ## 🖼️ Imagens:
 <mark> Caputuras com demonstração parcial do software em funcionamento: <mark/><br>
 
-<img src="https://github.com/MarcusCSPereira/MealMatch/tree/main/app/src/main/resources/images/demo1.png">
+<img src="/app/src/main/resources/images/demo1.png">
 
 ##
 
@@ -40,6 +40,7 @@ Certifique-se de ter instalado em sua máquina:
 1. **Java 8** ou superior: [Baixar Java](https://www.oracle.com/java/technologies/javase-downloads.html)
 2. **Apache Maven**: [Baixar Maven](https://maven.apache.org/download.cgi)
 3. **PostgreSQL**: [Baixar PostgreSQL](https://www.postgresql.org/download/)
+4. **Git**: [Baixar Git](https://git-scm.com/downloads)
 
 ## 
 
